@@ -1,0 +1,122 @@
+{
+  "_args": [
+    [
+      "ui-bootstrap4",
+      "/home/medilox/Documents/springBootProj/myschool"
+    ]
+  ],
+  "_from": "ui-bootstrap4@latest",
+  "_id": "ui-bootstrap4@3.0.4",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ui-bootstrap4",
+  "_nodeVersion": "9.10.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/ui-bootstrap4_3.0.4_1530732014269_0.5459889853461903"
+  },
+  "_npmUser": {
+    "email": "chris.case@g33xnexus.com",
+    "name": "morgul"
+  },
+  "_npmVersion": "6.1.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "ui-bootstrap4",
+    "raw": "ui-bootstrap4",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/ui-bootstrap4/-/ui-bootstrap4-3.0.4.tgz",
+  "_shasum": "e42c61a0fd383c2a7b176505270cff4cab9e4e9e",
+  "_shrinkwrap": null,
+  "_spec": "ui-bootstrap4",
+  "_where": "/home/medilox/Documents/springBootProj/myschool",
+  "author": {
+    "name": "https://github.com/morgul/ui-bootstrap4/graphs/contributors"
+  },
+  "bugs": {
+    "url": "https://github.com/morgul/ui-bootstrap4/issues"
+  },
+  "dependencies": {},
+  "description": "Native AngularJS (Angular) directives for Bootstrap",
+  "devDependencies": {
+    "angular": "1.6.1",
+    "angular-mocks": "1.6.1",
+    "angular-sanitize": "1.6.1",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-conventional-changelog": "^6.1.0",
+    "grunt-ddescribe-iit": "0.0.6",
+    "grunt-eslint": "^17.3.1",
+    "grunt-html2js": "^0.3.0",
+    "grunt-karma": "^0.12.0",
+    "jasmine-core": "^2.2.0",
+    "karma": "0.13.22",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-coverage": "^0.5.0",
+    "karma-firefox-launcher": "^0.1.4",
+    "karma-jasmine": "^0.3.5",
+    "load-grunt-tasks": "^3.3.0",
+    "lodash": "^4.1.0",
+    "marked": "^0.3.5",
+    "node-static": "^0.7.8",
+    "semver": "^5.0.1",
+    "shelljs": "^0.6.0"
+  },
+  "directories": {
+    "lib": "src/"
+  },
+  "dist": {
+    "fileCount": 231,
+    "integrity": "sha512-F2j2kny2ozHGy4McZr6F+9zZWTQhMTwphmSXfBfdRPp5MVgwSQQGmiG5b6pb+b7gsj5fBwSqYEtVKJD0LFgxoQ==",
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJbPR3uCRA9TVsSAnZWagAANEwP/AwGuYdARMuLRAmVwyhZ\nq8urHl/2cAeCBfgDBpUqXCNcNDsw+senKNkZS8nERuPsOHwbXeZrmzntpH9Q\n0H7KFpY8cRFKj0UvDS3cCdc9rmmBNFjLCRVdJuMC2jIfDLb4YAdIRwwDRqLd\nIsiAXrkIY/62ht8GGPMMxRfsPVChzvDnuqQ9Vhc7Vx5jLn606KFMuFiACYlg\nMHohfsuXUk9QSMPio2mYr8zH8lGYdzSbZqNTdYv/fQK7/NitEJM5he++yRwG\nLlp2/umOTUxx9mcciqSPD5JIkqKmwHcgOegPkZtPlpVjxV1owPuz/4DzcCA+\nATaTVvDgCIKpbkM+kXO+ccNPhDWyJxkihdn2Wc7WHjgKmHqu2tkIPy2tetDQ\nGzyr8bu82f2N91Eo5CacNJ2mHAkPfgadElbDFIXyE/9rTlDYI3Wm0yZWESPq\n6Rn07ERbKQSq+8TJ5tjmq10HxG3OdrDRTxOdXplbaibneIlDSGfqoWE5v0mA\nrlqjvLocgP7EAmVjL4v16mZqSP+cigDJuDrN/HjWgZVFmlWQPJYYBL3Vgc8X\nxyU8RYRwDKOwra6hfwi0nSxNwYp2cgD6Epd1o3waGWrcM+tKw5RTVNcMO6gF\nKN2bgyurKEKte4y1k0XPUxbohig7UvTn3yKcaIlfhXIHLLFBrb8kI5Q9S5hf\nIYlU\r\n=dEjp\r\n-----END PGP SIGNATURE-----\r\n",
+    "shasum": "e42c61a0fd383c2a7b176505270cff4cab9e4e9e",
+    "tarball": "https://registry.npmjs.org/ui-bootstrap4/-/ui-bootstrap4-3.0.4.tgz",
+    "unpackedSize": 1898123
+  },
+  "files": [
+    "dist/",
+    "index.js",
+    "src/",
+    "template/"
+  ],
+  "gitHead": "c6553764e7f8a9c88855332abd16e71a4264080b",
+  "homepage": "http://morgul.github.io/ui-bootstrap4/",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "bootstrap",
+    "ui"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "morgul",
+      "email": "chris.case@g33xnexus.com"
+    }
+  ],
+  "name": "ui-bootstrap4",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morgul/ui-bootstrap4.git"
+  },
+  "scripts": {
+    "demo": "grunt html2js after-test && static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
+    "serve": "static dist -p 3857 -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
+    "test": "grunt"
+  },
+  "version": "3.0.4"
+}

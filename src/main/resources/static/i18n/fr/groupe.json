@@ -1,0 +1,27 @@
+{
+  "myApp": {
+    "groupe" : {
+      "home": {
+        "title": "Groupes",
+        "createLabel": "Créer un nouveau groupe",
+        "createOrEditLabel": "Créer ou éditer un groupe",
+        "search": "Rechercher un groupe"
+      },
+      "created": "Un nouveau groupe a été créé avec l'identifiant {{ param }}",
+      "updated": "Le groupe avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le groupe avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le groupe {{ id }} ?"
+      },
+      "detail": {
+        "title": "Groupe"
+      },
+      "name":"Groupe",
+      "coef":"Coefficient",
+      "groupe":"Groupe",
+      "active":"Active",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

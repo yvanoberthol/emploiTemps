@@ -1,0 +1,31 @@
+{
+  "myApp": {
+    "classe" : {
+      "home": {
+        "title": "Classes",
+        "createLabel": "Créer une nouvelle classe",
+        "createOrEditLabel": "Créer ou éditer une classe",
+        "search": "Rechercher une classe"
+      },
+      "created": "Une nouvelle classe a été créé avec l'identifiant {{ param }}",
+      "updated": "La classe avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La classe avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la classe {{ id }} ?",
+        "questionSub": "Etes-vous certain de vouloir supprimer la sous-classe {{ id }} ?"
+      },
+      "detail": {
+        "title": "Classe"
+      },
+      "label":"Classe",
+      "montantScolarite":"Montant Scolarité",
+      "matieres":"Matières",
+      "nbStudents":"Nb Étudiants",
+      "credit":"Crédits",
+      "coef":"Coefficient",
+      "active":"Active",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

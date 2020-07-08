@@ -1,0 +1,189 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container-fluid col-md-11 spacer">
+
+        <header class="section-heading ">
+            <div layout-gt-sm="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg text-uppercase">Liste des Parents</h4>
+                </div>
+
+                <!--<div layout-gt-sm="row" layout-align="space-between center">
+
+                    <select class="form-control" id="field_classe" name="classe" ng-model="vm.promoId" required
+                            ng-options="promo.id as promo.classe for promo in vm.promos | orderBy:'classe'"
+                            ng-change="vm.promoChanged()">
+                        <option value="">Toutes les classes</option>
+                    </select>
+                </div>-->
+
+
+                <!--<div layout-gt-sm="row">
+                    <button class="btn btn-primary btn-raised" ng-click="vm.openlisteStudentsModal()">
+                        <span>
+                            Envoyer sms groupé
+                        </span>
+                    </button>
+                </div>-->
+            </div>
+        </header>
+
+        <div class="spacer"></div>
+
+        <div layout-gt-sm="row" layout-align="space-between center">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label class="control-label">Nombre de parents par page </label>
+                    <span>&nbsp;</span>
+                    <select class="form-control" ng-model="vm.count" ng-change="vm.search()">
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                    </select>
+                </div>
+            </form>
+
+
+            <div layout="column">
+                <div>
+                    <label class="control-label">Nombre de contacts sélectionnés </label>
+                    <span>&nbsp;</span>
+                    <h1 class="badge badge-success">{{vm.selected.length}}</h1>
+                </div>
+                <button class="btn btn-success btn-sm btn-raised" ng-disabled="vm.selected.length < 2"
+                        ng-click="vm.sendSmsGroup(vm.selected)">
+                    <span>
+                        Envoyer sms groupé
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="spacer">
+
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed table-striped small">
+
+                <tr>
+                    <td data-title="'#'"></td>
+
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="toggleAll" name="toggleAll"
+                                   ng-model="vm.allSelected" ng-change="vm.toggleAll()">
+                            <label class="custom-control-label" for="toggleAll"></label>
+                        </div>
+                    </td>
+
+                    <!--<td data-title="'myApp.inscription.civilite' | translate">
+                    </td>-->
+
+                    <td data-title="'myApp.inscription.fatherName' | translate" sortable="'student.fatherName'">
+                        <div class="form-group" style="margin:0;">
+                            <input type="text" class="form-control"  ng-model="vm.parent" my-enter="vm.search()"
+                            />
+                        </div>
+                    </td>
+
+                    <td  data-title="'myApp.inscription.fatherPhone' | translate">
+                        <div class="form-group" style="margin:0;">
+                            <input type="text" class="form-control"  ng-model="vm.phone" my-enter="vm.search()"
+                            />
+                        </div>
+                    </td>
+
+                    <td data-title="'myApp.inscription.student' | translate" sortable="'student.lastName'">
+                        <div class="form-group" style="margin:0;">
+                            <input type="text" class="form-control"  ng-model="vm.name" my-enter="vm.search()"
+                            />
+                        </div>
+                    </td>
+
+                    <td data-title="'myApp.inscription.classe' | translate" width="15%">
+                        <div class="form-group" style="margin:0;">
+                            <select class="form-control" id="field_classe" name="classe" ng-model="vm.promoId" required
+                                    ng-options="promo.id as promo.classe for promo in vm.promos | orderBy:'classe'"
+                                    ng-change="vm.search()">
+                                <option value="">Toutes</option>
+                            </select>
+                        </div>
+                    </td>
+
+                    <td></td>
+                </tr>
+
+                <tr ng-repeat="inscription in $data | unique: 'phone'" ng-if="inscription.student.fatherName && inscription.student.fatherPhone">
+
+                    <td>
+                            <span class="">
+                                {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                            </span>
+                    </td>
+
+                    <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="chk-{{inscription.student.id}}" name="inscription"
+                                   ng-model="inscription.selected" ng-change="vm.toggleInscription(inscription)">
+                            <label class="custom-control-label" for="chk-{{inscription.student.id}}"></label>
+                        </div>
+                    </td>
+
+                    <!--<td>
+                        <span class="">{{inscription.student.civiliteParent}}</span>
+                    </td>-->
+
+                    <td>
+                            <span class="">
+                                 <span>
+                                    {{inscription.student.fatherName}}
+                                </span>
+                            </span>
+                    </td>
+
+                    <td>
+                        <span class="">
+                             <span>
+                                {{inscription.student.fatherPhone}}
+                            </span>
+                        </span>
+                    </td>
+
+
+                    <td>
+                        <span class="">
+                             <span>
+                                {{inscription.student.name}}
+                            </span>
+                        </span>
+                    </td>
+
+                    <td>
+                            <span class="">
+                               {{inscription.classe}}
+                            </span>
+                    </td>
+
+                    <td data-title="''" class="text-right">
+                            <span class="text-nowrap">
+                                <a href="" ng-click="vm.sendSms(inscription)" class="btn btn-success btn-sm">
+                                    <span>
+                                        <span class="">Envoyer sms</span>
+                                    </span>
+                                </a>
+                                <!--<a ui-sref="inscription.delete({studentId:inscription.studentId, promoId:inscription.promoId})" class="btn btn-danger btn-sm">
+                                    <span>
+                                       <span class="" translate="entity.action.delete"></span>
+                                    </span>
+                                </a>-->
+                            </span>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+</section>
+
+

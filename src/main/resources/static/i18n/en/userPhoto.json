@@ -1,0 +1,40 @@
+{
+  "myApp": {
+    "userPhoto" : {
+      "home": {
+        "title": "My Pictures",
+        "createLabel": "Add a new image",
+        "createOrEditLabel": "Add an image",
+        "search": "Search for image"
+      },
+      "created": "A new image is created with identifier {{ param }}",
+      "updated": "A image is updated with identifier {{ param }}",
+      "deleted": "A image is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete image {{ id }}?"
+      },
+      "detail": {
+        "title": "UserPhoto"
+      },
+      "caption": "Say something about this picture...",
+      "url": "Url",
+      "description": "Description",
+      "product": "Product",
+      "products": "Products",
+      "nbProducts": "Number of products",
+      "language": "Language",
+      "currency": "Currency",
+      "createdDate": "Date Inscription",
+      "country": "Country",
+      "city": "City",
+      "enabled": "Enabled",
+      "shippingCost": "Shipping Cost",
+      "delay": "Shipping Delay",
+      "day":"Day",
+      "days":"Days",
+      "yes":"Yes",
+      "no":"No",
+      "nbOrders":"# Orders"
+    }
+  }
+}

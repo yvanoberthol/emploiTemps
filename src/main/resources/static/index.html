@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Myschool | Gestion Scolaire</title>
+
+  <link href="/css/styles.css" rel="stylesheet" />
+  <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>-->
+
+
+  <link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css">
+  <link rel="stylesheet" href="/bower_components/angucomplete-alt/angucomplete-alt.css">
+  <link rel="stylesheet" href="/bower_components/ng-table-bundle/ng-table.css">
+  <link rel="stylesheet" href="/bower_components/bootstrap-daterangepicker/daterangepicker.css"/>
+  <link rel="stylesheet" href="/bower_components/fullcalendar/dist/fullcalendar.css"/>
+  <link rel="stylesheet" href="/bower_components/textAngular/dist/textAngular.css">
+
+
+  <!-- Custom styles for this template-->
+  <!--<link rel="stylesheet" href="/bower_components/pdf.js-viewer/viewer.css">-->
+  <link href="/css/styles.css" rel="stylesheet">
+  <link href="/css/app.css" rel="stylesheet" type="text/css"/>
+  <base href="/" />
+
+</head>
+
+<body ng-app="myApp" class="sb-nav-fixed">
+
+  <ui-view></ui-view>
+
+
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+
+
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.js"></script>
+  <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="js/scripts.js"></script>
+
+  <!-- Demo scripts for this page-->
+  <script src="js/demo/datatables-demo.js"></script>
+  <script src="js/demo/chart-area-demo.js"></script>
+
+
+  <!--<script src="bower_components/jquery/dist/jquery.min.js"></script>-->
+  <!--<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>-->
+  <script src="bower_components/pdf.js-viewer/pdf.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+
+  <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="bower_components/ngstorage/ngStorage.js"></script>
+
+  <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+
+  <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+  <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+
+  <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+
+  <script src="bower_components/angular-material/angular-material.min.js"></script>
+
+  <script src="bower_components/ui-bootstrap4/dist/ui-bootstrap.js"></script>
+  <script src="bower_components/ui-bootstrap4/dist/ui-bootstrap-tpls.js"></script>
+
+  <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+
+  <script src="bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+
+  <script src="bower_components/arrive/minified/arrive.min.js"></script>
+
+  <script src="bower_components/ng-table-bundle/ng-table.min.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="bower_components/angular-daterangepicker/js/angular-daterangepicker.js"></script>
+
+  <!--<script src="bower_components/angular-simple-logger/dist/angular-simple-logger.js"></script>
+  <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+  <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
+  <script src="bower_components/ui-leaflet/dist/ui-leaflet.js"></script>
+  <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>-->
+
+  <script src="bower_components/angucomplete-alt/dist/angucomplete-alt.min.js"></script>
+  <script type="text/javascript" src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+  <script type="text/javascript" src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+  <script type="text/javascript" src="bower_components/fullcalendar/dist/gcal.js"></script>
+
+  <script src="bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
+  <script src="bower_components/textAngular/dist/textAngular.min.js"></script>
+  <script src="bower_components/angular-ckeditor/angular-ckeditor.min.js"></script>
+  <script src="bower_components/angular-pdfjs-viewer/dist/angular-pdfjs-viewer.js"></script>
+
+  <script src="app/vendors/spin.min.js"></script>
+
+  <script src="app/app.js"></script>
+  <script src="app/app.state.js"></script>
+  <script src="app/app.directives.js"></script>
+  <script src="app/app.constants.js"></script>
+
+
+  <script src="app/auth/auth.service.js"></script>
+  <script src="app/auth/session.service.js"></script>
+  <script src="app/auth/local-storage.service.js"></script>
+  <script src="app/auth/assign-to-root-scope.js"></script>
+  <script src="app/auth/auth-expired.interceptor.js"></script>
+
+  <script src="app/language/language.service.js"></script>
+  <script src="app/language/language.filter.js"></script>
+  <script src="app/language/language.controller.js"></script>
+  <script src="app/language/language.constants.js"></script>
+
+  <script src="app/blocks/handlers/translation.handler.js"></script>
+  <script src="app/blocks/config/translation-storage.provider.js"></script>
+  <script src="app/blocks/config/translation.config.js"></script>
+  <script src="app/blocks/config/localstorage.config.js"></script>
+
+  <script src="app/blocks/handlers/state.handler.js"></script>
+
+  <script src="app/account/login/login.state.js"></script>
+  <script src="app/account/login/login.service.js"></script>
+  <script src="app/account/login/login.controller.js"></script>
+
+  <!--<script src="app/account/register/register.state.js"></script>-->
+  <!--<script src="app/account/register/register.controller.js"></script>-->
+
+  <script src="app/account/activate/activate.state.js"></script>
+  <script src="app/account/activate/activate.controller.js"></script>
+
+  <script src="app/account/password/password-strength-bar.directive.js"></script>
+  <script src="app/account/password/password.state.js"></script>
+  <script src="app/account/password/password.controller.js"></script>
+
+  <script src="app/account/reset/request/reset.request.state.js"></script>
+  <script src="app/account/reset/request/reset.request.controller.js"></script>
+  <script src="app/account/reset/finish/reset.finish.state.js"></script>
+  <script src="app/account/reset/finish/reset.finish.controller.js"></script>
+
+  <script src="app/account/settings/settings.state.js"></script>
+  <script src="app/account/settings/settings.controller.js"></script>
+
+  <script src="app/entities/setup/setup.state.js"></script>
+  <script src="app/entities/setup/setup.controller.js"></script>
+
+  <script src="app/layouts/navbar/navbar.controller.js"></script>
+  <script src="app/layouts/navbar/navbar-admin.controller.js"></script>
+  <script src="app/layouts/navbar/active-menu.directive.js"></script>
+
+  <script src="app/home/home.state.js"></script>
+  <script src="app/home/home.controller.js"></script>
+
+  <script src="app/admin/annee/annee.state.js"></script>
+  <script src="app/admin/annee/annee.controller.js"></script>
+  <script src="app/admin/annee/annee.service.js"></script>
+  <script src="app/admin/annee/annee-detail.controller.js"></script>
+  <script src="app/admin/annee/annee-dialog.controller.js"></script>
+  <script src="app/admin/annee/annee-detail-matieres-dialog.controller.js"></script>
+  <script src="app/admin/annee/annee-detail-edit-scolarite-dialog.controller.js"></script>
+  <script src="app/admin/annee/annee-change-dialog.controller.js"></script>
+  <script src="app/admin/annee/annee-change.service.js"></script>
+  <script src="app/admin/annee/annee-setup-dialog.controller.js"></script>
+  <script src="app/admin/annee/annee-set-active-dialog.controller.js"></script>
+  <script src="app/admin/annee/annee-delete-dialog.controller.js"></script>
+
+  <script src="app/admin/admin.state.js"></script>
+
+  <script src="app/entities/promo/promo.state.js"></script>
+  <script src="app/entities/promo/promo.controller.js"></script>
+  <script src="app/entities/promo/promo.service.js"></script>
+  <script src="app/entities/promo/promo-matiere.service.js"></script>
+  <script src="app/entities/promo/promo-detail.controller.js"></script>
+  <script src="app/entities/promo/promo-matieres.controller.js"></script>
+  <script src="app/entities/promo/promo-students.controller.js"></script>
+  <script src="app/entities/promo/promo-groupes.controller.js"></script>
+  <script src="app/entities/promo/promo-dialog.controller.js"></script>
+  <script src="app/entities/promo/promo-matieres-dialog.controller.js"></script>
+  <script src="app/entities/promo/promo-students-dialog.controller.js"></script>
+  <script src="app/entities/promo/promo-notes.controller.js"></script>
+  <script src="app/entities/promo/promo-notes-summary.controller.js"></script>
+  <script src="app/entities/promo/promo-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/inscription/inscription.state.js"></script>
+  <script src="app/entities/inscription/inscription.controller.js"></script>
+  <script src="app/entities/inscription/inscription.service.js"></script>
+  <script src="app/entities/inscription/inscription-detail.controller.js"></script>
+  <script src="app/entities/inscription/inscription-dialog.controller.js"></script>
+  <script src="app/entities/inscription/inscription-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/reglement/reglement.state.js"></script>
+  <script src="app/entities/reglement/reglement.controller.js"></script>
+  <script src="app/entities/reglement/reglement.service.js"></script>
+  <script src="app/entities/reglement/reglement-detail.controller.js"></script>
+  <script src="app/entities/reglement/reglement-dialog.controller.js"></script>
+  <script src="app/entities/reglement/reglement-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/student/student.state.js"></script>
+  <script src="app/entities/student/student.controller.js"></script>
+  <script src="app/entities/student/student.service.js"></script>
+  <script src="app/entities/student/student-detail.controller.js"></script>
+  <script src="app/entities/student/student-dialog.controller.js"></script>
+  <script src="app/entities/student/student-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/trimestre/trimestre.state.js"></script>
+  <script src="app/entities/trimestre/trimestre.controller.js"></script>
+  <script src="app/entities/trimestre/trimestre.service.js"></script>
+  <script src="app/entities/trimestre/trimestre-detail.controller.js"></script>
+  <script src="app/entities/trimestre/trimestre-dialog.controller.js"></script>
+  <script src="app/entities/trimestre/trimestre-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/sequence/sequence.service.js"></script>
+  <script src="app/entities/sequence/sequence-dialog.controller.js"></script>
+  <script src="app/entities/sequence/sequence-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/bulletin/bulletin.service.js"></script>
+  <script src="app/entities/bulletin/bulletin.controller.js"></script>
+  <script src="app/entities/bulletin/bulletin-all.controller.js"></script>
+
+  <script src="app/entities/matiere/matiere.state.js"></script>
+  <script src="app/entities/matiere/matiere.service.js"></script>
+  <script src="app/entities/matiere/matiere-dialog.controller.js"></script>
+  <script src="app/entities/matiere/matiere-delete-dialog.controller.js"></script>
+
+  <!--<script src="app/entities/groupe/groupe.state.js"></script>-->
+  <script src="app/entities/groupe/groupe.controller.js"></script>
+  <script src="app/entities/groupe/groupe.service.js"></script>
+  <script src="app/entities/groupe/groupe-dialog.controller.js"></script>
+  <script src="app/entities/groupe/groupe-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/contact/contact.state.js"></script>
+  <script src="app/entities/contact/contact.controller.js"></script>
+  <script src="app/entities/contact/contact.service.js"></script>
+  <script src="app/entities/contact/contact-detail.controller.js"></script>
+  <script src="app/entities/contact/contact-dialog.controller.js"></script>
+  <script src="app/entities/contact/contact-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/group/group.state.js"></script>
+  <script src="app/entities/group/group.controller.js"></script>
+  <script src="app/entities/group/group.service.js"></script>
+  <script src="app/entities/group/group-detail.controller.js"></script>
+  <script src="app/entities/group/group-dialog.controller.js"></script>
+  <script src="app/entities/group/group-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/sms/sms.state.js"></script>
+  <script src="app/entities/sms/sms.controller.js"></script>
+  <script src="app/entities/sms/sms.service.js"></script>
+  <script src="app/entities/sms/sms-detail.controller.js"></script>
+  <script src="app/entities/sms/sms-dialog.service.js"></script>
+  <script src="app/entities/sms/sms-dialog.controller.js"></script>
+  <script src="app/entities/sms/sms-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/sms-template/sms-template.state.js"></script>
+  <script src="app/entities/sms-template/sms-template.controller.js"></script>
+  <script src="app/entities/sms-template/sms-template.service.js"></script>
+  <script src="app/entities/sms-template/sms-template-detail.controller.js"></script>
+  <script src="app/entities/sms-template/sms-template-dialog.controller.js"></script>
+  <script src="app/entities/sms-template/sms-template-delete-dialog.controller.js"></script>
+
+  <script src="app/entities/enums/sexe.service.js"></script>
+  <script src="app/entities/enums/civilite.service.js"></script>
+  <script src="app/entities/enums/statut.service.js"></script>
+  <script src="app/entities/enums/cat-user.service.js"></script>
+
+</body>
+
+</html>

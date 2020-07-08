@@ -1,0 +1,40 @@
+{
+  "myApp": {
+    "userPhoto" : {
+      "home": {
+        "title": "Mes Photos",
+        "createLabel": "Ajouter une nouvelle photo",
+        "createOrEditLabel": "Ajouter une photo",
+        "search": "Rechercher une photo"
+      },
+      "created": "Une nouvelle photo a été créé avec l'identifiant {{ param }}",
+      "updated": "la photo avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "la photo avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la photo {{ id }} ?"
+      },
+      "detail": {
+        "title": "UserPhoto"
+      },
+      "caption": "Dites quelque chose à propos de cette photo...",
+      "url": "Url",
+      "description": "Description",
+      "nbProducts": "Nombre de produits",
+      "product": "Produit",
+      "products": "Produits",
+      "language": "Langue",
+      "currency": "Monnaie",
+      "createdDate": "Date d'inscription",
+      "counetry": "Pays",
+      "city": "Ville",
+      "enabled": "Activée",
+      "shippingCost": "Frais livraison",
+      "delay": "Délais livraison",
+      "day":"Jour",
+      "days":"Jours",
+      "yes":"Oui",
+      "no":"Non",
+      "nbOrders":"# Commandes"
+    }
+  }
+}

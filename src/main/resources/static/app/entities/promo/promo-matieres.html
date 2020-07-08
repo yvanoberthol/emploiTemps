@@ -1,0 +1,104 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container">
+
+        <header class="section-heading ">
+            <div layout="row" layout-align="space-between center">
+                <div >
+                    <!--<h4 class="title-section bg"><b class="text-uppercase">{{vm.promo.classe}}</b>  </h4>-->
+                    <span class="text-uppercase">Liste des Matières</span>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="promo-detail.matieres.new">
+                        <span translate="myApp.matiere.home.createLabel">
+                            Create new matiere
+                        </span>
+                    </button>
+                    <!--<span>&nbsp;</span>
+                    <button class="btn btn-info btn-raised btn-sm" ng-if="auth.getTypeSchool() == 'College'"
+                            ui-sref="promo-groupes({promoId:vm.promo.id})">
+                        <span>
+                            Lister les groupes
+                        </span>
+                    </button>-->
+                </div>
+            </div>
+        </header>
+
+        <div class="spacer">
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed">
+
+                <tr ng-repeat="matiere in $data track by $index" class="small">
+
+                    <td data-title="'#'" width="5%">
+                    <span class="small">
+                        {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.matiere.name' | translate" sortable="'name'">
+                    <span>
+                        <span> {{matiere.name}}</span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.matiere.groupe' | translate" sortable="'groupe'"
+                        ng-if="auth.getTypeSchool() == 'College'">
+                    <span>
+                         <span>
+                            {{matiere.groupe }}
+                        </span>
+                    </span>
+                    </td>
+
+                    <td data-title="'Enseignant'"
+                        ng-if="auth.getTypeSchool() == 'College'">
+                    <span>
+                         <span>
+                            {{matiere.teacher}}
+                        </span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.matiere.coef' | translate" sortable="'coef'"
+                        ng-if="auth.getTypeSchool() == 'College'">
+                    <span>
+                         <span>
+                            {{matiere.coef }}
+                        </span>
+                    </span>
+                    </td>
+
+                    <td data-title="'Note sur'" ng-if="auth.getTypeSchool() == 'Primaire'">
+                    <span>
+                         <span>
+                            {{matiere.noteSur }}
+                        </span>
+                    </span>
+                    </td>
+
+                    <td class="text-right">
+                    <span class="text-nowrap">
+                        <a ui-sref="promo-detail.matieres.edit({matiereId:matiere.id})" class="btn btn-info btn-sm">
+                            <span>
+                                <span class="" translate="entity.action.edit"></span>
+                            </span>
+                        </a>
+                        <a ui-sref="promo-detail.matieres.delete({matiereId:matiere.id})" class="btn btn-danger btn-sm">
+                            <span>
+                               <span class="" translate="entity.action.delete"></span>
+                            </span>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- card.// -->
+
+    </div> <!-- container .//  -->
+
+</section>
+
+
+

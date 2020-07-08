@@ -1,0 +1,242 @@
+/* ==========================================================================
+Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak
+========================================================================== */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.error {
+    color: white;
+    background-color: red;
+}
+
+.pad {
+    padding: 10px;
+}
+
+.no-padding {
+    padding: none;
+}
+
+.spacer {
+    margin-top: 20px;
+}
+
+.break {
+    white-space: normal;
+    word-break:break-all;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.hand {
+    cursor: pointer;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+
+/* ==========================================================================
+start Password strength bar style
+========================================================================== */
+ul#strengthBar {
+    display:inline;
+    list-style:none;
+    margin:0;
+    margin-left:15px;
+    padding:0;
+    vertical-align:2px;
+}
+
+.point:last {
+    margin:0 !important;
+}
+.point {
+    background:#DDD;
+    border-radius:2px;
+    display:inline-block;
+    height:5px;
+    margin-right:1px;
+    width:20px;
+}
+
+/* ==========================================================================
+Fix error field display
+========================================================================== */
+.form-group .help-block {
+    position: static;
+}
+
+.ng-table th {
+    text-align: left;
+    font-size: small;
+    font-weight:normal;
+    -moz-user-select: none;
+}
+
+
+ .form-group.required .control-label:after {
+   content:"*";
+   color:red;
+   margin-left:5px;
+ }
+
+
+ .green{
+    color: green;
+ }
+
+.red{
+    color: red;
+}
+
+.animate-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.animate-show-hide.ng-hide-add,
+.animate-show-hide.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.orgchart { background: #fff; }
+/*.orgchart { background: #f8f8f8 !important; }*/
+.orgchart td.left, .orgchart td.right, .orgchart td.top { border-color: #aaa; }
+.orgchart td>.down { background-color: #aaa; }
+
+.orgchart .male-blood .title {
+  background-color: #AE355E;
+}
+.orgchart .male-blood .content {
+  border-color: #AE355E;
+}
+.orgchart .female-blood .title {
+  background-color: #E9417A;
+}
+.orgchart .female-blood .content {
+  border-color: #E9417A;
+}
+.orgchart .male-other .title {
+  background-color: #006699;
+}
+.orgchart .male-other .content {
+  border-color: #006699;
+}
+.orgchart .female-other .title {
+  background-color: #2E95C9;
+}
+.orgchart .female-other .content {
+  border-color: #2E95C9;
+}
+
+.orgchart .node.matched { background-color: rgba(238, 217, 54, 0.5); }
+
+/*
+#chart-container {
+  height: 100%;
+  width:100%;
+  overflow: auto;
+}
+*/
+
+#chart-container {
+  position: relative;
+  display: inline-block;
+  height: 100%;
+  width:100%;
+  border: 2px dashed #aaa;
+  border-radius: 5px;
+  overflow: auto;
+  text-align: center;
+}
+
+body {
+  /*min-height: 600px;*/
+  min-height: 100%;
+  height:auto;
+}
+
+.photo-badge
+{
+    position: absolute;
+    border-radius: 2px;
+    margin: 3px 3px;
+    background: #f5f5f1;;
+    font-weight: 100;
+    font-size: 15px;
+    right: 5px;
+}
+
+.angucomplete-dropdown {
+    border-color: #ececec;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 2px;
+    width: 100%;
+    padding: 6px;
+    cursor: pointer;
+    z-index: 9999;
+    position: absolute;
+    top: 32px;
+    left: 0px;
+    margin-top: -6px;
+    background-color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 90%;
+   max-width:1200px;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+/* This will disable the panel animation */
+md-tabs [role="tabpanel"] {
+    transition: none;
+}
+
+/* This will disable the `ink-bar` animation (border-bottom of selected tab) */
+md-tabs md-ink-bar {
+  transition: none;
+  display: none;
+}
+
+.md-tab{text-transform: none}
+
+.table th, .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: none;
+}
+
+.ng-table-responsive td:before {
+    position: absolute;
+    padding: 8px;
+    left: 0;
+    top: 0;
+    width: 50%;
+    white-space: nowrap;
+    text-align: left;
+    font-weight: bold;
+    display:none;
+}
+
+
+.list-group-item + .list-group-item {
+    border-top-width: 1px;
+}

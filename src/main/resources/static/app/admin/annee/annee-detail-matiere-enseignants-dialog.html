@@ -1,0 +1,47 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.savePromoMatiere()" show-validation>
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="myTeacherLabel">Liste des Enseignants {{vm.promoMatiere.matiere}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear2()">&times;</button>
+    </div>
+    <div class="modal-body">
+
+        <!--<table ng-table="vm.tableParams" class="ng-table-responsive table table-condensed table-striped">
+
+            <tr ng-repeat="teacher in $data track by $index">
+
+                <td data-title="'myApp.promoMatiere.label' | translate" width="15%">
+                    <span class="small">
+                       {{teacher.name}}
+                    </span>
+                </td>
+
+
+                <td data-title="'myApp.promoMatiere.active' | translate" width="10%">
+                    <span ng-class="{'badge-success': teacher.enabled, 'badge-danger': !teacher.enabled}"
+                          class="badge clickable" ng-click="vm.updateEnabled(teacher)">
+                        <span ng-if="teacher.enabled" translate="myApp.promoMatiere.yes"></span>
+                        <span ng-if="!teacher.enabled" translate="myApp.promoMatiere.no"></span>
+                    </span>
+                </td>
+            </tr>
+        </table>-->
+
+        <div layout-padding layout="row" layout-wrap>
+            <div class="custom-control col-md-6 custom-checkbox" ng-repeat="teacher in vm.teachers track by teacher.id">
+                <input type="checkbox" class="custom-control-input" id="chk-{{teacher.id}}" name="example1"
+                       ng-model="teacher.selected"
+                       ng-change="vm.toggleTeacher(teacher)">
+                <label class="custom-control-label" for="chk-{{teacher.id}}">{{teacher.name}}</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear2()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.close">Close</span>
+        </button>
+    </div>
+</form>

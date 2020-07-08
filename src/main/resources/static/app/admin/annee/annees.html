@@ -1,0 +1,107 @@
+<div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-4">
+        <li class="breadcrumb-item active">Années</li>
+    </ol>
+    <div class="container col-md-10 mt-4">
+
+        <header class="section-heading ">
+            <div layout="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg text-uppercase" translate="myApp.annee.home.title">Annees</h4>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="annee.new">
+                            <span translate="myApp.annee.home.createLabel">
+                                Create new annee
+                            </span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="spacer">
+
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-condensed table-bordered table-striped">
+
+                <tr ng-repeat="annee in $data track by $index"  ng-dblclick="vm.editAnnee(annee.id)" ng-class="{active: annee.id === vm.selectedAnneeId}">
+
+                    <td data-title="'#'">
+                    <span class="small">
+                        {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.annee.label' | translate" sortable="'label'">
+                    <span class="small">
+                       {{annee.label}}
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.annee.debut' | translate">
+                    <span class="small">
+                       {{annee.debut}}
+                    </span>
+                    </td>
+                    <td data-title="'myApp.annee.fin' | translate">
+                    <span class="small">
+                         <span>
+                            {{annee.fin }}
+                        </span>
+                    </span>
+                    </td>
+
+                    <!--<td data-title="'myApp.annee.active' | translate" width="10%">
+                        <span ng-class="{'badge-success': annee.active, 'badge-danger': !annee.active}"
+                            class="badge clickable">
+                            <span ng-if="annee.active" translate="myApp.annee.yes"></span>
+                            <span ng-if="!annee.active" translate="myApp.annee.no"></span>
+                        </span>
+                    </td>-->
+
+                    <td data-title="'myApp.annee.active' | translate">
+                        <span ng-class="{'text-success': annee.active, 'text-danger': !annee.active}"
+                              class="small">
+                            <span ng-if="annee.active" translate="myApp.annee.yes"></span>
+                            <span ng-if="!annee.active" translate="myApp.annee.no"></span>
+                        </span>
+                    </td>
+
+
+                    <td class="text-right">
+                        <span class="text-nowrap">
+
+                        <a ui-sref="annee.set-active({anneeId:annee.id})" class="btn btn-primary btn-sm" ng-show="!annee.active">
+                            <span>
+                                <span class="small">Set Active</span>
+                            </span>
+                        </a>
+                        <span> &nbsp;</span>
+                        <a ui-sref="annee-detail({anneeId:annee.id})" class="btn btn-success btn-sm">
+                            <span>
+                                <span class="small">Setup</span>
+                            </span>
+                        </a>
+
+                        <span> &nbsp;</span>
+                        <a ui-sref="annee.edit({anneeId:annee.id})" class="btn btn-info btn-sm">
+                            <span>
+                                <span class="small" translate="entity.action.edit"></span>
+                            </span>
+                        </a>
+                        <span> &nbsp;</span>
+                        <a ui-sref="annee.delete({anneeId:annee.id})" class="btn btn-danger btn-sm">
+                            <span>
+                               <span class="small" translate="entity.action.delete"></span>
+                            </span>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- card.// -->
+
+    </div>
+</div>
+
+

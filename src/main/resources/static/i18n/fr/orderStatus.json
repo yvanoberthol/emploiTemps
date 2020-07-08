@@ -1,0 +1,15 @@
+{
+  "myApp": {
+    "orderStatus" : {
+      "null": "",
+      "AW_CONFIRM_CLIENT": "En attente confirm client",
+      "AW_SELECT_TRAV": "En attente select voyageur",
+      "AW_PAYMENT_CLIENT": "En attente paiement client",
+      "AW_CONFIRM_TRAV": "En attente confirm voyageur",
+      "AW_SHIPMENT_TRAV": "En attente livraison voyageur",
+      "AW_DELIVERY_CLIENT": "En attente livraison client",
+      "SHIPPED": "Livré",
+      "CANCELLED": "Annulé"
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "myApp": {
+    "product" : {
+      "home": {
+        "title": "Products",
+        "createLabel": "Add a new product",
+        "createOrEditLabel": "Create or edit a product",
+        "search": "Search for product"
+      },
+      "created": "A new product is created with identifier {{ param }}",
+      "updated": "A product is updated with identifier {{ param }}",
+      "deleted": "A product is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete product {{ id }}?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "name": "Name",
+      "url": "URL",
+      "description": "Description",
+      "product": "Product",
+      "category": "Category level 1",
+      "subCategory": "Category level 2",
+      "subSubCategory": "Category level 3",
+      "price": "Price",
+      "compareAt": "Compare At",
+      "reliure": "Reliure",
+      "auteur": "Auteur",
+      "editor": "Editeur",
+      "collection": "Collection",
+      "dateParution": "Date de parution",
+      "reference": "Référence",
+      "isbn": "ISBN",
+      "nbPages": "Nombre de pages",
+      "format": "Format",
+      "stock": "Quantité en stock",
+      "currency": "Currency",
+      "visibility": "Visibility",
+      "stock": "Stock",
+      "negotiable": "Negotiable",
+      "enabled": "Enabled",
+      "featured": "Featured",
+      "related": "Related",
+      "yes":"Yes",
+      "no":"No",
+      "totalSalesQuantity": "Quantity",
+      "totalSalesPrice": "Total Price",
+      "store":"Store",
+      "views":"Views",
+      "addedToCart":"Carts",
+      "deleteSelection":"Delete selected",
+      "general": "General",
+      "description": "Description",
+      "gallery": "Gallery",
+      "variants": "Variants",
+      "relatedProducts": "Related Products",
+      "addVariants": "Add variants if this product comes in multiple versions, like different sizes or colors.",
+      "add": "Add",
+      "addPictures": "Add images of your product.",
+      "currentImages": "Current images of your product.",
+      "addMorePictures": "Add more images of your product.",
+      "enterValue": "Enter values",
+      "addMoreValues": "add more values...",
+      "nbMaxProductsLimitMessage" : "Your current plan is limited to <strong>{{ nbMaxProducts }}</strong> products ! If you wish to add more products, subscribe to a higher plan <a class=\"alert-link\" href=\"\" ui-sref=\"transaction\">here</a>",
+      "nbMaxRelatedProductsLimitMessage" : "You can select at most 3 related products !",
+      "noProductFound" : "No product was found for your store !"
+    }
+  }
+}

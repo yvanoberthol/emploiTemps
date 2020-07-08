@@ -1,0 +1,96 @@
+<section class="section-content padding-y-sm bg" loading="vm.loading">
+
+    <div class="container">
+
+        <header class="section-heading ">
+            <div class="row d-flex justify-content-between">
+                <div >
+                    <h4 class="title-section bg"><b class="text-uppercase">{{vm.trimestre.name}}</b>  </h4>
+                    <span class="text-uppercase">Liste des sous-catégories</span>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="trimestre-detail.new-subtrimestre">
+                            <span translate="myApp.trimestre.home.createLabelSub">
+                                Create new trimestre
+                            </span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="card">
+
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-condensed table-striped">
+
+                <tr ng-repeat="subTrimestre in vm.trimestre.subTrimestres track by $index">
+
+                    <td data-title="'#'" width="5%">
+                    <span class="small">
+                        {{ $index + 1}}
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.trimestre.name' | translate" width="30%" sortable="'name'">
+                    <span>
+                        <span> {{subTrimestre.name}}</span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.trimestre.nbProducts' | translate" width="15%" sortable="'productIds.length'">
+                    <span class="small">
+                         <span>
+                            {{subTrimestre.nbProducts || 0 }}
+                        </span>
+                        <span> &nbsp;</span>
+                        <span ng-if="subTrimestre.nbProducts">
+                            <a ui-sref="product({trimestreName:subTrimestre.name})"> [<span translate="entity.action.view"></span>] </a>
+                        </span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.trimestre.rank' | translate" width="15%" sortable="'rank'">
+                    <span class="small">
+                         <span>
+                            {{subTrimestre.rank || 0 }}
+                        </span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.trimestre.enabled' | translate" width="20%">
+                        <h1 ng-class="{'badge-success': subTrimestre.enabled, 'badge-danger': !subTrimestre.enabled}"
+                            class="badge clickable" ng-click="vm.updateSubTrimestre(subTrimestre)">
+                            <span ng-if="subTrimestre.enabled" translate="myApp.trimestre.yes"></span>
+                            <span ng-if="!subTrimestre.enabled" translate="myApp.trimestre.no"></span>
+                        </h1>
+                    </td>
+                    <td width="15%">
+                    <span class="text-nowrap">
+                        <a ui-sref="subTrimestre-edit({subTrimestreId:subTrimestre.id})" class="btn btn-info btn-sm">
+                            <span>
+                                <span class="" translate="entity.action.edit"></span>
+                            </span>
+                        </a>
+                        <a ui-sref="subTrimestre-delete({subTrimestreId:subTrimestre.id})" class="btn btn-danger btn-sm">
+                            <span>
+                               <span class="" translate="entity.action.delete"></span>
+                            </span>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+            </table>
+
+        </div> <!-- card.// -->
+
+        <div class="spacer">
+            <button type="submit"
+                    ui-sref="trimestre"
+                    class="btn btn-info">
+                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+            </button>
+        </div>
+
+    </div> <!-- container .//  -->
+
+</section>

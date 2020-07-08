@@ -1,0 +1,166 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()"show-validation>
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="myInscriptionLabel" data-translate="myApp.inscription.home.createOrEditLabel">Create or edit a Inscription</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+    </div>
+
+
+    <div class="modal-body" layout-padding>
+
+        <div class="alert alert-danger" ng-show="vm.showErrorAlert">
+            <p>{{vm.errorMessage}}</p>
+        </div>
+
+        <div>
+            <div class="row">
+                <div class="form-group col-md-6 required">
+                    <label class="control-label" translate="myApp.inscription.lastName" for="field_lastName">Nom</label>
+                    <input type="text" class="form-control" name="lastName" id="field_lastName"
+                           ng-model="vm.inscription.student.lastName"
+                           required/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label" translate="myApp.inscription.firstName" for="field_firstName">Nom</label>
+                    <input type="text" class="form-control" name="firstName" id="field_firstName"
+                           ng-model="vm.inscription.student.firstName"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label">
+                        <span translate="myApp.inscription.dateNaissance">Date de naissance</span>
+                    </label>
+                    <input type="text"
+                           ui-mask="99/99/9999" ui-options="{{options | json}}"
+                           model-view-value="{{modelViewValue}}"
+                           ng-model="vm.inscription.student.dateNaissance" placeholder="jj / mm / yyyy"
+                           ui-mask-placeholder ui-mask-placeholder-char=""
+                           class="form-control"/>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label" for="field_lieuNaissance">
+                        <span translate="myApp.inscription.lieuNaissance">Lieu</span>
+                    </label>
+                    <input type="text" class="form-control" name="lieuNaissance" id="field_lieuNaissance"
+                           ng-model="vm.inscription.student.lieuNaissance"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label" data-translate="myApp.inscription.sexe" for="field_sexe">Sexe</label>
+                    <select class="form-control" id="field_sexe" name="sexe" ng-model="vm.inscription.student.sexe"
+                            ng-options="sexe.value as sexe.name for sexe in vm.sexes | orderBy:'name'">
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label" for="field_nationalite">
+                        <span translate="myApp.inscription.nationalite">Nationalité</span>
+                    </label>
+                    <input type="text" class="form-control" name="nationalite" id="field_nationalite"
+                           ng-model="vm.inscription.student.nationalite"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6 required">
+                    <label class="control-label" data-translate="myApp.inscription.classe" for="field_classe">Classe</label>
+                    <select class="form-control" id="field_classe" name="classe" ng-model="vm.inscription.promoId" required
+                            ng-options="promo.id as promo.classe for promo in vm.promos | orderBy:'classe'">
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="control-label" for="field_matricule">
+                        <span translate="myApp.inscription.matricule">Matricule</span>
+                    </label>
+                    <input type="text" class="form-control" name="matricule" id="field_matricule"
+                           ng-model="vm.inscription.student.matricule"/>
+                </div>
+            </div>
+
+            <!--<div class="row">
+                <div class="form-group col-md-6 required">
+                    <label class="control-label" data-translate="myApp.inscription.classe" for="field_classe">Classe</label>
+                    <select class="form-control" id="field_classe" name="classe" ng-model="vm.inscription.promoId" required
+                            ng-options="promo.id as promo.classe for promo in vm.promos | orderBy:'classe'">
+                    </select>
+                </div>
+            </div>-->
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label" translate="myApp.inscription.fatherName" for="field_fatherName">Nom</label>
+                    <input type="text" class="form-control" name="fatherName" id="field_fatherName"
+                           ng-model="vm.inscription.student.fatherName"/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label" for="field_fatherPhone">
+                        <span translate="myApp.inscription.fatherPhone">Telephone père</span>
+                    </label>
+                    <input type="text" class="form-control" name="fatherPhone" id="field_fatherPhone"
+                           ng-model="vm.inscription.student.fatherPhone"/>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label" translate="myApp.inscription.motherName" for="field_motherName">Nom</label>
+                    <input type="text" class="form-control" name="motherName" id="field_motherName"
+                           ng-model="vm.inscription.student.motherName"/>
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label" for="field_motherPhone">
+                        <span translate="myApp.inscription.motherPhone">Telephone mère</span>
+                    </label>
+                    <input type="text" class="form-control" name="motherPhone" id="field_motherPhone"
+                           ng-model="vm.inscription.student.motherPhone"/>
+                </div>
+            </div>
+
+           <!-- <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">
+                        <span translate="myApp.inscription.otherInfos">OtherInfos</span>
+                    </label>
+                    <textarea class="form-control" ng-model="vm.inscription.student.otherInfos"></textarea>
+                </div>
+            </div>-->
+
+
+            <!--<div class="row">-->
+                <!--<div class="form-group col-md-12">-->
+                    <!--<label class="control-label">-->
+                        <!--<span>Image-->
+                        <!--<a class="btn btn-outline-primary btn-sm"-->
+                           <!--ngf-select="vm.addImage()" ng-model="vm.file" name="file" ngf-pattern="'image/*'"-->
+                           <!--ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">{{vm.selectedFile? "modifier" : "ajouter"}} </a></span>-->
+                    <!--</label>-->
+                    <!--<div class="col-md-3">-->
+                        <!--<img ngf-src="vm.selectedFile" class="img-responsive" width="100%">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving"
+                class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+        <!--<button type="submit" ng-disabled="!vm.inscription.studentId || !vm.inscription.promoId || vm.isSaving"
+                class="btn btn-primary" ng-if="vm.studentExist == 0">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>-->
+    </div>
+</form>

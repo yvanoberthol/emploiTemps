@@ -1,0 +1,54 @@
+{
+    "myApp": {
+        "payment" : {
+            "home": {
+                "title": "Payments",
+                "createLabel": "Create a new Payment",
+                "createOrEditLabel": "Create or edit a Payment",
+                "search": "Search for Payment"
+            },
+            "created": "A new Payment is created with identifier {{ param }}",
+            "updated": "A Payment is updated with identifier {{ param }}",
+            "deleted": "A Payment is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Payment {{ id }}?"
+            },
+            "detail": {
+                "title": "Payment"
+            },
+            "name": "Name",
+            "store": "Store",
+            "transactionId": "Transaction Id",
+            "createdDate": "Date paiement",
+            "dateTo": "Date To",
+            "currentPayment": "Current payment",
+            "newPayment": "New payment",
+            "managePayments": "Manage payments",
+            "viewBills": "View bills & payments",
+            "pricePlan": "Price plan",
+            "amount": "Amount",
+            "paymentValidated": "Payment validated",
+            "yes": "Yes",
+            "no": "No",
+            "currentPlan": "Current plan",
+            "currentPaymentPeriod": "Current payment period",
+            "currentPaymentPrice": "Current payment price",
+            "selectPlan": "Select a plan ",
+            "selectPaymentPeriod": "Select a payment period ",
+            "newPaymentPrice": "New payment price",
+            "nbDrivers" : "Number of drivers",
+            "orderNow": "Order Now",
+            "payOrangeMoney": "Pay with Orange Money",
+            "expiresOn": "Expires on",
+            "never": "Never !",
+            "changePlan": "Change plan",
+            "renewPlan": "Renew plan",
+            "newExpiryDate": "New expiry date",
+            "products": "products",
+            "discount": "discount",
+            "perMonth": "per month",
+            "selectBtn": "Select"
+
+        }
+    }
+}

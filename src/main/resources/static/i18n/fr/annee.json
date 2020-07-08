@@ -1,0 +1,43 @@
+{
+  "myApp": {
+    "annee" : {
+      "home": {
+        "title": "Années Scolaires",
+        "createLabel": "Créer une nouvelle année",
+        "createOrEditLabel": "Créer ou éditer une année",
+        "changeLabel": "Changement d'année scolaire",
+        "configLabel": "Configuration de l'année {{ annee }}",
+        "search": "Rechercher une année"
+      },
+      "created": "Une nouvelle année a été créé avec l'identifiant {{ param }}",
+      "updated": "La année avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La année avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la annee {{ id }} ?"
+      },
+      "setActive": {
+        "question": "Etes-vous certain de vouloir rendre l'année {{ id }} active ?"
+      },
+      "detail": {
+        "title": "Année"
+      },
+      "label":"Année",
+      "debut":"Début",
+      "fin":"Fin",
+      "active":"Active",
+      "nomEtablissement":"Nom Etablissement",
+      "typeEtablissement":"Type Etablissement",
+      "pays":"Pays",
+      "ville":"Ville",
+      "adresse":"Adresse",
+      "telephone":"Téléphone",
+      "logo":"Logo",
+      "cachet":"Cachet",
+      "entete":"Entête",
+      "bulletin":"Modèle Bulletin",
+      "carteScolaire":"Modèle Carte Scolaire",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

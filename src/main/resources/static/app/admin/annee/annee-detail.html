@@ -1,0 +1,90 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container">
+        <div class="">
+            <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation layout-padding>
+                <div class="row mt-10 spacer">
+                    <div class="col-md-3">
+                        <label  for="nomEtablissement" data-translate="myApp.annee.nomEtablissement">nomEtablissement</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="nomEtablissement" name="nomEtablissement"
+                               ng-model="vm.annee.nomEtablissement" ng-minlength=1 ng-maxlength=50 maxlength="50">
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-3">
+                        <label  for="pays" data-translate="myApp.annee.pays">Pays</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="pays" name="pays"
+                               ng-model="vm.annee.pays" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    </div>
+                </div>
+
+                <div class="row mt-10">
+                    <div class="col-md-3">
+                        <label  for="ville" data-translate="myApp.annee.ville">Ville</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="ville" name="ville"
+                               ng-model="vm.annee.ville" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    </div>
+                </div>
+
+                <div class="row mt-10">
+                    <div class="col-md-3">
+                        <label  for="adresse" data-translate="myApp.annee.adresse">Adresse</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="adresse" name="adresse"
+                               ng-model="vm.annee.adresse" ng-minlength=5 ng-maxlength=100 required maxlength="100">
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-3">
+                        <label  data-translate="myApp.annee.telephone">Telephone Number</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input ui-mask="999 999 999" ui-options="{{options | json}}"
+                               model-view-value="{{modelViewValue}}"
+                               ng-model="vm.annee.teletelephone" placeholder=""
+                               ui-mask-placeholder ui-mask-placeholder-char="space"
+                               required class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="row mt-10">
+                    <div class="col-md-3">
+                        <label  for="logo" data-translate="myApp.annee.logo">Logo</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="logo" name="logo"
+                               ng-model="vm.annee.logo" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    </div>
+                </div>
+
+                <div class="row mt-10">
+                    <div class="col-md-3">
+                        <label  for="cachet" data-translate="myApp.annee.cachet">Cachet</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="cachet" name="cachet"
+                               ng-model="vm.annee.cachet" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    </div>
+                </div>
+
+
+
+                <div class="row mt-10">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-9">
+                        <button type="submit" class="btn btn-primary btn-raised" data-translate="entity.action.save">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div> <!-- container .//  -->
+
+</section>

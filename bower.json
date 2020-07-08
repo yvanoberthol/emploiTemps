@@ -1,0 +1,32 @@
+{
+  "name": "myschool",
+  "authors": [
+    "Medilox <medilox02@yahoo.fr>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-jquery-nice-select": "*",
+    "angular-ui-mask": "^1.8.7",
+    "ngtouch": "^1.0.2",
+    "masonry-layout": "masonry#^4.2.2",
+    "angular-masonry": "^0.17.0",
+    "jquery-bridget": "^2.0.1",
+    "ui-leaflet": "^2.0.0",
+    "leaflet.markercluster": "leaflet-0.7",
+    "angucomplete-alt": "^3.0.0",
+    "angular-slick": "^0.2.1",
+    "angular-ui-calendar": "^1.0.2",
+    "angular-xeditable": "^0.10.0",
+    "angular-ckeditor": "^1.0.3"
+  }
+}

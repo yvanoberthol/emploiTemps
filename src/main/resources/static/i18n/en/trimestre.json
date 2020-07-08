@@ -1,0 +1,41 @@
+{
+  "myApp": {
+    "trimestre" : {
+      "home": {
+        "title": "Trimestres",
+        "createLabel": "Créer un nouveau trimestre",
+        "createOrEditLabel": "Créer ou éditer un trimestre",
+        "search": "Rechercher un trimestre"
+      },
+      "created": "Un nouveau trimestre a été créé avec l'identifiant {{ param }}",
+      "updated": "Le trimestre avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le trimestre avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le trimestre {{ id }} ?"
+      },
+      "setActive": {
+        "question": "Etes-vous certain de vouloir rendre l'trimestre {{ id }} active ?"
+      },
+      "detail": {
+        "title": "Trimestre"
+      },
+      "label":"Trimestre",
+      "name":"Nom",
+      "enabled":"Activée",
+      "sequence":"Séquence",
+      "sequences":"Séquences",
+      "start":"Heure Début",
+      "end":"Heure Fin",
+      "rank":"Rang",
+      "matiere":"Matière",
+      "teacher":"Enseignant",
+      "typeEvent":"Type",
+      "title":"Titre",
+      "present":"Présent",
+      "absent":"Absent",
+      "weight":"Poids",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

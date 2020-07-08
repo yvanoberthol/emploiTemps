@@ -1,0 +1,12 @@
+{
+    "myApp": {
+        "sortBy" : {
+            "null": "Trier par",
+            "newest": "Nouveautés",
+            "priceLowToHigh": "Prix croissant",
+            "priceHighToLow": "Prix décroissant",
+            "bestDiscount": "Meilleures réductions",
+            "bestSeller": "Meilleures ventes"
+        }
+    }
+}

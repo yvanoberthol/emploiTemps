@@ -1,0 +1,43 @@
+{
+  "myApp": {
+    "note" : {
+      "home": {
+        "title": "Marks",
+        "createLabel": "Create a new Mark",
+        "createOrEditLabel": "Create or edit a Mark",
+        "changeLabel": "School Mark Modification",
+        "configLabel": "School Mark {{ note }} Configuration",
+        "search": "Search for Mark",
+        "searchSub": "Search for Submark"
+      },
+      "created": "A new Mark is created with identifier {{ param }}",
+      "updated": "A Mark is updated with identifier {{ param }}",
+      "deleted": "A Mark is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Mark {{ id }}?",
+        "question": "Are you sure you want to delete Sub mark {{ id }}?"
+      },
+      "detail": {
+        "title": "Mark"
+      },
+      "debut":"Begin",
+      "fin":"End",
+      "active":"Active",
+      "label":"Lecture",
+      "name":"Name",
+      "enabled":"Enabled",
+      "start":"Starting Time",
+      "end":"Ending Time",
+      "duration":"Duration",
+      "matiere":"Mark",
+      "teacher":"Teacher",
+      "typeEvent":"Type",
+      "title":"Title",
+      "present":"Present",
+      "absent":"Absent",
+      "weight":"Weight",
+      "yes":"Yes",
+      "no":"No"
+    }
+  }
+}

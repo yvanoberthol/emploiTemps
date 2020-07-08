@@ -1,0 +1,51 @@
+{
+  "myApp": {
+    "inscription" : {
+      "home": {
+        "title": "Inscriptions",
+        "createLabel": "Nouvelle inscription",
+        "createOrEditLabel": "Créer ou éditer une inscription",
+        "search": "Rechercher une inscription"
+      },
+      "created": "Une nouvelle inscription a été créé avec l'identifiant {{ param }}",
+      "updated": "La inscription avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La inscription avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer l'inscription {{ id }} ?"
+      },
+      "detail": {
+        "title": "Inscription"
+      },
+      "createdDate": "Date",
+      "enabled": "Activée",
+      "firstName": "Prénoms",
+      "lastName": "Noms",
+      "student": "Nom de l'étudiant",
+      "sexe": "Sexe",
+      "dateNaissance": "Date de naissance",
+      "age": "Age",
+      "lieuNaissance": "Lieu",
+      "nationalite": "Nationalité",
+      "cni": "Numéro CNI",
+      "classe": "Classe",
+      "statut": "Statut",
+      "matricule": "Matricule",
+      "fatherName": "Nom du père ou tuteur légal",
+      "motherName": "Nom de la mère",
+      "fatherPhone": "Téléphone",
+      "motherPhone": "Téléphone",
+      "phone1": "Téléphone 1",
+      "phone2": "Téléphone 2",
+      "email": "Adresse email",
+      "otherInfos": "Autres informations",
+      "staff": "Créé par",
+      "montantScolarite": "Mnt scolarité",
+      "solde": "Solde",
+      "arrieres": "Arriérés",
+      "present":"Présent",
+      "absent":"Absent",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

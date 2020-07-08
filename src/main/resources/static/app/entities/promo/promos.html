@@ -1,0 +1,139 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container-fluid col-md-11 mt-4">
+
+        <header class="section-heading ">
+            <div layout="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg text-uppercase" translate="myApp.classe.home.title">Promos</h4>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="promo.new">
+                            <span translate="myApp.classe.home.createLabel">
+                                Create new classe
+                            </span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="spacer">
+
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed table-striped small">
+
+                <tr ng-repeat="promo in $data track by $index">
+
+                    <td data-title="'#'">
+                    <span class="">
+                        {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.classe.label' | translate" sortable="'classe'">
+                    <span class="">
+                       {{promo.classe}}
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.promo.profPrincipal' | translate">
+                        <span class="">
+                           {{promo.profPrincipal}}
+                        </span>
+                    </td>
+
+                    <td data-title="'Capacité'">
+                        <span class="">
+                           {{promo.capacite || 0}}
+                        </span>
+                    </td>
+
+                    <td data-title="'Effectif'" sortable="'nbStudents'">
+                        <span class="">
+                           {{promo.nbStudents || 0}}
+                        </span>
+                       <!-- <span>&nbsp;</span>
+                        <a ui-sref="student({promoId:promo.id})"  class="btn btn-light btn-sm">
+                            <span class=" " translate="entity.action.view">Voir</span>
+                        </a>-->
+                    </td>
+
+                    <td data-title="'myApp.promo.nbMatieres' | translate" sortable="'nbMatieres'">
+                        <span class="">
+                           {{promo.nbMatieres || 0}}
+                        </span>
+                        <!--<span>&nbsp;</span>
+                        <a ui-sref="promo-matieres({promoId:promo.id})" class="btn btn-light btn-sm">
+                            <span class=" ">Configurer</span>
+                        </a>-->
+                    </td>
+
+                    <td data-title="'myApp.classe.montantScolarite' | translate" sortable="'montantScolarite'">
+                        <span class="">
+                           {{promo.montantScolarite | currency: '' : 0}} Fcfa
+                        </span>
+                    </td>
+
+                    <!--<td data-title="''" >
+                        <span class="">
+                          <a ui-sref="promo.edit({promoId:promo.id})" class="btn btn-primary btn-sm">
+                                <span>
+                                    <span class="">Envoyer sms groupé</span>
+                                </span>
+                            </a>
+                        </span>
+                    </td>-->
+
+                    <!--<td class="text-right">
+                        <span class="text-nowrap">
+                        <a ui-sref="promo-notes({promoId:promo.id})" class="btn btn-info btn-sm">
+                            <span class="">Editer les notes</span>
+                        </a>
+                        </span>
+                    </td>-->
+
+                    <!--<td class="text-right">
+                        <span class="text-nowrap">
+                        <a ui-sref="promo-notes-summary({promoId:promo.id})" class="btn btn-warning btn-sm">
+                            <span class="">Voir les notes</span>
+                        </a>
+                        </span>
+                    </td>-->
+
+                    <td data-title="''" class="text-right" width="10%">
+                        <span class="text-nowrap">
+                            <a ui-sref="promo-detail.students({promoId:promo.id})" class="btn btn-primary btn-sm">
+                                <span>
+                                    <span class="" translate="entity.action.view"></span>
+                                </span>
+                            </a>
+                            <span>&nbsp;</span>
+                            <!--<a ui-sref="promo-notes({promoId:promo.id})" class="btn btn-info btn-sm">
+                                <span class="">Editer les notes</span>
+                            </a>
+                            <span>&nbsp;</span>
+                            <a ui-sref="promo-notes-summary({promoId:promo.id})" class="btn btn-warning btn-sm">
+                                <span class="">Voir les notes</span>
+                            </a>
+                            <span>&nbsp;</span>-->
+                            <a ui-sref="promo.edit({promoId:promo.id})" class="btn btn-info btn-sm">
+                                <span>
+                                    <span class="" translate="entity.action.edit"></span>
+                                </span>
+                            </a>
+                            <span>&nbsp;</span>
+                            <a ui-sref="promo.delete({promoId:promo.id})" class="btn btn-danger btn-sm">
+                                <span>
+                                   <span class="" translate="entity.action.delete"></span>
+                                </span>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+        </div> <!-- card.// -->
+
+    </div> <!-- container .//  -->
+
+</section>
+
+

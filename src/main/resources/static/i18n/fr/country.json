@@ -1,0 +1,33 @@
+{
+  "myApp": {
+    "country" : {
+      "home": {
+        "title": "Pays",
+        "createLabel": "Créer un nouveau Pays",
+        "createOrEditLabel": "Créer ou éditer un Pays",
+        "search": "Rechercher un Pays"
+      },
+      "created": "Un nouveau Pays a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Pays avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "Le Pays avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le Pays {{ id }} ?"
+      },
+      "detail": {
+        "title": "Pays"
+      },
+      "name": "Nom",
+      "name": "Nom Français",
+      "nameEn": "Nom Anglais",
+      "email": "Email",
+      "phone": "Téléphone",
+      "createdDate": "Date d'inscription",
+      "country" : "Pays",
+      "activated": "Activé",
+      "origin":"Origine",
+      "destination":"Destination",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

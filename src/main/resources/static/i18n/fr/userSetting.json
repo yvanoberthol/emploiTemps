@@ -1,0 +1,37 @@
+{
+    "optitourplanApp": {
+        "userSetting" : {
+            "home": {
+                "title": "UserSettings",
+                "createLabel": "Créer un nouveau User Setting",
+                "createOrEditLabel": "Créer ou éditer un User Setting",
+                "search": "Recherche pour User Setting"
+            },
+            "created": "Un nouveau User Setting a été créé avec l'identifiant {{ param }}",
+            "updated": "Le User Setting avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le User Setting avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le User Setting {{ id }} ?"
+            },
+            "detail": {
+                "title": "User Setting"
+            },
+            "company": "Company",
+            "address": "Address",
+            "focusPointLat": "Focus Point Lat",
+            "focusPointLng": "Focus Point Lng",
+            "country": "Country",
+            "phoneNumber": "Phone Number",
+            "currency": "Currency",
+            "distanceUnit": "Distance Unit",
+            "timeZone": "Time Zone",
+            "timeFormat": "Time Format",
+            "transactionBillingPeriod": "Transaction Billing Period",
+            "transactionDateTime": "Transaction Date Time",
+            "transactionMaxNbOrders": "Transaction Max Nb Orders",
+            "transactionPrice": "Transaction Price",
+            "transactionPlanName": "Transaction Plan Name",
+            "user": "User"
+        }
+    }
+}

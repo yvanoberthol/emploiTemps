@@ -1,0 +1,12 @@
+{
+    "myApp": {
+        "sortBy" : {
+            "null": "Sort By",
+            "newest": "Newest Items",
+            "priceLowToHigh": "Price Low to High",
+            "priceHighToLow": "Price High to Low",
+            "bestDiscount": "High Discount",
+            "bestSeller": "Best Selling"
+        }
+    }
+}

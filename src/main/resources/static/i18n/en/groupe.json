@@ -1,0 +1,30 @@
+{
+  "myApp": {
+    "groupe" : {
+      "home": {
+        "title": "Matieres",
+        "createLabel": "Create a new Groupe",
+        "createOrEditLabel": "Create or edit a Groupe",
+        "search": "Search for Groupe",
+        "createLabelSub": "Create a new Submatiere",
+        "createOrEditLabelSub": "Create or edit a Submatiere",
+        "searchSub": "Search for Submatiere"
+      },
+      "created": "A new Groupe is created with identifier {{ param }}",
+      "updated": "A Groupe is updated with identifier {{ param }}",
+      "deleted": "A Groupe is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Groupe {{ id }}?",
+        "question": "Are you sure you want to delete Sub groupe {{ id }}?"
+      },
+      "detail": {
+        "title": "Groupe"
+      },
+      "debut":"Begin",
+      "fin":"End",
+      "active":"Active",
+      "yes":"Yes",
+      "no":"No"
+    }
+  }
+}

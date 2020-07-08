@@ -1,0 +1,54 @@
+{
+    "myApp": {
+        "transaction" : {
+            "home": {
+                "title": "Transactions",
+                "createLabel": "Create a new Transaction",
+                "createOrEditLabel": "Create or edit a Transaction",
+                "search": "Search for Transaction"
+            },
+            "created": "A new Transaction is created with identifier {{ param }}",
+            "updated": "A Transaction is updated with identifier {{ param }}",
+            "deleted": "A Transaction is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Transaction {{ id }}?"
+            },
+            "detail": {
+                "title": "Transaction"
+            },
+            "name": "Name",
+            "store": "Store",
+            "transactionId": "Transaction Id",
+            "date": "Date paiement",
+            "dateTo": "Date To",
+            "currentTransaction": "Current transaction",
+            "newTransaction": "New transaction",
+            "manageTransactions": "Manage transactions",
+            "viewBills": "View bills & payments",
+            "pricePlan": "Price plan",
+            "amount": "Amount",
+            "paymentValidated": "Payment validated",
+            "yes": "Yes",
+            "no": "No",
+            "currentPlan": "Current plan",
+            "currentTransactionPeriod": "Current transaction period",
+            "currentTransactionPrice": "Current transaction price",
+            "selectPlan": "Select a plan ",
+            "selectTransactionPeriod": "Select a transaction period ",
+            "newTransactionPrice": "New transaction price",
+            "nbDrivers" : "Number of drivers",
+            "orderNow": "Order Now",
+            "payOrangeMoney": "Pay with Orange Money",
+            "expiresOn": "Expires on",
+            "never": "Never !",
+            "changePlan": "Change plan",
+            "renewPlan": "Renew plan",
+            "newExpiryDate": "New expiry date",
+            "products": "products",
+            "discount": "discount",
+            "perMonth": "per month",
+            "selectBtn": "Select"
+
+        }
+    }
+}

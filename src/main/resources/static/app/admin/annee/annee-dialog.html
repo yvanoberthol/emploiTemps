@@ -1,0 +1,45 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myAnneeLabel" data-translate="myApp.annee.home.createOrEditLabel">Create or edit a Annee</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+
+        <div>
+            <div class="form-group required">
+                <label class="control-label" translate="myApp.annee.debut" for="field_debut">Debut</label>
+                <input type="number" class="form-control" name="name" id="field_debut"
+                       ng-model="vm.annee.debut"/>
+                <!--<input type="text" id="field_debut"
+                       ui-mask="99/99/9999" ui-options="{{options | json}}"
+                       model-view-value="{{modelViewValue}}"
+                       ng-model="vm.annee.dateDebut" placeholder="jj / mm / yyyy"
+                       ui-mask-placeholder ui-mask-placeholder-char=""
+                       class="form-control" required/>-->
+            </div>
+
+            <div class="form-group required">
+                <label class="control-label" translate="myApp.annee.fin" for="field_fin">Fin</label>
+                <input type="number" class="form-control" name="name" id="field_fin"
+                       ng-model="vm.annee.fin"/>
+                <!--<input type="text" id="field_fin"
+                       ui-mask="99/99/9999" ui-options="{{options | json}}"
+                       model-view-value="{{modelViewValue}}"
+                       ng-model="vm.annee.dateFin" placeholder="jj / mm / yyyy"
+                       ui-mask-placeholder ui-mask-placeholder-char=""
+                       class="form-control" required/>-->
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

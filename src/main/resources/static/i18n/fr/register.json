@@ -1,0 +1,29 @@
+{
+    "register": {
+        "title": "Création de compte utilisateur",
+        "title-pronostic": "Création de compte Transporteur",
+        "title-relay": "Création de compte Point Relais",
+        "title-advertiser": "Création de compte Annonceur",
+        "title-staff": "Création de compte Staff",
+        "form": {
+            "button": "Enregistrement"
+        },
+        "messages": {
+            "validate": {
+                "login": {
+                    "required": "Votre nom d'utilisateur est obligatoire.",
+                    "minlength": "Votre nom d'utilisateur doit contenir plus d'un caractère.",
+                    "maxlength": "Votre nom d'utilisateur ne peut pas contenir plus de 50 caractères.",
+                    "pattern": "Votre nom d'utilisateur ne peut contenir que des lettres minuscules ou des nombres."
+                }
+            },
+            "success": "<strong>Compte enregistré !</strong> Merci de vérifier votre email de confirmation.",
+            "error": {
+                "fail": "<strong>Compte non créé !</strong> Merci d'essayer à nouveau plus tard.",
+                "userexists": "<strong>Ce compte utilisateur existe déjà !</strong> Veuillez en choisir un autre.",
+                "emailexists": "<strong>Cet email est déjà utilisé !</strong> Veuillez en choisir un autre.",
+                "errorStoreNameExists": "<strong>Ce nom de boutique est déjà utilisé !</strong> Veuillez en choisir un autre."
+            }
+        }
+    }
+}

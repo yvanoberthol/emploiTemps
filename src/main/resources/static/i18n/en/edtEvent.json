@@ -1,0 +1,42 @@
+{
+  "myApp": {
+    "edtEvent" : {
+      "home": {
+        "title": "Courses",
+        "createLabel": "Create a new Course",
+        "createOrEditLabel": "Create or edit a Course",
+        "changeLabel": "School Course Modification",
+        "configLabel": "School Course {{ edtEvent }} Configuration",
+        "search": "Search for Course",
+        "createLabelSub": "Create a new Subcourse",
+        "createOrEditLabelSub": "Create or edit a Subcourse",
+        "searchSub": "Search for Subcourse"
+      },
+      "created": "A new Course is created with identifier {{ param }}",
+      "updated": "A Course is updated with identifier {{ param }}",
+      "deleted": "A Course is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Course {{ id }}?",
+        "question": "Are you sure you want to delete Sub course {{ id }}?"
+      },
+      "detail": {
+        "title": "Course"
+      },
+      "debut":"Begin",
+      "fin":"End",
+      "active":"Active",
+      "label":"Lectue",
+      "start":"Starting Time",
+      "end":"Ending Time",
+      "duration":"Duration",
+      "matiere":"Course",
+      "teacher":"Teacher",
+      "typeEvent":"Type",
+      "title":"Title",
+      "present":"Present",
+      "absent":"Absent",
+      "yes":"Yes",
+      "no":"No"
+    }
+  }
+}

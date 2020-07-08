@@ -1,0 +1,40 @@
+{
+  "myApp": {
+    "node" : {
+      "home": {
+        "title": "Nodes",
+        "createLabel": "Add a new node",
+        "createOrEditLabel": "Add an node",
+        "search": "Search for node"
+      },
+      "created": "A new node is created with identifier {{ param }}",
+      "updated": "A node is updated with identifier {{ param }}",
+      "deleted": "A node is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete node {{ id }}?"
+      },
+      "detail": {
+        "title": "Node"
+      },
+      "caption": "Say something about this picture...",
+      "url": "Url",
+      "description": "Description",
+      "product": "Product",
+      "products": "Products",
+      "nbProducts": "Number of products",
+      "language": "Language",
+      "currency": "Currency",
+      "createdDate": "Date Inscription",
+      "country": "Country",
+      "city": "City",
+      "enabled": "Enabled",
+      "shippingCost": "Shipping Cost",
+      "delay": "Shipping Delay",
+      "day":"Day",
+      "days":"Days",
+      "yes":"Yes",
+      "no":"No",
+      "nbOrders":"# Orders"
+    }
+  }
+}

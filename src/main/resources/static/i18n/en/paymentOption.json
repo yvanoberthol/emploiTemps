@@ -1,0 +1,26 @@
+{
+  "myApp": {
+    "paymentOption" : {
+      "home": {
+        "title": "Payment Options",
+        "createLabel": "Create a new Payment Option",
+        "createOrEditLabel": "Create or edit a Payment Option",
+        "search": "Search for Payment Option"
+      },
+      "created": "A new Payment Option is created with identifier {{ param }}",
+      "updated": "A Payment Option is updated with identifier {{ param }}",
+      "deleted": "A Payment Option is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Payment Option {{ id }}?"
+      },
+      "detail": {
+        "title": "Payment Option"
+      },
+      "name": "Label",
+      "instruction": "Instructions",
+      "phone": "Phone Number",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    }
+  }
+}

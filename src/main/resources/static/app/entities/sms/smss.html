@@ -1,0 +1,159 @@
+    <section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container col-md-11">
+
+        <header class="section-heading ">
+            <div layout-gt-sm="row" layout-align="space-between center">
+                <div>
+                    <h4 class="title-section bg text-uppercase" translate="myApp.sms.home.title">Sms</h4>
+                </div>
+
+
+                <div layout-gt-sm="row">
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="sms.new">
+                        <span>
+                            Envoyer un sms rapide
+                        </span>
+                    </button>
+                    <!--<div class="dropdown">
+                        <button type="button" class="btn btn-primary btn-raised dropdown-toggle" data-toggle="dropdown">
+                            Envoyer un sms
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" ui-sref="sms.new">Sms simple</a>
+                            <a class="dropdown-item" ui-sref="sms.new">Sms groupé</a>
+                            <a class="dropdown-item" ui-sref="sms.new">Sms personnalisé</a>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </header>
+
+        <div class="spacer"></div>
+
+        <div layout-gt-sm="row" layout-align="space-between center">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label class="control-label">Nombre de sms par page </label>
+                    <span>&nbsp;</span>
+                    <select class="form-control" ng-model="vm.count" ng-change="vm.search()">
+                        <option value="10">10</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="500">500</option>
+                        <option value="1000">1000</option>
+                    </select>
+                </div>
+            </form>
+
+
+            <div layout="column">
+            </div>
+        </div>
+
+        <div class="spacer">
+            <div class="">
+
+                <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed table-striped">
+                    <tr>
+                        <td data-title="'#'">
+                        </td>
+
+                        <td data-title="'myApp.sms.createdDate' | translate" sortable="'createdDate'">
+                            <div class="form-group" style="margin:0;">
+                                <input date-range-picker class="form-control date-picker input-sm" type="text" ng-model="vm.range"
+                                       options="vm.options" />
+                            </div>
+                        </td>
+
+                        <td data-title="'myApp.sms.sender' | translate" sortable="'sender'">
+                            <div class="form-group" style="margin:0;">
+                                <input type="text" class="form-control input-sm"  ng-model="vm.sender" my-enter="vm.search()"
+                                />
+                            </div>
+                        </td>
+
+                        <td data-title="'myApp.sms.message' | translate"></td>
+
+                        <td data-title="'myApp.sms.recipient' | translate">
+                            <div class="form-group" style="margin:0;">
+                                <input type="text" class="form-control"  ng-model="vm.recipient" my-enter="vm.search()"
+                                />
+                            </div>
+                        </td>
+
+                        <td data-title="'myApp.sms.deliverStatus' | translate"></td>
+                        <td data-title="''"></td>
+                    </tr>
+                    <tr ng-repeat="sms in $data track by $index">
+
+                        <td data-title="'#'">
+                            <span class="small">
+                                {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="small">
+                                {{sms.createdDate}}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="small">
+                                {{sms.sender}}
+                            </span>
+                        </td>
+
+                        <td>
+                        <span class="small">
+                             <span>
+                                {{sms.message}}
+                            </span>
+                        </span>
+                        </td>
+
+
+                        <td>
+                            <!--<span ng-repeat="recipient in sms.recipients" class="small">
+                                <span >{{recipient}}</span>{{$last ? '' : ', '}}
+                            </span>-->
+                            <span class="small">{{sms.recipient}}</span>
+                        </td>
+
+                        <td>
+                            <h1 class="badge badge-{{sms.badge}}">
+                                <span>{{sms.deliveryStatus}} &nbsp;</span>
+                            </h1>
+                        </td>
+
+                        <td data-title="''" class="text-right">
+                            <span class="text-nowrap">
+                                <!--<a ui-sref="sms-detail({smsId:sms.id})" class="btn btn-primary btn-sm">
+                                    <span>
+                                        <span class="small" translate="entity.action.view"></span>
+                                    </span>
+                                </a>-->
+                                <!--<span>&nbsp;</span>
+                                <a ui-sref="sms.edit({smsId:sms.id})" class="btn btn-info btn-sm">
+                                    <span>
+                                        <span class="small" translate="entity.action.edit"></span>
+                                    </span>
+                                </a>-->
+                                <span>&nbsp;</span>
+                                <a ui-sref="sms.delete({smsId:sms.id})" class="btn btn-danger btn-sm">
+                                    <span>
+                                       <span class="small" translate="entity.action.delete"></span>
+                                    </span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+

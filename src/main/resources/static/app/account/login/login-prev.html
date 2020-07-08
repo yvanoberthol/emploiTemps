@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Connectez vous</div>
+        <div class="card-body">
+
+            <div class="">
+                <div class="alert alert-danger" ng-show="vm.authenticationError" data-translate="login.messages.error.authentication">
+                    <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                </div>
+                <div class="alert alert-warning" ng-show="vm.userNotActivated">
+                    <strong>Votre compte est en cours de validation !</strong> <br>
+                    Veuillez attendre la confirmation d'activation par mail avant de pouvoir vous connecter
+                </div>
+            </div>
+
+            <form name="form" role="form" ng-submit="vm.login()">
+                <div class="form-group required">
+                    <div class="form-label-group">
+                        <input type="text" id="inputEmail" class="form-control"
+                               placeholder="Username" required autofocus="autofocus"
+                               ng-model="vm.credentials.username">
+                        <label for="inputEmail">Email</label>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" class="form-control"
+                               placeholder="Password" required
+                               ng-model="vm.credentials.password">
+                        <label for="inputPassword">Mot de passe</label>
+                    </div>
+                </div>
+                <!--<div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="remember-me">
+                            Remember Password
+                        </label>
+                    </div>
+                </div>-->
+                <!--<a class="btn btn-primary btn-block" type="submit" href="">Connexion</a>-->
+                <button type="submit" ng-disabled="form.$invalid || vm.isSaving" class="btn btn-primary btn-block" ng-class="{'btn-raised': !form.$invalid}" data-translate="login.form.button">Login</button>
+
+            </form>
+            <div class="text-center">
+                <!--<a class="d-block small mt-3" href="" ng-click="vm.register()">Register an Account</a>-->
+                <a class="d-block small" href="" ng-click="vm.requestResetPassword()">Mot de passe oublié ?</a>
+            </div>
+        </div>
+    </div>
+</div>

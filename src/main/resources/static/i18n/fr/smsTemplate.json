@@ -1,0 +1,23 @@
+{
+  "myApp": {
+    "smsTemplate" : {
+      "home": {
+        "title": "Modèles Sms ",
+        "createLabel": "Envoyer un modèle sms",
+        "createOrEditLabel": "Créer ou éditer un modèle sms",
+        "search": "Rechercher un modèle sms"
+      },
+      "created": "Un modèle sms a été créé avec l'identifiant {{ param }}",
+      "updated": "Le modèle sms avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le modèle sms avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le modèle sms {{ id }} ?"
+      },
+      "detail": {
+        "title": " Modèle sms"
+      },
+      "title": "Titre",
+      "message": "Message"
+    }
+  }
+}

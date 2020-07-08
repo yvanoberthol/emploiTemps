@@ -1,0 +1,77 @@
+
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container col-md-11">
+
+        <header class="section-heading ">
+            <div layout-gt-sm="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg text-uppercase" translate="myApp.smsTemplate.home.title">SmsTemplates</h4>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="smsTemplate.new">
+                        <span>Nouveau Modèle Sms</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="spacer">
+            <div class="">
+
+                <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed table-striped">
+
+                    <tr ng-repeat="smsTemplate in $data track by $index">
+
+                        <td data-title="'#'">
+                            <span class="small">
+                                {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                            </span>
+                        </td>
+
+                        <td data-title="'myApp.smsTemplate.title' | translate">
+                        <span class="small">
+                             <span>
+                                {{smsTemplate.title}}
+                            </span>
+                        </span>
+                        </td>
+
+                        <td data-title="'myApp.smsTemplate.message' | translate">
+                            <span class="small">
+                               {{smsTemplate.message}}
+                            </span>
+                        </td>
+
+
+                        <td data-title="''" class="text-right">
+                            <span class="text-nowrap">
+                                <!--<a ui-sref="smsTemplate-detail({smsTemplateId:smsTemplate.id})" class="btn btn-primary btn-sm">
+                                    <span>
+                                        <span class="small" translate="entity.action.view"></span>
+                                    </span>
+                                </a>
+                                <span>&nbsp;</span>-->
+                                <a ui-sref="smsTemplate.edit({smsTemplateId:smsTemplate.id})" class="btn btn-info btn-sm">
+                                    <span>
+                                        <span class="small" translate="entity.action.edit"></span>
+                                    </span>
+                                </a>
+                                <span>&nbsp;</span>
+                                <a ui-sref="smsTemplate.delete({smsTemplateId:smsTemplate.id})" class="btn btn-danger btn-sm">
+                                    <span>
+                                       <span class="small" translate="entity.action.delete"></span>
+                                    </span>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+

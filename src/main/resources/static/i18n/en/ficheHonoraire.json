@@ -1,0 +1,41 @@
+{
+  "myApp": {
+    "ficheHonoraire" : {
+      "home": {
+        "title": "Fiches Honoraires",
+        "createLabel": "Create a new Honoraire",
+        "createOrEditLabel": "Create or edit a Honoraire",
+        "changeLabel": "School Honoraire Modification",
+        "configLabel": "School Honoraire {{ honoraire }} Configuration",
+        "search": "Search for Honoraire",
+        "createLabelSub": "Create a new Subhonoraire",
+        "createOrEditLabelSub": "Create or edit a Subhonoraire",
+        "searchSub": "Search for Subhonoraire"
+      },
+      "created": "A new Honoraire is created with identifier {{ param }}",
+      "updated": "A Honoraire is updated with identifier {{ param }}",
+      "deleted": "A Honoraire is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Honoraire {{ id }}?",
+        "question": "Are you sure you want to delete Sub honoraire {{ id }}?"
+      },
+      "detail": {
+        "title": "Honoraire"
+      },
+      "debut":"Begin",
+      "fin":"End",
+      "tauxHoraire":"Taux H",
+      "nbHeures":"NB H",
+      "brut":"MNT Brut",
+      "net":"MNT Net",
+      "irpp":"IRPP",
+      "autre":"Autre",
+      "transport":"Transport",
+      "retenue":"Retenue",
+      "total":"Total Amount",
+      "active":"Active",
+      "yes":"Yes",
+      "no":"No"
+    }
+  }
+}

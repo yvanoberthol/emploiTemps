@@ -1,0 +1,35 @@
+{
+  "myApp": {
+    "promo" : {
+      "home": {
+        "title": "Promos",
+        "createLabel": "Créer une nouvelle promo",
+        "createOrEditLabel": "Créer ou éditer une promo",
+        "editMontantScolariteLabel": "Editer Montant Scolarité",
+        "search": "Rechercher une promo"
+      },
+      "created": "Une nouvelle promo a été créé avec l'identifiant {{ param }}",
+      "updated": "La promo avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La promo avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la promo {{ id }} ?",
+        "questionSub": "Etes-vous certain de vouloir supprimer la sous-promo {{ id }} ?"
+      },
+      "detail": {
+        "title": "Promo"
+      },
+      "classe":"Classe",
+      "profPrincipal":"Professeur Principal",
+      "teachers":"Enseignants",
+      "montantScolarite":"Montant Scolarité",
+      "matieres":"Matières",
+      "nbMatieres":"Nb Matières",
+      "credit":"Crédits",
+      "coef":"Coefficient",
+      "active":"Active",
+      "notes":"Notes",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

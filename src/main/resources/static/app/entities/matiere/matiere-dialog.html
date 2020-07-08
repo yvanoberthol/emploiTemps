@@ -1,0 +1,53 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myMatiereLabel" data-translate="myApp.matiere.home.createOrEditLabel">Create or edit a Matiere</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <div>
+            <div class="form-group">
+                <label class="control-label" translate="myApp.matiere.name" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="vm.matiere.name"/>
+            </div>
+
+            <div class="form-group" ng-if="auth.getTypeSchool() == 'College'">
+                <label class="control-label"  for="field_groupe">
+                    <span data-translate="myApp.matiere.groupe">Groupe</span>
+                </label>
+                <select class="form-control" id="field_groupe" name="groupe" ng-model="vm.matiere.groupeId"
+                        ng-options="groupe.id as groupe.name for groupe in vm.groupes | orderBy:'name'">
+                </select>
+            </div>
+
+            <div class="form-group" ng-if="auth.getTypeSchool() == 'College'">
+                <label class="control-label" translate="myApp.matiere.coef" for="field_coef">Coef</label>
+                <input type="number" min=0 step=".01" class="form-control" name="coef" id="field_coef"
+                       ng-model="vm.matiere.coef"/>
+            </div>
+
+            <div class="form-group" ng-if="auth.getTypeSchool() == 'College'">
+                <label class="control-label" for="field_teacher">Enseignant</label>
+                <input type="text" class="form-control" name="teacher" id="field_teacher"
+                       ng-model="vm.matiere.teacher"/>
+            </div>
+
+            <div class="form-group" ng-if="auth.getTypeSchool() == 'Primaire'">
+                <label class="control-label">Note Sur</label>
+                <input type="number" min=0 class="form-control" name="noteSur" id="field_noteSur"
+                       ng-model="vm.matiere.noteSur"/>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

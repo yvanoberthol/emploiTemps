@@ -1,0 +1,150 @@
+<div class="modal-header">
+    <ul class="nav nav-pills">
+        <li class="nav-item" ng-repeat="ligneTrimestre in vm.student.notes track by $index">
+            <a class="nav-link" ng-class="{active: vm.selectedTab == $index}" href=""
+               ng-click="vm.tabSelected($index)">{{ligneTrimestre.trimestre}}</a>
+        </li>
+    </ul>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+</div>
+<div class="modal-body" loading="vm.loading">
+    <md-content layout-padding>
+
+        <div id="doc">
+
+            <div ng-if="vm.bulletin.logo" align="center">
+                <!--<img class="logo" src="images/logo.png" style="max-height:60px;">-->
+                <img ng-src="data:image/JPEG;base64,{{vm.bulletin.logo}}" style="max-height:60px;">
+            </div>
+
+            <table style="width: 100%;" cellspacing="0" cellpadding="2" border="0">
+                <tr>
+                    <td align="left" style="border: none;">
+                        <span style="text-transform: uppercase;">Trimestre : <b>{{vm.ligneTrimestre.trimestre}}</b></span>
+                    </td>
+                    <td align="right" style="border: none;">
+                        <span style="text-transform: uppercase;">Année scolaire :<b>{{session.getAnnee().label}}</b></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" style="border: none;">
+                        <span style="text-transform: uppercase;">Noms et prénoms de l'élève : <b>{{vm.student.name}}</b></span>
+                    </td>
+                    <td align="right" style="border: none;">
+                        <span style="text-transform: uppercase;">Classe :<b>{{vm.ligneTrimestre.classe}}</b></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align="left" style="border: none;">
+                        <span style="text-transform: uppercase;">Date de naissance : <b>{{vm.student.dateNaissance}}</b></span>
+                    </td>
+                    <td align="right" style="border: none;">
+        <span ng-if="vm.student.lieuNaissance" style="text-transform: uppercase;">Lieu : <b>{{vm.student.lieuNaissance}}</b>
+                    </span>
+                    </td>
+                </tr>
+            </table>
+
+            <!--<p>&nbsp;</p>-->
+
+            <table style="width: 100%; margin-top:10px; border: 1px solid black;border-collapse: collapse;" cellspacing="1" cellpadding="5" border="1">
+                <tr>
+                    <td align="center"rowspan="2" width="10%">Composantes</td>
+                    <td rowspan="2" width="40%">Activités</td>
+                    <td align="center" colspan="{{vm.ligneTrimestre.sequences.length}}" width="30%">Appréciations</td>
+                    <td align="center" rowspan="2" width="10%">Cotation des compétences</td>
+                    <td align="center" rowspan="2" width="10%">Remarques</td>
+                </tr>
+                <tr>
+                    <td align="center" ng-repeat="sequence in vm.ligneTrimestre.sequences" width="10%">
+                        <span>{{sequence.name}}</span></td>
+                </tr>
+
+                <tbody ng-repeat="ligneGroupe in vm.ligneTrimestre.groupes track by $index">
+                <tr>
+                    <td rowspan="{{ligneGroupe.matieres.length}}">{{ligneGroupe.groupe}}</td>
+                    <td>{{ligneGroupe.matieres[0].matiere}}</td>
+                    <td align="center" ng-repeat="studentNote in ligneGroupe.matieres[0].notes">
+                        {{studentNote.note}}
+                        <!--<span>{{studentNote.grade}}</span>-->
+                    </td>
+                    <td rowspan="{{ligneGroupe.matieres.length}}">&nbsp;</td>
+                    <td rowspan="{{ligneGroupe.matieres.length}}">&nbsp;</td>
+                </tr>
+                <tr ng-repeat="ligneMatiere in ligneGroupe.matieres track by $index"
+                    ng-if="$index != 0"
+                    style="border: 1px solid black;">
+                    <td >{{ligneMatiere.matiere}}</td>
+                    <td align="center" ng-repeat="studentNote in ligneMatiere.notes">
+                        {{studentNote.note}}
+                        <!--<span>{{studentNote.grade}}</span>-->
+                    </td>
+                </tr>
+                </tbody>
+                <tr>
+                    <td colspan="4">Monthly Attendance</td>
+                    <td colspan="2" rowspan="3" style="padding:5px; width: 100%; font-size:small;">
+                        <table style="width: 100%;" cellspacing="0" cellpadding="5" border="0">
+                            <tr>
+                                <td style="border: none;"><span style="text-transform:uppercase">Cotation des compétences</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;">
+                                    <span>A+ : Expert</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;"><span>A : Acquis</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;"><span>ECA : En cours d'acquisition</span></td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;"><span>NA : Non acquis</span></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">Monthly Remarks</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="padding:0;">
+                        <table style="width: 100%;" cellspacing="0" cellpadding="10" border="0">
+                            <tr style="border-top: none;">
+                                <td width="10%" style="border: none;">&nbsp;</td>
+                                <td width="30%" align="center" style="border: none;border-left: 1px solid black;" >Visa enseignant</td>
+                                <td width="30%" align="center" style="border: none;border-left: 1px solid black;" >Visa directeur</td>
+                                <td width="30%" align="center" style="border: none;border-left: 1px solid black;" >Visa parent</td>
+                            </tr>
+                            <tr ng-repeat="sequence in vm.ligneTrimestre.sequences">
+                                <td style="border: none;border-top: 1px solid black;" >{{sequence.name}}</td>
+                                <td style="border: none;border-left: 1px solid black;border-top: 1px solid black;" >&nbsp;</td>
+                                <td style="border: none;border-left: 1px solid black;border-top: 1px solid black;" >&nbsp;</td>
+                                <td style="border: none;border-left: 1px solid black;border-top: 1px solid black;" >&nbsp;</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+            <p>&nbsp;</p>
+
+        </div>
+    </md-content>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.close">Close</span>
+    </button>
+    <button type="button" ng-disabled="vm.isSaving" class="btn btn-primary"
+            ng-click="vm.download()">
+        <span>Télécharger</span>
+    </button>
+    <!--<button type="button" ng-disabled="vm.isSaving" print-avoid-break class="btn btn-primary" >
+        <span>Télécharger</span>
+    </button>-->
+</div>

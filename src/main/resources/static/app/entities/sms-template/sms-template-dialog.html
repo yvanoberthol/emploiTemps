@@ -1,0 +1,62 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="mySmsTemplateLabel" data-translate="myApp.smsTemplate.home.createOrEditLabel">Create or edit a SmsTemplate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+    </div>
+
+
+    <div class="modal-body" layout-padding>
+
+        <div>
+            <div class="form-group">
+                <label class="control-label" translate="myApp.smsTemplate.title" for="field_title">Nom</label>
+                <input type="text" class="form-control" name="title" id="field_title"
+                       ng-model="vm.smsTemplate.title"
+                       required/>
+                <div ng-show="editForm.title.$invalid">
+                    <p class="help-block"
+                       ng-show="editForm.name.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="30">
+                        This field cannot be longer than 30 characters.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label class="control-label">
+                        <span translate="myApp.smsTemplate.message">Message</span>
+                    </label>
+                    <textarea rows="5" class="form-control" ng-model="vm.smsTemplate.message"></textarea>
+                    <p class="text-info text-right">{{ vm.smsTemplate.message.length }} : {{ vm.nbSms || 1}} Messages</p>
+
+                </div>
+            </div>
+
+
+            <!--<div class="row">-->
+                <!--<div class="form-group col-md-12">-->
+                    <!--<label class="control-label">-->
+                        <!--<span>Image-->
+                        <!--<a class="btn btn-outline-primary btn-sm"-->
+                           <!--ngf-select="vm.addImage()" ng-model="vm.file" name="file" ngf-pattern="'image/*'"-->
+                           <!--ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">{{vm.selectedFile? "modifier" : "ajouter"}} </a></span>-->
+                    <!--</label>-->
+                    <!--<div class="col-md-3">-->
+                        <!--<img ngf-src="vm.selectedFile" class="img-responsive" width="100%">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

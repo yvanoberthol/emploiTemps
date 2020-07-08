@@ -1,0 +1,53 @@
+{
+    "myApp": {
+        "payment" : {
+            "home": {
+                "title": "Paiements",
+                "createLabel": "Créer un nouveau Paiement",
+                "createOrEditLabel": "Créer ou éditer un Paiement",
+                "search": "Rechercher un Paiement"
+            },
+            "created": "Un nouveau Paiement a été créé avec l'identifiant {{ param }}",
+            "updated": "La Paiement avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "La Paiement avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer la Paiement {{ id }} ?"
+            },
+            "detail": {
+                "title": "Paiement"
+            },
+            "name": "Name",
+            "store": "Boutique",
+            "transactiontId": "Numéro transaction",
+            "createdDate": "Date de paiement",
+            "dateTo": "Date d'expiration",
+            "currentPaiement": "Abonnement actuel",
+            "newPayment": "Nouvel abonnement",
+            "managePayments": "Gérer mon abonnement",
+            "viewBills": "Voir mes factures et paiements",
+            "pricePlan": "Plan tarifaire",
+            "amount": "Montant",
+            "paiementValidated": "Paiement validé",
+            "yes": "Oui",
+            "no": "Non",
+            "currentPlan": "Plan tarifaire actuel",
+            "currentPaymentPeriod": "Période de facturation actuelle",
+            "currentPaymentPrice": "Prix de l'abonnement actuel",
+            "selectPlan": "Choisir un plan ",
+            "selectPaymentPeriod": "Choisir un période de facturation ",
+            "newPaymentPrice": "Prix du nouvel abonnement",
+            "nbDrivers" : "Nombre drivers",
+            "orderNow": "Commandez maintenant",
+            "payOrangeMoney": "Payez avec Orange Money",
+            "expiresOn": "Expire le",
+            "never": "Jamais !",
+            "changePlan": "Changer plan",
+            "renewPlan": "Renouveaur plan",
+            "newExpiryDate": "nouveau date d'expiration",
+            "products": "produits",
+            "discount": "remise",
+            "perMonth": " / mois",
+            "selectBtn": "Choisir"
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "myApp": {
+    "paymentMode" : {
+      "null": "",
+      "Cash_Delivery": "Cash Delivery",
+      "Mobile_Money": "Mobile Money"
+    }
+  }
+}

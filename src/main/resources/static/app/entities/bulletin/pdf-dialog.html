@@ -1,0 +1,33 @@
+<style>
+    .modal-dialog {
+      height: 90%; /* = 90% of the .modal-backdrop block = %90 of the screen */
+    }
+    .modal-content {
+      height: 100%; /* = 100% of the .modal-dialog block */
+    }
+    .modal-body {
+      height: 100%; /* = 100% of the .modal-dialog block */
+    }
+
+    .pdfjs .pdfViewer .page {
+        border-image: none;
+    }
+</style>
+
+<!--<link rel="stylesheet" href="/bower_components/pdf.js-viewer/viewer.css">-->
+<!--<div class="modal-header">
+    <h5 class="modal-title" id="myDocumentLabel">{{vm.filename}}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+            ng-click="vm.clear()">&times;</button>
+</div>-->
+
+
+<div class="modal-body">
+    <pdfjs-viewer style="min-height: calc(100vh);" data="vm.bulletin"></pdfjs-viewer>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="vm.clear()">
+        <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Fermer</span>
+    </button>
+</div>

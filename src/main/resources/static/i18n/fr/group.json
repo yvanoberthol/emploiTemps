@@ -1,0 +1,27 @@
+{
+  "myApp": {
+    "group" : {
+      "home": {
+        "title": "Groupes de contacts",
+        "createLabel": "Créer un nouveau groupe",
+        "createOrEditLabel": "Créer ou éditer un groupe",
+        "search": "Rechercher un groupe"
+      },
+      "created": "Un nouveau groupe a été créé avec l'identifiant {{ param }}",
+      "updated": "La groupe avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La groupe avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la groupe {{ id }} ?"
+      },
+      "detail": {
+        "title": "Groupe"
+      },
+      "name":"Nom",
+      "description":"Description",
+      "nbContacts":"Nombre de Contacts",
+      "active":"Active",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

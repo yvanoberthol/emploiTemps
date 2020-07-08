@@ -1,0 +1,57 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container-fluid">
+
+        <header class="section-heading ">
+            <div layout-gt-sm="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg">
+                        <b class="text-uppercase">{{vm.promo.classe}}</b>
+                        <span> &nbsp; </span>
+                        <span class="small text-uppercase text-muted">{{vm.promo.annee}}</span>
+                    </h4>
+                </div>
+            </div>
+        </header>
+
+        <div class="spacer">
+
+            <div layout-gt-sm="row" layout-align="space-between">
+                <div layout="column" flex-gt-sm="20">
+                    <div class="list-group" id="list-tab" role="tablist">
+
+                        <a class="list-group-item list-group-item-action "
+                           ng-class="{'active': vm.selected == 0 }" ui-sref="setup.annee-detail({anneeId:session.getAnneeId()})" ng-click="vm.selected = 0">Informations Etablissement</a>
+
+                        <a class="list-group-item list-group-item-action mt-4"
+                           ng-class="{'active': vm.selected == 2 }" ui-sref="setup.trimestre" ng-click="vm.selected = 2">Périodes Scolaires</a>
+
+                        <a class="list-group-item list-group-item-action mt-4"
+                           ng-class="{'active': vm.selected == 3 }" ui-sref="promo-detail.matieres" ng-click="vm.selected = 3">Entête, logo & cachet</a>
+
+                        <a class="list-group-item list-group-item-action mt-4"
+                           ng-class="{'active': vm.selected == 4 }" ui-sref="promo-detail.notes" ng-click="vm.selected = 4">Modèle Bulletin </a>
+
+                        <a class="list-group-item list-group-item-action mt-4"
+                           ng-class="{'active': vm.selected == 4 }" ui-sref="promo-detail.notes" ng-click="vm.selected = 4">Modèle Carte Scolaire </a>
+
+                        <a class="list-group-item list-group-item-action mt-4"
+                           ng-class="{'active': vm.selected == 4 }" ui-sref="promo-detail.notes" ng-click="vm.selected = 4">Modèle Tableau d'Honneur </a>
+
+                    </div>
+                </div>
+                <!--<div flex="5" hide-xs hide-sm>&lt;!&ndash; Spacer //&ndash;&gt;</div>-->
+                <div class="spacer" hide-gt-sm><!-- Spacer //--></div>
+
+                <div flex-gt-sm="80" style="margin-left:20px">
+                    <div class="tab-content" id="nav-tabContent">
+                        <md-content>
+                            <ui-view></ui-view>
+                        </md-content>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

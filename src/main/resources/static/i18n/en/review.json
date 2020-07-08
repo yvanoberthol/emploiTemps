@@ -1,0 +1,62 @@
+{
+  "myApp": {
+    "review" : {
+      "home": {
+        "title": "Reviews",
+        "createLabel": "Add a new review",
+        "createOrEditLabel": "Create or edit a review",
+        "search": "Search for review"
+      },
+      "created": "A new review is created with identifier {{ param }}",
+      "updated": "A review is updated with identifier {{ param }}",
+      "deleted": "A review is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete review {{ id }}?"
+      },
+      "detail": {
+        "title": "Review"
+      },
+      "name": "Name",
+      "name": "Name in french",
+      "nameEn": "Name in english",
+      "url": "URL",
+      "description": "Description",
+      "review": "Review",
+      "category": "Category level 1",
+      "subCategory": "Category level 2",
+      "subSubCategory": "Category level 3",
+      "price": "Price",
+      "compareAt": "Compare At",
+      "currency": "Currency",
+      "visibility": "Visibility",
+      "stock": "Stock",
+      "negotiable": "Negotiable",
+      "enabled": "Enabled",
+      "featured": "Featured",
+      "related": "Related",
+      "yes":"Yes",
+      "no":"No",
+      "totalSalesQuantity": "Quantity",
+      "totalSalesPrice": "Total Price",
+      "store":"Store",
+      "views":"Views",
+      "addedToCart":"Carts",
+      "deleteSelection":"Delete selected",
+      "general": "General",
+      "description": "Description",
+      "gallery": "Gallery",
+      "variants": "Variants",
+      "relatedReviews": "Related Reviews",
+      "addVariants": "Add variants if this review comes in multiple versions, like different sizes or colors.",
+      "add": "Add",
+      "addPictures": "Add images of your review.",
+      "currentImages": "Current images of your review.",
+      "addMorePictures": "Add more images of your review.",
+      "enterValue": "Enter values",
+      "addMoreValues": "add more values...",
+      "nbMaxReviewsLimitMessage" : "Your current plan is limited to <strong>{{ nbMaxReviews }}</strong> reviews ! If you wish to add more reviews, subscribe to a higher plan <a class=\"alert-link\" href=\"\" ui-sref=\"transaction\">here</a>",
+      "nbMaxRelatedReviewsLimitMessage" : "You can select at most 3 related reviews !",
+      "noReviewFound" : "No review was found for your store !"
+    }
+  }
+}

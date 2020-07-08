@@ -1,0 +1,68 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container col-md-10">
+
+        <header class="section-heading ">
+            <div layout="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg">
+                        <b class="text-uppercase">Détails du règlement</b>
+                    </h4>
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-raised btn-sm"
+                            ng-click="vm.download()"
+                            ng-disabled="!vm.reglement.justificatif">
+                        <span>Télécharger le justificatif</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="spacer">
+
+            <div layout-gt-sm="row" style="margin-top:40px;" layout-align="space-between">
+                <md-content flex-gt-sm="40" layout-padding>
+
+                    <div layout="row">
+                        <span  flex-gt-sm="40" data-translate="myApp.reglement.createdDate">Date</span>
+                        <span flex-gt-sm="60">{{vm.reglement.createdDate}}</span>
+                    </div>
+
+                    <div layout="row">
+                        <span  flex-gt-sm="40" data-translate="myApp.reglement.student">Student</span>
+                        <span flex-gt-sm="60">{{vm.reglement.student}}</span>
+                    </div>
+
+                    <div layout="row">
+                        <span  flex-gt-sm="40" data-translate="myApp.reglement.promo">Promo</span>
+                        <span flex-gt-sm="60">{{vm.reglement.promo}}</span>
+                    </div>
+
+                    <div layout="row">
+                        <span  flex-gt-sm="40" data-translate="myApp.reglement.amount">Amount</span>
+                        <span flex-gt-sm="60">
+                            <span>{{vm.reglement.amount | currency : '' : 0 }} Fcfa</span>
+                        </span>
+                    </div>
+
+                    <div layout="row">
+                        <span  flex-gt-sm="40" data-translate="myApp.reglement.staff">staff</span>
+                        <span flex-gt-sm="60">{{vm.reglement.staff}}</span>
+                    </div>
+
+                </md-content>
+                <div flex="5" hide-xs hide-sm><!-- Spacer //--></div>
+                <div class="spacer" hide-gt-sm><!-- Spacer //--></div>
+
+                <div flex-gt-sm="60" ng-if="vm.reglement.justificatif">
+                    <div>
+                        <img ng-src="data:image/JPEG;base64,{{vm.reglement.justificatif}}" class="img-responsive" width="100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+</section>

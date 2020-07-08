@@ -1,0 +1,134 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container-fluid col-md-11 mt-4">
+
+        <header class="section-heading ">
+            <div layout-gt-sm="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg text-uppercase" translate="myApp.reglement.home.title">Reglements</h4>
+                </div>
+
+                <div class="form-group form-inline">
+                    <label class="control-label">Classe &nbsp;</label>
+                    <select class="form-control" id="field_classe" name="classe" ng-model="vm.promoId" required
+                            ng-options="promo.id as promo.classe for promo in vm.promos | orderBy:'classe'"
+                            ng-change="vm.promoChanged()">
+                        <option value="">Toutes les classes</option>
+                    </select>
+                </div>
+            </div>
+            <div layout-gt-sm="row" layout-align="space-between center" class="spacer">
+
+                <div class="form-group form-inline">
+                    <label class="control-label">Filtrer par date &nbsp;</label>
+                    <input date-range-picker class="form-control date-picker" type="text" ng-model="vm.range"
+                           options="vm.options" />
+                </div>
+
+                <div>
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="reglement.new">
+                            <span translate="myApp.reglement.home.createLabel">
+                                Create new reglement
+                            </span>
+                    </button>
+                </div>
+            </div>
+
+        </header>
+
+        <div class="">
+
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed table-striped">
+
+                <tr ng-repeat="reglement in $data track by $index">
+
+                    <td data-title="'#'">
+                            <span class="small">
+                                {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                            </span>
+                    </td>
+
+                    <td data-title="'myApp.reglement.createdDate' | translate" sortable="'createdDate'">
+                            <span class="small">
+                                {{reglement.createdDate}}
+                            </span>
+                    </td>
+
+                    <td data-title="'myApp.reglement.student' | translate" width="15%" sortable="'student'">
+                        <span class="small">
+                             <span>
+                                {{reglement.student}}
+                            </span>
+                        </span>
+                    </td>
+
+                    <td data-title="'myApp.reglement.amount' | translate">
+                        <span class="small">
+                             <span>
+                                {{reglement.amount | currency: '' : 0}} Fcfa
+                            </span>
+                        </span>
+                    </td>
+
+                    <td data-title="'myApp.reglement.promo' | translate">
+                        <span class="small">
+                           {{reglement.promo}}
+                        </span>
+                    </td>
+
+                    <td data-title="'myApp.reglement.staff' | translate">
+                        <span class="small">
+                             <span>
+                                {{reglement.staff }}
+                            </span>
+                        </span>
+                    </td>
+
+                    <td data-title="''" class="text-right" width="10%">
+                            <span class="text-nowrap">
+                                <a ui-sref="reglement-detail({reglementId:reglement.id})" class="btn btn-primary btn-sm">
+                                    <span>
+                                        <span class="small">Reçu</span>
+                                    </span>
+                                </a>
+                                <span>&nbsp;</span>
+                                <a ui-sref="reglement.edit({reglementId:reglement.id})" class="btn btn-info btn-sm">
+                                    <span>
+                                        <span class="small" translate="entity.action.edit">Edit</span>
+                                    </span>
+                                </a>
+                                <!--<span>&nbsp;</span>
+                                <a ui-sref="reglement.edit({reglementId:reglement.id})" class="">
+                                    <span>
+                                        <span class="small text-primary">Justificatif</span>
+                                    </span>
+                                </a>-->
+                                <span>&nbsp;</span>
+                                <a ui-sref="reglement.delete({reglementId:reglement.id})" class="btn btn-danger btn-sm">
+                                    <span>
+                                       <span class="small" translate="entity.action.delete"></span>
+                                    </span>
+                                </a>
+                            </span>
+                        <!--<div class="dropdown">
+                            <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-h "></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item btn-sm" ui-sref="reglement.edit({reglementId:reglement.id})">
+                                    <span class="" translate="entity.action.edit"></span>
+                                </a>
+                                <a class="dropdown-item btn-sm" ui-sref="reglement.delete({reglementId:reglement.id})">
+                                    <span class="" translate="entity.action.delete"></span>
+                                </a>
+                            </div>
+                        </div>-->
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+

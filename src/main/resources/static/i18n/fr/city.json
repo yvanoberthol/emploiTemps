@@ -1,0 +1,29 @@
+{
+  "myApp": {
+    "city" : {
+      "home": {
+        "title": "Villes",
+        "createLabel": "Créer une nouvelle Ville",
+        "createOrEditLabel": "Créer ou éditer une Ville",
+        "search": "Rechercher une Ville"
+      },
+      "created": "Une nouvelle Ville a été créé avec l'identifiant {{ param }}",
+      "updated": "La Ville avec l'identifiant {{ param }} a été mise à jour",
+      "deleted": "La Ville avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la Ville {{ id }} ?"
+      },
+      "detail": {
+        "title": "Villes"
+      },
+      "name": "Nom",
+      "country": "Pays",
+      "region": "Region",
+      "createdDate": "Date d'inscription",
+      "city" : "Ville",
+      "enabled": "Activé",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

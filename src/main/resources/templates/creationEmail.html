@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.creation.title}">Myschool creation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="#{email.creation.text1}">
+            Your Myschool account has been created, please click on the URL below to access it:
+        </p>
+        <p>
+          <a th:href="@{|${baseUrl}}"
+             th:text="|${baseUrl}|">login</a>
+        </p>
+        <p>
+            <span th:text="#{email.creation.text2}"></span>
+            <br/>
+            <span th:text="#{email.creation.email(${user.email})}"></span>
+            <br/>
+            <span th:text="#{email.creation.password(${user.password})}"></span>
+        </p>
+        <p>
+            <span th:text="#{email.creation.text3}"></span>
+            <br/>
+            <em th:text="#{email.signature}">Myschool.</em>
+        </p>
+    </body>
+</html>

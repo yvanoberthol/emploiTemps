@@ -1,0 +1,28 @@
+{
+  "myApp": {
+    "sms" : {
+      "home": {
+        "title": "SMS Envoyés",
+        "createLabel": "Envoyer un sms",
+        "createOrEditLabel": "Envoyer un sms",
+        "search": "Rechercher un sms"
+      },
+      "created": "Un sms a été créé avec l'identifiant {{ param }}",
+      "updated": "Le sms avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le sms avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer le sms {{ id }} ?"
+      },
+      "detail": {
+        "title": "Sms"
+      },
+      "sender": "Emetteur",
+      "smsTemplate": "Message Prédéfini",
+      "recipient": "Destinataire",
+      "recipients": "Destinataires",
+      "message": "Message",
+      "createdDate": "Date",
+      "deliverStatus": "Statut"
+    }
+  }
+}

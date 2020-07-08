@@ -1,0 +1,32 @@
+{
+  "myApp": {
+    "annee" : {
+      "home": {
+        "title": "Years",
+        "createLabel": "Create a new Year",
+        "createOrEditLabel": "Create or edit a Year",
+        "changeLabel": "School Year Modification",
+        "configLabel": "School Year {{ annee }} Configuration",
+        "search": "Search for Year",
+        "createLabelSub": "Create a new Subyear",
+        "createOrEditLabelSub": "Create or edit a Subyear",
+        "searchSub": "Search for Subyear"
+      },
+      "created": "A new Year is created with identifier {{ param }}",
+      "updated": "A Year is updated with identifier {{ param }}",
+      "deleted": "A Year is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Year {{ id }}?",
+        "question": "Are you sure you want to delete Sub year {{ id }}?"
+      },
+      "detail": {
+        "title": "Year"
+      },
+      "debut":"Begin",
+      "fin":"End",
+      "active":"Active",
+      "yes":"Yes",
+      "no":"No"
+    }
+  }
+}

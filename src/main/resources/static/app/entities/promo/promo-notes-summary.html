@@ -1,0 +1,127 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container">
+
+        <header class="section-heading ">
+            <div layout="row" layout-align="space-between center">
+                <div class="form-group" flex-gt-sm="40">
+                    <input type="text" class="form-control" placeholder="Rechercher un élève"
+                           ng-model="student.lastName"/>
+                </div>
+                <div layout-gt-sm="row">
+                    <div layout-gt-sm="row" layout-align="start center">
+                        <select class="form-control" id="field_note" name="trimestre"
+                                ng-model="vm.trimestreId" required
+                                ng-change="vm.noteChanged()">
+                            <option value="">Tous les trimestres</option>
+                            <option value="{{trimestre.id}}"
+                                    ng-repeat="trimestre in vm.trimestres">
+                                {{trimestre.name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <!--<span>&nbsp;</span>
+                    <span>&nbsp;</span>
+                    <button class="btn btn-success btn-raised btn-sm" ng-disabled="!vm.matiereId || !vm.trimestreId || !vm.promoMatiere.promoMatiereNoteInters.length">
+                        <span>
+                            Télécharger
+                        </span>
+                    </button>-->
+                </div>
+            </div>
+        </header>
+
+
+        <div layout-gt-sm="row" layout-align="space-between center" class="spacer">
+            <span></span>
+            <a class="btn btn-success" href="" ng-if="vm.trimestreId"
+               ng-click="vm.openAll(vm.trimestreId)">
+                <span class="">Télécharger tous les Bulletins</span>
+            </a>
+
+        </div>
+
+
+        <div class="spacer">
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed">
+
+                <thead>
+                    <tr class="small">
+                        <td>#</td>
+                        <td><span translate="myApp.student.matricule">Matricule</span></td>
+                        <td><span translate="myApp.student.lastName">Last Name</span></td>
+                        <td><span translate="myApp.student.firstName">First Name</span></td>
+                        <td ng-repeat="item in vm.trimestres" ng-if="item.id == vm.trimestreId || !vm.trimestreId">
+                            {{item.name}}
+                        </td>
+                        <!--<td ng-if="!vm.trimestreId"><span>Note Annuelle</span></td>-->
+                    </tr>
+                </thead>
+                <tr ng-repeat="student in vm.students | filter:student">
+
+                    <td data-title="'#'" width="5%">
+                        <span class="small">
+                            {{ ((vm.tableParams.page() - 1) * vm.tableParams.count()) + $index + 1}}
+                        </span>
+                    </td>
+
+                    <td data-title="'myApp.student.matricule' | translate" width="20%">
+                        <span class="small">
+                            {{student.matricule}}
+                        </span>
+                    </td>
+
+                    <td data-title="'myApp.student.lastName' | translate" width="20%">
+                            <span class="small">
+                               {{student.lastName}}
+                            </span>
+                    </td>
+
+                    <td data-title="'myApp.student.firstName' | translate" width="20%">
+                        <span class="small">
+                             <span>
+                                {{student.firstName}}
+                            </span>
+                        </span>
+                    </td>
+
+                    <td ng-repeat="trimestre in vm.trimestres track by $index" ng-if="trimestre.id == vm.trimestreId || !vm.trimestreId"
+                        data-title="vm.getTitle()">
+                        <strong class=""
+                                ng-class="{'text-success': student.notes[trimestre.id] > 10, 'text-danger': student.notes[trimestre.id] < 10}">
+                           {{student.notes[trimestre.id] || 'N/A'}}
+                        </strong>
+                        <span>&nbsp;</span>
+                        <a ng-if="student.notes[trimestre.id]" class="btn btn-light btn-sm" href="" ng-click="vm.openBulletinModal(student, trimestre.id)">
+                            <span class="small">Voir</span>
+                        </a>
+                        <span>&nbsp;</span>
+                        <a ng-if="student.notes[trimestre.id] > 12" class="btn btn-light btn-sm" href="" ng-click="vm.openBulletinModal(student, trimestre.id)">
+                            <span class="small">TH</span>
+                        </a>
+                    </td>
+
+                    <!--<td ng-if="!vm.trimestreId">
+                        <strong class=""
+                                ng-class="{'text-success': student.finalNote > 10, 'text-danger': student.finalNote < 10}">
+                            {{student.finalNote || 'N/A'}}
+                        </strong>
+                    </td>-->
+
+                    <!--<td data-title="''"  class="text-right">
+                        <span class="text-nowrap">
+                            <a class="btn btn-primary btn-sm" href="" ng-click="vm.openBulletinModal(student)">
+                                <span class="">Consulter les Bulletins</span>
+                            </a>
+                        </span>
+                    </td>-->
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="spacer"></div>
+
+    <embed src="{{content}}" width="200" height="200"></embed>
+</section>

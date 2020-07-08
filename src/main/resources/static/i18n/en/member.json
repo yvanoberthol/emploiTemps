@@ -1,0 +1,42 @@
+{
+  "myApp" : {
+    "member": {
+      "home": {
+        "title": "members",
+        "createLabel": "Create a new member",
+        "createOrEditLabel": "Create or edit a member",
+        "search": "search a member"
+      },
+      "created": "A new member is created with identifier {{ param }}",
+      "updated": "An member is updated with identifier {{ param }}",
+      "deleted": "An member is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete member {{ login }}?"
+      },
+      "detail": {
+        "title": "member"
+      },
+      "login": "Login",
+      "name" : "Name",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "dateNaissance": "Date of birth",
+      "dateDeces": "Date of death",
+      "activated": "Activated",
+      "desactivated": "Desactivated",
+      "profiles": "Profiles",
+      "langKey": "Language",
+      "createdBy": "Created by",
+      "createdDate": "Created date",
+      "lastModifiedBy": "Modified by",
+      "lastModifiedDate": "Modified date",
+      "country": "Country",
+      "address": "Address",
+      "pricePlan": "Price Plan",
+      "suspended": "Suspended",
+      "authorized": "Authorized"
+    }
+  }
+}

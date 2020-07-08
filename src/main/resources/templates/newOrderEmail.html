@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.order.title}">Myschool creation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="#{email.order.greeting(${user.login})}">
+            Dear
+        </p>
+        <p th:text="#{email.order.text1}">
+            Your Myschool account has been created, please click on the URL below to access it:
+        </p>
+        <p>
+            <span th:text="#{email.order.text2}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">Myschool.</em>
+        </p>
+    </body>
+</html>

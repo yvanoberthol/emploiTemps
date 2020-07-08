@@ -1,0 +1,10 @@
+{
+  "myApp": {
+    "transactionState" : {
+      "null": "",
+      "Awaiting_Validation": "En Attente Validation",
+      "Accepted": "Acceptée",
+      "Rejected": "Rejetée"
+    }
+  }
+}
