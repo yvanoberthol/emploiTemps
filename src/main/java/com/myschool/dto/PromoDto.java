@@ -21,6 +21,7 @@ public class PromoDto {
     private String classe;
     private String profPrincipal;
     private double montantScolarite;
+    private int capacite;
     private Integer nbStudents;
     private Integer nbMatieres;
     private List<MatiereDto> matieres = new ArrayList<>();
@@ -31,6 +32,7 @@ public class PromoDto {
         if(promo != null){
             promoDto.setId(promo.getId());
             promoDto.setMontantScolarite(promo.getMontantScolarite());
+            promoDto.setCapacite(promo.getCapacite());
             promoDto.setClasse(promo.getClasse());
             promoDto.setProfPrincipal(promo.getProfPrincipal());
 

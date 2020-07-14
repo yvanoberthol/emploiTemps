@@ -20,7 +20,7 @@
 
         <div class="spacer">
 
-            <table ng-table="vm.tableParams" class="ng-table-responsive table table-condensed table-striped">
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-condensed table-bordered">
 
                 <tr ng-repeat="trimestre in $data track by $index"  ng-dblclick="vm.editTrimestre(trimestre.id)" ng-class="{enabled: trimestre.id === vm.selectedTrimestreId}">
 

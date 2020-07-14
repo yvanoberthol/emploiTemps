@@ -32,7 +32,6 @@
         .state('setup.annee-detail', {
             parent: 'setup',
             url: '/annee-detail',
-            params : { anneeId: null },
             data: {
                 pageTitle: 'myApp.promo.detail.title'
             },
@@ -45,9 +44,9 @@
                         $translatePartialLoader.addPart('promo');
                         return $translate.refresh();
                     }],
-                    entity: ['$stateParams', 'Annee',  function($stateParams, Annee) {
+                    entity: ['session', 'Annee',  function(session, Annee) {
                          var annee = {};
-                         return Annee.get($stateParams.anneeId)
+                         return Annee.get(session.getAnneeId())
                          .then(function(response){
                             annee = response.data;
                             return response.data;

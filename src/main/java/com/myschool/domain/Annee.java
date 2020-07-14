@@ -61,11 +61,8 @@ public class Annee {
     @Column(name = "telephone")
     private String telephone;
 
-    @Column
-    private String logoUrl;
-
-    @Column
-    private String cachetUrl;
+    @Column(name = "senderId")
+    private String senderId;
 
     @JoinColumn(name = "bulletin_id", referencedColumnName = "id")
     @ManyToOne
@@ -74,6 +71,14 @@ public class Annee {
     @JoinColumn(name = "carte_scolaire_id", referencedColumnName = "id")
     @ManyToOne
     private CarteScolaire carteScolaire;
+
+    @JoinColumn(name = "tableau_honneur_id", referencedColumnName = "id")
+    @ManyToOne
+    private TableauHonneur tableauHonneur;
+
+    @JoinColumn(name = "recu_id", referencedColumnName = "id")
+    @ManyToOne
+    private Recu recu;
 
     @Transient
     public TypeEtablissement getTypeEtablissement() {

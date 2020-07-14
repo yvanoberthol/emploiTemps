@@ -7,10 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
@@ -53,13 +56,14 @@ public class AnneeResource {
      * or with status 500 (Internal Server Error) if the annee couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PutMapping("/api/annees")
-    public ResponseEntity<AnneeDto> updateAnnee(@Valid @RequestBody AnneeDto anneeDto) throws URISyntaxException {
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/annees", method = RequestMethod.PUT)
+    @ResponseBody
+    public ResponseEntity<AnneeDto> updateAnnee(@RequestPart("annee") AnneeDto anneeDto,
+                                            @RequestPart(name="logo", required=false) MultipartFile logo,
+                                            @RequestPart(name="cachet", required=false) MultipartFile cachet) throws IOException {
         log.debug("REST request to update Annee : {}", anneeDto);
-        if (anneeDto.getId() == null) {
-            return createAnnee(anneeDto);
-        }
-        return anneeService.update(anneeDto);
+        return anneeService.update(anneeDto, logo, cachet);
     }
 
 
@@ -115,5 +119,12 @@ public class AnneeResource {
         log.debug("REST request to delete Annee : {}", id);
         anneeService.delete(id);
         return new ResponseEntity<AnneeDto>(HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value="/api/annee-image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @ResponseBody
+    public byte[] getImage(@PathVariable("id") Long id,
+                              @RequestParam(name = "name", defaultValue = "logo") String name) throws IOException {
+        return anneeService.getImage(id, name);
     }
 }

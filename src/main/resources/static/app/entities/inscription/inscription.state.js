@@ -22,7 +22,7 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('inscription');
-                    $translatePartialLoader.addPart('product');
+                    $translatePartialLoader.addPart('student');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
@@ -49,9 +49,9 @@
             }
         })
         .state('inscription-detail', {
-            parent: 'admin',
-            url: '/inscription/{inscriptionId}',
-            params : { inscriptionId: null },
+            parent: 'app',
+            url: '/classes/{promoId}/students/{studentId}',
+            params : { studentId: null, promoId: null },
             data: {
                 authorities: ['ADMIN'],
                 pageTitle: 'myApp.inscription.detail.title'
@@ -62,15 +62,27 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('inscription');
-                    $translatePartialLoader.addPart('product');
+                    $translatePartialLoader.addPart('student');
+                    $translatePartialLoader.addPart('sms');
+                    $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Inscription',  function($stateParams, Inscription) {
                      var inscription = {};
-                     return Inscription.get($stateParams.inscriptionId)
+                     return Inscription.get($stateParams.studentId, $stateParams.promoId)
                      .then(function(response){
                         inscription = response.data;
-                        return response.data;
+                    })
+                    .then(function(response){
+                        return Inscription.getImage($stateParams.studentId, $stateParams.promoId)
+                          .then(function(response) {
+                            inscription.image = arrayBufferToBase64(response.data);
+                            return inscription;
+                        },
+                        function(response) {
+                            inscription.image = null;
+                            return inscription;
+                        });
                     })
                 }],
                 previousState: ["$state", function ($state) {
@@ -198,5 +210,15 @@
                 });
             }]
         });
+    }
+
+     function arrayBufferToBase64(buffer) {
+       var binary = '';
+       var bytes = new Uint8Array(buffer);
+       var len = bytes.byteLength;
+       for (var i = 0; i < len; i++) {
+         binary += String.fromCharCode(bytes[i]);
+       }
+       return window.btoa(binary);
     }
 })();

@@ -240,3 +240,15 @@ md-tabs md-ink-bar {
 .list-group-item + .list-group-item {
     border-top-width: 1px;
 }
+
+ .drop-box2 {
+     background: #FFF;
+     /*border: 2px dashed #DDD;*/
+     border: 2px #DDD;
+     width: 150px;
+     height: 150px;
+
+     text-align: center;
+     /*padding-top: 25px;*/
+     /*margin: 10px;*/
+ }

@@ -1,19 +1,26 @@
 package com.myschool.service;
 
 import com.myschool.domain.*;
+import com.myschool.domain.enumerations.TypeEtablissement;
 import com.myschool.dto.*;
-import com.myschool.repository.AnneeRepository;
-import com.myschool.repository.PromoRepository;
-import com.myschool.repository.TrimestreRepository;
-import com.myschool.repository.UserRepository;
+import com.myschool.repository.*;
+import com.myschool.utils.CustomErrorType;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +52,15 @@ public class AnneeService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private BulletinRepository bulletinRepository;
+
+    @Autowired
+    private CarteScolaireRepository carteScolaireRepository;
+
+    @Value("${dir.myschool}")
+    private String FOLDER;
+
     /**
      * Save a annee.
      *
@@ -60,6 +76,7 @@ public class AnneeService {
         annee.setDebut(anneeDto.getDebut());
         annee.setFin(anneeDto.getFin());
         annee.setActive(anneeDto.getActive());
+        annee.setTypeEtablissement(TypeEtablissement.College);
 
         Annee result = anneeRepository.save(annee);
         if (result != null){
@@ -108,7 +125,7 @@ public class AnneeService {
     }
 
 
-    public ResponseEntity<AnneeDto> update(AnneeDto anneeDto) {
+    public ResponseEntity<AnneeDto> update(AnneeDto anneeDto, MultipartFile logo, MultipartFile cachet) throws IOException {
         log.debug("Request to save Annee : {}", anneeDto);
 
         Annee annee = anneeRepository.findOne(anneeDto.getId());
@@ -118,7 +135,49 @@ public class AnneeService {
         annee.setFin(anneeDto.getFin());
         annee.setActive(anneeDto.getActive());
 
+        annee.setNomEtablissement(anneeDto.getNomEtablissement());
+        annee.setPays(anneeDto.getPays());
+        annee.setVille(anneeDto.getVille());
+        annee.setAdresse(anneeDto.getAdresse());
+        annee.setTelephone(anneeDto.getTelephone());
+        annee.setSenderId(anneeDto.getSenderId());
+        annee.setTypeEtablissement(TypeEtablissement.fromValue(anneeDto.getTypeEtablissement()));
+
+        if(anneeDto.getBulletinId() != null){
+            Bulletin bulletin = bulletinRepository.getOne(anneeDto.getBulletinId());
+            annee.setBulletin(bulletin);
+        }
+
+        if(anneeDto.getCarteScolaireId() != null){
+            CarteScolaire carteScolaire = carteScolaireRepository.getOne(anneeDto.getCarteScolaireId());
+            annee.setCarteScolaire(carteScolaire);
+        }
+
         Annee result = anneeRepository.save(annee);
+
+        if (!Files.exists(Paths.get(FOLDER))) {
+            File annees = new File(FOLDER);
+            if(! annees.mkdir()) {
+                return new ResponseEntity(new CustomErrorType("Unable to create folder ${dir.myschool}"), HttpStatus.CONFLICT);
+            }
+        }
+
+        if (!Files.exists(Paths.get(FOLDER + result.getId()))) {
+            File anneeFolder = new File(FOLDER + result.getId());
+            if (!anneeFolder.mkdir()) {
+                return new ResponseEntity(new CustomErrorType("Unable to create folder for this annee"), HttpStatus.CONFLICT);
+            }
+        }
+
+        if(logo != null){
+            if(!logo.isEmpty())
+                logo.transferTo(new File(FOLDER + result.getId() + "/logo.png"));
+        }
+        if(cachet != null){
+            if(!cachet.isEmpty())
+                cachet.transferTo(new File(FOLDER + result.getId() + "/cachet.png"));
+        }
+        anneeRepository.save(result);
         return new ResponseEntity<AnneeDto>(new AnneeDto().createDTO(result), HttpStatus.CREATED);
     }
 
@@ -190,5 +249,19 @@ public class AnneeService {
         if(Optional.ofNullable(annee).isPresent()){
             anneeRepository.delete(id);
         }
+    }
+
+    public byte[] getImage(Long id, String name) throws IOException {
+        Annee annee = anneeRepository.findOne(id);
+
+        if (annee == null) {
+            return null;
+        }
+
+        File f = new File(FOLDER + "/" + annee.getId() + "/" + name + ".png");
+        if(f.exists() && !f.isDirectory()) {
+            return IOUtils.toByteArray(new FileInputStream(f));
+        }
+        return null;
     }
 }

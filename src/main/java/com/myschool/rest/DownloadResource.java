@@ -54,11 +54,30 @@ public class DownloadResource {
 
     @GetMapping("/api/bulletins")
     public ResponseEntity<byte[]> getAllBulletins(@RequestParam(name = "promo") Long promoId,
-                                                  @RequestParam(name = "annee") Long anneId,
+                                                  @RequestParam(name = "annee") Long anneeId,
                                                   @RequestParam(name = "trimestre") Long trimestreId) throws IOException {
 
         HttpHeaders headers = new HttpHeaders();
-        String FILE_PATH = downloadService.createBulletins(promoId, anneId, trimestreId);
+        String FILE_PATH = downloadService.createBulletins(promoId, anneeId, trimestreId);
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+
+        Path path = Paths.get(FILE_PATH);
+        byte[] data = Files.readAllBytes(path);
+        String filename = StringUtils.stripAccents(path.getFileName().toString());
+        filename = filename.replace(" ", "_");
+        //String filename = path.getFileName().toString();
+
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=" + filename.toLowerCase());
+        //headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(data, headers, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping("/api/student-cards")
+    public ResponseEntity<byte[]> getStudentCards(@RequestParam(name = "promo") Long promoId) throws IOException {
+
+        HttpHeaders headers = new HttpHeaders();
+        String FILE_PATH = downloadService.createStudentCards(promoId);
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
 
         Path path = Paths.get(FILE_PATH);

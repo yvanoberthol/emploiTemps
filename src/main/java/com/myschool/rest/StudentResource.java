@@ -15,8 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +90,7 @@ public class StudentResource {
      */
     @CrossOrigin
     @PutMapping("/api/students")
-    public ResponseEntity<StudentDto> updateStudent(@Valid @RequestBody StudentDto studentDto) throws URISyntaxException {
+    public ResponseEntity<StudentDto> updateStudent(@Valid @RequestBody StudentDto studentDto) {
         log.debug("REST request to update Student : {}", studentDto);
         if (studentDto.getId() == null) {
             return new ResponseEntity(new CustomErrorType("Unable to update. A student id can not be null."), HttpStatus.BAD_REQUEST);

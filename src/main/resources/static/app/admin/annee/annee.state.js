@@ -28,7 +28,7 @@
                 }]
             }
         })
-        .state('annee-detail', {
+        /*.state('annee-detail', {
             parent: 'admin',
             url: '/annees/{anneeId}',
             params : { anneeId: null },
@@ -62,7 +62,7 @@
                     return currentStateData;
                 }]
             }
-        })
+        })*/
         .state('annee-detail.matieres', {
             parent: 'annee-detail',
             url: '/promo/{promoId}/matieres',

@@ -64,6 +64,27 @@ public class Student {
     @Column(name = "matricule")
     private String matricule;
 
+    @Column(name = "fatherName")
+    private String fatherName;
+
+    @Column(name = "motherName")
+    private String motherName;
+
+    @Column(name = "fatherPhone")
+    private String fatherPhone;
+
+    @Column(name = "motherPhone")
+    private String motherPhone;
+
+    @Column(name = "fatherProfession")
+    private String fatherProfession;
+
+    @Column(name = "motherProfession")
+    private String motherProfession;
+
+    @Column(name = "otherInfos")
+    private String otherInfos;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<Inscription> inscriptions;
 

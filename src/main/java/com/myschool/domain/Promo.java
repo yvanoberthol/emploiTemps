@@ -48,6 +48,9 @@ public class Promo {
     @Column(name = "montantScolarite")
     private double montantScolarite;
 
+    @Column(name = "capacite")
+    private int capacite;
+
     @Column
     private String profPrincipal;
 

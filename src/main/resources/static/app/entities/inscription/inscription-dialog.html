@@ -14,25 +14,44 @@
             <p>{{vm.errorMessage}}</p>
         </div>
 
-        <div>
+        <div class="small" loading="vm.loading">
             <div class="row">
-                <div class="form-group col-md-6 required">
-                    <label class="control-label" translate="myApp.inscription.lastName" for="field_lastName">Nom</label>
+                <div class="form-group col-md-4">
+                    <label class="control-label" translate="myApp.student.lastName" for="field_lastName">Nom</label>
                     <input type="text" class="form-control" name="lastName" id="field_lastName"
                            ng-model="vm.inscription.student.lastName"
                            required/>
+                    <div ng-show="editForm.lastName.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.name.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="30">
+                            This field cannot be longer than 30 characters.
+                        </p>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label" translate="myApp.inscription.firstName" for="field_firstName">Nom</label>
+                <div class="form-group col-md-4">
+                    <label class="control-label" translate="myApp.student.firstName" for="field_firstName">Nom</label>
                     <input type="text" class="form-control" name="firstName" id="field_firstName"
                            ng-model="vm.inscription.student.firstName"/>
+                    <div ng-show="editForm.firstName.$invalid">
+                        <p class="help-block"
+                           ng-show="editForm.name.$error.maxlength" translate="entity.validation.maxlength" translate-value-max="30">
+                            This field cannot be longer than 30 characters.
+                        </p>
+                    </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                    <label class="control-label" data-translate="myApp.student.sexe" for="field_sexe">Sexe</label>
+                    <select class="form-control" id="field_sexe" name="sexe" ng-model="vm.inscription.student.sexe"
+                            ng-options="sexe.value as sexe.name for sexe in vm.sexes | orderBy:'name'">
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
                     <label class="control-label">
-                        <span translate="myApp.inscription.dateNaissance">Date de naissance</span>
+                        <span translate="myApp.student.dateNaissance">Date de naissance</span>
                     </label>
                     <input type="text"
                            ui-mask="99/99/9999" ui-options="{{options | json}}"
@@ -42,9 +61,9 @@
                            class="form-control"/>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label class="control-label" for="field_lieuNaissance">
-                        <span translate="myApp.inscription.lieuNaissance">Lieu</span>
+                        <span translate="myApp.student.lieuNaissance">Contact Primaire</span>
                     </label>
                     <input type="text" class="form-control" name="lieuNaissance" id="field_lieuNaissance"
                            ng-model="vm.inscription.student.lieuNaissance"/>
@@ -52,102 +71,82 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label" data-translate="myApp.inscription.sexe" for="field_sexe">Sexe</label>
-                    <select class="form-control" id="field_sexe" name="sexe" ng-model="vm.inscription.student.sexe"
-                            ng-options="sexe.value as sexe.name for sexe in vm.sexes | orderBy:'name'">
-                    </select>
-                </div>
-
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label class="control-label" for="field_nationalite">
-                        <span translate="myApp.inscription.nationalite">Nationalité</span>
+                        <span translate="myApp.student.nationalite">Nationalité</span>
                     </label>
                     <input type="text" class="form-control" name="nationalite" id="field_nationalite"
                            ng-model="vm.inscription.student.nationalite"/>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-md-6 required">
+                <div class="form-group col-md-4 required">
                     <label class="control-label" data-translate="myApp.inscription.classe" for="field_classe">Classe</label>
                     <select class="form-control" id="field_classe" name="classe" ng-model="vm.inscription.promoId" required
                             ng-options="promo.id as promo.classe for promo in vm.promos | orderBy:'classe'">
                     </select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label class="control-label" for="field_matricule">
-                        <span translate="myApp.inscription.matricule">Matricule</span>
+                        <span translate="myApp.student.matricule">Matricule</span>
                     </label>
                     <input type="text" class="form-control" name="matricule" id="field_matricule"
                            ng-model="vm.inscription.student.matricule"/>
                 </div>
             </div>
 
-            <!--<div class="row">
-                <div class="form-group col-md-6 required">
-                    <label class="control-label" data-translate="myApp.inscription.classe" for="field_classe">Classe</label>
-                    <select class="form-control" id="field_classe" name="classe" ng-model="vm.inscription.promoId" required
-                            ng-options="promo.id as promo.classe for promo in vm.promos | orderBy:'classe'">
-                    </select>
-                </div>
-            </div>-->
-
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label" translate="myApp.inscription.fatherName" for="field_fatherName">Nom</label>
+                <div class="form-group col-md-4">
+                    <label class="control-label" translate="myApp.student.fatherName" for="field_fatherName">Nom</label>
                     <input type="text" class="form-control" name="fatherName" id="field_fatherName"
                            ng-model="vm.inscription.student.fatherName"/>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label class="control-label" for="field_fatherPhone">
-                        <span translate="myApp.inscription.fatherPhone">Telephone père</span>
+                        <span translate="myApp.student.fatherPhone">Telephone père</span>
                     </label>
                     <input type="text" class="form-control" name="fatherPhone" id="field_fatherPhone"
                            ng-model="vm.inscription.student.fatherPhone"/>
                 </div>
-
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="field_fatherProfession">
+                        <span>Profession</span>
+                    </label>
+                    <input type="text" class="form-control" name="fatherProfession" id="field_fatherProfession"
+                           ng-model="vm.inscription.student.fatherProfession"/>
+                </div>
             </div>
-
             <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label" translate="myApp.inscription.motherName" for="field_motherName">Nom</label>
+                <div class="form-group col-md-4">
+                    <label class="control-label" translate="myApp.student.motherName" for="field_motherName">Nom</label>
                     <input type="text" class="form-control" name="motherName" id="field_motherName"
                            ng-model="vm.inscription.student.motherName"/>
                 </div>
-                <div class="form-group col-md-6">
+
+                <div class="form-group col-md-4">
                     <label class="control-label" for="field_motherPhone">
-                        <span translate="myApp.inscription.motherPhone">Telephone mère</span>
+                        <span translate="myApp.student.motherPhone">Telephone mère</span>
                     </label>
                     <input type="text" class="form-control" name="motherPhone" id="field_motherPhone"
                            ng-model="vm.inscription.student.motherPhone"/>
                 </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label" for="field_motherProfession">
+                        <span>Profession</span>
+                    </label>
+                    <input type="text" class="form-control" name="motherProfession" id="field_motherProfession"
+                           ng-model="vm.inscription.student.motherProfession"/>
+                </div>
             </div>
-
-           <!-- <div class="row">
+            <div class="row">
                 <div class="form-group col-md-12">
                     <label class="control-label">
-                        <span translate="myApp.inscription.otherInfos">OtherInfos</span>
+                        <span translate="myApp.student.otherInfos">OtherInfos</span>
                     </label>
                     <textarea class="form-control" ng-model="vm.inscription.student.otherInfos"></textarea>
                 </div>
-            </div>-->
+            </div>
 
-
-            <!--<div class="row">-->
-                <!--<div class="form-group col-md-12">-->
-                    <!--<label class="control-label">-->
-                        <!--<span>Image-->
-                        <!--<a class="btn btn-outline-primary btn-sm"-->
-                           <!--ngf-select="vm.addImage()" ng-model="vm.file" name="file" ngf-pattern="'image/*'"-->
-                           <!--ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">{{vm.selectedFile? "modifier" : "ajouter"}} </a></span>-->
-                    <!--</label>-->
-                    <!--<div class="col-md-3">-->
-                        <!--<img ngf-src="vm.selectedFile" class="img-responsive" width="100%">-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
         </div>
     </div>
     <div class="modal-footer">

@@ -6,10 +6,10 @@
         .controller('PromoNotesSummaryController', PromoNotesSummaryController);
 
     PromoNotesSummaryController.$inject = ['$scope', '$state', '$stateParams', 'previousState', 'entity', 'session',
-                                    'Student', 'NgTableParams', 'Trimestre', '$filter', 'BulletinService'];
+                                    'Student', 'NgTableParams', 'Trimestre', '$filter', 'DownloadService'];
 
     function PromoNotesSummaryController($scope, $state, $stateParams, previousState, entity, session,
-                                    Student, NgTableParams, Trimestre, $filter, BulletinService) {
+                                    Student, NgTableParams, Trimestre, $filter, DownloadService) {
         var vm = this;
         vm.promo = entity;
         console.log(vm.promo)
@@ -56,17 +56,17 @@
         vm.openBulletinModal = function(student, trimestreId){
             /*
             vm.loading = true;
-            BulletinService.getBulletin(student.id, session.getAnneeId(), trimestreId)
+            DownloadService.getBulletin(student.id, session.getAnneeId(), trimestreId)
             .then(function(response){
                 showDownloadPopup(response);
                 vm.loading = false;
             });
             */
-            BulletinService.open(student, trimestreId);
+            DownloadService.openOneBulletin(student, trimestreId);
         }
 
         vm.openAll = function(trimestreId){
-           BulletinService.openAll(vm.promo.id, trimestreId);
+           DownloadService.openAllBulletins(vm.promo.id, trimestreId);
         }
 
         function showDownloadPopup(response){

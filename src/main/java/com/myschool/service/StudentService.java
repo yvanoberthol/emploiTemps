@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -94,6 +95,14 @@ public class StudentService {
         student.setNationalite(studentDto.getNationalite());
         student.setMatricule(studentDto.getMatricule());
 
+        student.setFatherName(studentDto.getFatherName());
+        student.setFatherPhone(studentDto.getFatherPhone());
+        student.setFatherProfession(studentDto.getFatherProfession());
+        student.setMotherName(studentDto.getMotherName());
+        student.setMotherPhone(studentDto.getMotherPhone());
+        student.setMotherProfession(studentDto.getMotherProfession());
+        student.setOtherInfos(studentDto.getOtherInfos());
+
         return studentRepository.save(student);
     }
 
@@ -112,6 +121,14 @@ public class StudentService {
         student.setLieuNaissance(studentDto.getLieuNaissance());
         student.setNationalite(studentDto.getNationalite());
         student.setMatricule(studentDto.getMatricule());
+
+        student.setFatherName(studentDto.getFatherName());
+        student.setFatherPhone(studentDto.getFatherPhone());
+        student.setFatherProfession(studentDto.getFatherProfession());
+        student.setMotherName(studentDto.getMotherName());
+        student.setMotherPhone(studentDto.getMotherPhone());
+        student.setMotherProfession(studentDto.getMotherProfession());
+        student.setOtherInfos(studentDto.getOtherInfos());
 
         Student result = studentRepository.save(student);
         return new StudentDto().createDTO(result);
@@ -678,7 +695,7 @@ public class StudentService {
         double min = 20;
         for(Inscription i: inscription.getPromo().getInscriptions()){
             double moy = computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), i.getStudent().getId()));
-            if(moy < min)
+            if(moy < min && moy != 0)
                 min = moy;
         }
         return Math.round(min * 100) / 100.0;

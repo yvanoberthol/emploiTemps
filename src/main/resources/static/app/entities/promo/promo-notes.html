@@ -44,12 +44,6 @@
                     </div>
                 </div>
             </div>
-
-            <div layout-gt-sm="row" layout-align="end center" class="spacer">
-                <button class="btn btn-success" ng-disabled="!vm.matiereId || !vm.trimestreId">
-                    <span class="">Importer les notes</span>
-                </button>
-            </div>
         </header>
 
 
@@ -65,6 +59,11 @@
                     <td><span translate="myApp.student.firstName">First Name</span></td>
                     <td ng-repeat="item in vm.trimestre.sequences"  ng-if="vm.matiereId && vm.trimestreId">
                         {{item.name}}
+                    </td>
+                    <td width="10%" class="text-right">
+                        <button class="btn btn-success btn-sm" ng-disabled="!vm.matiereId || !vm.trimestreId">
+                            <span class="">Importer</span>
+                        </button>
                     </td>
                 </tr>
                 </thead>

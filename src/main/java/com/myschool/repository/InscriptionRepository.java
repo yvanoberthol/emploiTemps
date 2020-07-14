@@ -26,6 +26,11 @@ public interface InscriptionRepository extends JpaRepository<Inscription, Long>{
 
     Page<Inscription> findByPromoId(Long promoId, Pageable pageable);
 
+    @Query("SELECT inscription FROM Inscription inscription "
+            + "WHERE inscription.promo.id = ?1 "
+            + "AND (inscription.student.firstName like ?2 OR inscription.student.lastName like ?2)")
+    List<Inscription> findByPromoId(Long promoId, String s);
+
     @Query("SELECT inscription FROM  Inscription inscription "
             + "WHERE inscription.promo.annee.id = ?2 "
             + "AND inscription.student.id = ?1 ")

@@ -34,6 +34,7 @@
       "logo":"Logo",
       "cachet":"Cachet",
       "entete":"Entête",
+      "senderId":"Identifiant SMS",
       "bulletin":"Modèle Bulletin",
       "carteScolaire":"Modèle Carte Scolaire",
       "yes":"Oui",

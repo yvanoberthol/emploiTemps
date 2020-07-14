@@ -3,13 +3,13 @@
 
     angular
         .module('myApp')
-        .controller('PromoStudentsController', PromoStudentsController);
+        .controller('PromoInscriptionsController', PromoInscriptionsController);
 
-    PromoStudentsController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity',
-                                        'Student', '$filter', 'NgTableParams', 'DownloadService'];
+    PromoInscriptionsController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity',
+                                        'Inscription', '$filter', 'NgTableParams', 'DownloadService'];
 
-    function PromoStudentsController($scope, $rootScope, $stateParams, previousState, entity,
-                                        Student, $filter, NgTableParams, DownloadService) {
+    function PromoInscriptionsController($scope, $rootScope, $stateParams, previousState, entity,
+                                        Inscription, $filter, NgTableParams, DownloadService) {
         var vm = this;
         vm.promo = entity;
         vm.previousState = previousState.name;
@@ -20,18 +20,17 @@
             //sorting: { 'name': "asc" }
         };
 
-        Student.getByPromo(vm.promo.id, vm.name)
+        Inscription.getByPromo(vm.promo.id, vm.name)
             .then(function(response){
                 vm.loading = false;
-                vm.students = response.data;
+                vm.inscriptions = response.data;
                 vm.tableParams = new NgTableParams(initialParamsPromos, {
                     counts: [],
                     paginationMaxBlocks: 10,
                     paginationMinBlocks: 2,
-                    dataset: vm.students
+                    dataset: vm.inscriptions
                 });
         })
-
 
         vm.openStudentCards = function(){
            DownloadService.openStudentCards(vm.promo.id);

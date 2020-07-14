@@ -22,7 +22,6 @@
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
                     $translatePartialLoader.addPart('student');
-                    $translatePartialLoader.addPart('product');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]

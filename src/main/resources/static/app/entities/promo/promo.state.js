@@ -404,6 +404,41 @@
                         }]
                     }
                 })
+        .state('promo-detail.inscriptions', {
+            parent: 'promo-detail',
+            url: '/inscriptions',
+            params : { promoId: null },
+            data: {
+                pageTitle: 'myApp.promo.detail.title'
+            },
+            templateUrl: 'app/entities/promo/promo-inscriptions.html',
+            controller: 'PromoInscriptionsController',
+            controllerAs: 'vm',
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('classe');
+                    $translatePartialLoader.addPart('student');
+                    $translatePartialLoader.addPart('note');
+                    return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Promo',  function($stateParams, Promo) {
+                     var promo = {};
+                     return Promo.get($stateParams.promoId)
+                     .then(function(response){
+                        promo = response.data;
+                        return response.data;
+                    })
+                }],
+                previousState: ["$state", function ($state) {
+                    var currentStateData = {
+                        name: $state.current.name || 'promo',
+                        params: $state.params,
+                        url: $state.href($state.current.name, $state.params)
+                    };
+                    return currentStateData;
+                }]
+            }
+        })
         .state('promo-detail.notes', {
             parent: 'promo-detail',
             url: '/edit-notes',

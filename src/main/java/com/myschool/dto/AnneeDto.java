@@ -19,6 +19,18 @@ public class AnneeDto {
     private int nbStudents;
     private String typeEtablissement;
 
+    private String nomEtablissement;
+    private String pays;
+    private String ville;
+    private String adresse;
+    private String telephone;
+    private String senderId;
+
+    private Long bulletinId;
+    private Long carteScolaireId;
+    private Long tableauHonneurId;
+    private Long recuId;
+
     public AnneeDto createDTO(Annee annee) {
         AnneeDto anneeDto = new AnneeDto();
         if(annee != null){
@@ -27,6 +39,26 @@ public class AnneeDto {
             anneeDto.setFin(annee.getFin());
             anneeDto.setTypeEtablissement(String.valueOf(annee.getTypeEtablissement()));
             anneeDto.setLabel(annee.toString());
+
+            anneeDto.setNomEtablissement(annee.getNomEtablissement());
+            anneeDto.setPays(annee.getPays());
+            anneeDto.setVille(annee.getVille());
+            anneeDto.setAdresse(annee.getAdresse());
+            anneeDto.setTelephone(annee.getTelephone());
+            anneeDto.setSenderId(annee.getSenderId());
+
+            if(annee.getBulletin() != null){
+                anneeDto.setBulletinId(annee.getBulletin().getId());
+            }
+            if(annee.getCarteScolaire() != null){
+                anneeDto.setCarteScolaireId(annee.getCarteScolaire().getId());
+            }
+            if(annee.getTableauHonneur() != null){
+                anneeDto.setTableauHonneurId(annee.getTableauHonneur().getId());
+            }
+            if(annee.getRecu() != null){
+                anneeDto.setRecuId(annee.getRecu().getId());
+            }
 
             if(annee.getPromos() !=  null){
                 int nbStudents = 0;

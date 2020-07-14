@@ -12,6 +12,13 @@
     .pdfjs .pdfViewer .page {
         border-image: none;
     }
+
+
+.pdfjs .toolbar {
+
+    display: none;
+
+}
 </style>
 
 <!--<link rel="stylesheet" href="/bower_components/pdf.js-viewer/viewer.css">-->
@@ -23,11 +30,15 @@
 
 
 <div class="modal-body">
-    <pdfjs-viewer style="min-height: calc(100vh);" data="vm.bulletin"></pdfjs-viewer>
+    <pdfjs-viewer style="min-height: calc(100vh);" data="vm.downloaded"></pdfjs-viewer>
 </div>
 
 <div class="modal-footer">
     <button type="button" class="btn btn-default btn-sm" data-dismiss="modal" ng-click="vm.clear()">
         <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Fermer</span>
     </button>
+    <button class="btn btn-success btn-sm" ng-click="vm.showDownloadPopup()">
+        <span></span>&nbsp;<span>Télécharger</span>
+    </button>
+
 </div>

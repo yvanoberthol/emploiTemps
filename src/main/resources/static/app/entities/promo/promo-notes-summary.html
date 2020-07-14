@@ -21,19 +21,17 @@
                         </select>
                     </div>
 
-                    <!--<span>&nbsp;</span>
                     <span>&nbsp;</span>
-                    <button class="btn btn-success btn-raised btn-sm" ng-disabled="!vm.matiereId || !vm.trimestreId || !vm.promoMatiere.promoMatiereNoteInters.length">
-                        <span>
-                            Télécharger
-                        </span>
-                    </button>-->
+                    <a class="btn btn-success" href="" ng-if="vm.trimestreId"
+                       ng-click="vm.openAll(vm.trimestreId)">
+                        <span class="">Liste des bulletins</span>
+                    </a>
                 </div>
             </div>
         </header>
 
 
-        <div layout-gt-sm="row" layout-align="space-between center" class="spacer">
+        <!--<div layout-gt-sm="row" layout-align="space-between center" class="spacer">
             <span></span>
             <a class="btn btn-success" href="" ng-if="vm.trimestreId"
                ng-click="vm.openAll(vm.trimestreId)">
@@ -41,7 +39,7 @@
             </a>
 
         </div>
-
+-->
 
         <div class="spacer">
             <table ng-table="vm.tableParams" class="ng-table-responsive table table-bordered table-condensed">

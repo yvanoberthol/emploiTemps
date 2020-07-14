@@ -4,9 +4,9 @@
           .module('myApp')
           .factory('Inscription', Inscription);
 
-      Inscription.$inject = ['$http'];
+      Inscription.$inject = ['$http', 'Upload'];
 
-      function Inscription ($http) {
+      function Inscription ($http, Upload) {
            return{
               query: function(){
                     return $http.get("/api/inscriptions");
@@ -20,12 +20,15 @@
                                           + "&name=" + name
                                           + "&promo=" + promoId);
               },
-              getByPromo: function(page, size, sortBy, direction, promoId){
+              /*getByPromo: function(page, size, sortBy, direction, promoId){
                   return $http.get("/api/inscriptions-by-promo/" + promoId
                                   +"?page=" + page
                                   + "&size=" + size
                                   + "&sortBy=" + sortBy
                                   + "&direction=" + direction);
+              },*/
+              getByPromo: function(promoId, name){
+                          return $http.get("/api/inscriptions-by-promo/" + promoId + "?name=" + name);
               },
               /*getByPromoWithAttendances: function(page, size, sortBy, direction, promoId, edtEventId){
                   return $http.get("/api/inscriptions-by-promo-with-attendances/" + promoId
@@ -48,16 +51,32 @@
                            onSaveError(response);
                           });
               },
-              update: function(inscription, onSaveSuccess, onSaveError){
+              /*update: function(inscription, onSaveSuccess, onSaveError){
                   return $http.put("/api/inscriptions", inscription).
                           then(function(response){
                             onSaveSuccess(response);
                           }, function errorCallback(response) {
                            onSaveError(response);
                           });
+              },*/
+              update: function(inscription, file, onSaveSuccess, onSaveError){
+                    return  Upload.upload({
+                         url: '/api/inscriptions',
+                          method: 'PUT',
+                         data: {file: file, 'inscription': Upload.jsonBlob(inscription) }
+                    })
+                    .then(function(response){
+                         onSaveSuccess(response);
+                       },
+                       function errorCallback(response) {
+                        onSaveError(response);
+                    });
               },
               get: function(studentId, promoId){
                     return $http.get("/api/inscriptions?studentId=" + studentId + "&promoId=" + promoId);
+              },
+              getImage: function(studentId, promoId){
+                  return $http.get("/api/inscription-image?studentId=" + studentId + "&promoId=" + promoId, {responseType: "arraybuffer"})
               },
               getSexes: function(){
                return $http.get("/api/sexes");

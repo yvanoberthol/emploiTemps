@@ -35,7 +35,7 @@
 
         var initialParams = {
             count: 200, // initial page size
-            sorting: { 'student': "asc" }
+            sorting: { 'createdDate': "desc" }
         };
 
         vm.tableParams = new NgTableParams(initialParams, {

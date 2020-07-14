@@ -14,7 +14,5 @@
         vm.previousState = previousState.name;
         //vm.selected = 0;
         //$state.go('promo-detail.students');
-
-
     }
 })();

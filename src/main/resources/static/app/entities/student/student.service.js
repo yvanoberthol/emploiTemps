@@ -4,9 +4,9 @@
           .module('myApp')
           .factory('Student', Student);
 
-      Student.$inject = ['$http'];
+      Student.$inject = ['$http', 'Upload'];
 
-      function Student ($http) {
+      function Student ($http, Upload) {
            return{
               query: function(){
                     return $http.get("/api/students");

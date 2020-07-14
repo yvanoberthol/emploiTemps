@@ -2,15 +2,18 @@ package com.myschool.service;
 
 import com.myschool.domain.*;
 import com.myschool.dto.InscriptionDto;
-import com.myschool.dto.InscriptionFormDto;
+import com.myschool.dto.InscriptionDto;
 import com.myschool.dto.StudentDto;
 import com.myschool.repository.*;
+import com.myschool.utils.CustomErrorType;
+import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +22,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,16 +47,26 @@ public class InscriptionService {
     private InscriptionRepository inscriptionRepository;
 
     @Autowired
+    private AnneeRepository anneeRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private PromoRepository promoRepository;
 
     @Autowired
+    private ReglementRepository reglementRepository;
+
+    @Autowired
     private StudentRepository studentRepository;
 
     @Autowired
     private StudentService studentService;
+
+    @Value("${dir.myschool}")
+    private String FOLDER;
+
 
 
     /*public Inscription addNewInscription(String name) {
@@ -56,27 +77,28 @@ public class InscriptionService {
     /**
      * Save a inscription.
      *
-     * @param inscriptionFormDto the entity to save
+     * @param inscriptionDto the entity to save
      * @return the persisted entity
      */
-    public ResponseEntity<?> save(InscriptionFormDto inscriptionFormDto) {
-        log.debug("Request to save Inscription : {}", inscriptionFormDto);
+    public ResponseEntity<?> save(InscriptionDto inscriptionDto) {
+        log.debug("Request to save Inscription : {}", inscriptionDto);
 
         Inscription inscription;
 
-        if(inscriptionFormDto.getStudentId() != null){
-            InscriptionPK inscriptionPK = new InscriptionPK(inscriptionFormDto.getStudentId(), inscriptionFormDto.getPromoId());
+        if(inscriptionDto.getStudentId() != null){
+            InscriptionPK inscriptionPK = new InscriptionPK(inscriptionDto.getStudentId(), inscriptionDto.getPromoId());
             inscription = new Inscription(inscriptionPK);
-            Student student = studentRepository.findOne(inscriptionFormDto.getStudentId());
+            Student student = studentRepository.findOne(inscriptionDto.getStudentId());
+            studentService.update(inscriptionDto.getStudent());
             inscription.setStudent(student);
         }
         else{
             //create new student
-            StudentDto student = inscriptionFormDto.getStudent();
+            StudentDto student = inscriptionDto.getStudent();
             Student newStudent = studentService.save(student);
             if(newStudent == null)
                 return new ResponseEntity<>("Error while creating student", HttpStatus.BAD_REQUEST);
-            InscriptionPK inscriptionPK = new InscriptionPK(newStudent.getId(), inscriptionFormDto.getPromoId());
+            InscriptionPK inscriptionPK = new InscriptionPK(newStudent.getId(), inscriptionDto.getPromoId());
             inscription = new Inscription(inscriptionPK);
             inscription.setStudent(newStudent);
         }
@@ -86,14 +108,14 @@ public class InscriptionService {
         LocalDateTime datetime = new LocalDateTime();
         inscription.setCreatedDate(datetime.toString(pattern));
 
-        if(inscriptionFormDto.getPromoId() != null){
-            Promo promo = promoRepository.findOne(inscriptionFormDto.getPromoId());
+        if(inscriptionDto.getPromoId() != null){
+            Promo promo = promoRepository.findOne(inscriptionDto.getPromoId());
             inscription.setPromo(promo);
             inscription.setMontantScolarite(promo.getMontantScolarite());
         }
 
-        if(inscriptionFormDto.getStaffId() != null){
-            User user = userRepository.findOne(inscriptionFormDto.getStaffId());
+        if(inscriptionDto.getStaffId() != null){
+            User user = userRepository.findOne(inscriptionDto.getStaffId());
             if(user != null){
                 inscription.setStaff(user);
             }
@@ -105,13 +127,42 @@ public class InscriptionService {
     }
 
 
-    public ResponseEntity<InscriptionDto> update(InscriptionFormDto inscriptionFormDto) {
-        log.debug("Request to save Inscription : {}", inscriptionFormDto);
+    public ResponseEntity<InscriptionDto> update(InscriptionDto inscriptionDto, MultipartFile file) {
+        log.debug("Request to save Inscription : {}", inscriptionDto);
 
-        InscriptionPK inscriptionPK = new InscriptionPK(inscriptionFormDto.getStudentId(), inscriptionFormDto.getPromoId());
+        InscriptionPK inscriptionPK = new InscriptionPK(inscriptionDto.getStudentId(), inscriptionDto.getPromoId());
         Inscription inscription = inscriptionRepository.findByInscriptionPK(inscriptionPK);
+        studentService.update(inscriptionDto.getStudent());
 
         Inscription result = inscriptionRepository.save(inscription);
+
+        if(result != null){
+            if (!Files.exists(Paths.get(FOLDER))) {
+                File folder = new File(FOLDER);
+                if(! folder.mkdirs()) {
+                    return new ResponseEntity(new CustomErrorType("Unable to create folder ${dir.myschool}"), HttpStatus.CONFLICT);
+                }
+            }
+
+            if (!Files.exists(Paths.get(FOLDER + inscription.getPromo().getAnnee().getId()))) {
+                File anneeFolder = new File(FOLDER + inscription.getPromo().getAnnee().getId());
+                if (!anneeFolder.mkdir()) {
+                    return new ResponseEntity(new CustomErrorType("Unable to create folder for this annee"), HttpStatus.CONFLICT);
+                }
+            }
+
+            if(file != null){
+                if(!file.isEmpty()){
+                    try {
+                        file.transferTo(new File(FOLDER + inscription.getPromo().getAnnee().getId() + "/" + inscriptionDto.getPromoId() + "_" + inscriptionDto.getStudentId() + ".png"));
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                        return new ResponseEntity(new CustomErrorType("Error while saving inscription image"), HttpStatus.NO_CONTENT);
+                    }
+                }
+            }
+        }
         return new ResponseEntity<InscriptionDto>(new InscriptionDto().createDTO(result), HttpStatus.CREATED);
     }
 
@@ -181,12 +232,24 @@ public class InscriptionService {
         return inscriptionDtos;
     }
 
-    public Page<InscriptionDto> findByPromo(Integer page, Integer size, String sortBy, String direction, Long promoId) {
+    /*public Page<InscriptionDto> findByPromo(Integer page, Integer size, String sortBy, String direction, Long promoId) {
         Pageable pageable = new PageRequest(page, size, Sort.Direction.fromString(direction), sortBy);
 
         Page<Inscription> inscriptions = inscriptionRepository.findByPromoId(promoId, pageable);
 
         Page<InscriptionDto> inscriptionDtos = inscriptions.map(inscription -> new InscriptionDto().createDTO(inscription));
+        return inscriptionDtos;
+    }*/
+
+    public List<InscriptionDto> findByPromo( Long promoId, String studentName) {
+        log.debug("Request to get all Students");
+
+        List<Inscription> inscriptions = inscriptionRepository.findByPromoId(promoId, "%"+studentName+"%");
+
+        List<InscriptionDto> inscriptionDtos = new ArrayList<>();
+        for(Inscription inscription: inscriptions){
+            inscriptionDtos.add(new InscriptionDto().createDTO(inscription));
+        }
         return inscriptionDtos;
     }
 
@@ -216,7 +279,10 @@ public class InscriptionService {
         log.debug("Request to get Inscription : {}");
         InscriptionPK inscriptionPK = new InscriptionPK(studentId, promoId);
         Inscription inscription = inscriptionRepository.findByInscriptionPK(inscriptionPK);
-        return new InscriptionDto().createDTO(inscription);
+        //return new InscriptionDto().createDTO(inscription);
+        InscriptionDto inscriptionDto = new InscriptionDto().createDTO(inscription);
+        inscriptionDto.setStudent(studentService.findOne(studentId, inscription.getPromo().getAnnee().getId()));
+        return inscriptionDto;
     }
 
     /**
@@ -230,18 +296,14 @@ public class InscriptionService {
         InscriptionPK inscriptionPK = new InscriptionPK(studentId, promoId);
         Inscription inscription = inscriptionRepository.findByInscriptionPK(inscriptionPK);
         if(Optional.ofNullable(inscription).isPresent()){
-            inscription.setSolde(inscription.getSolde() + inscription.getMontantScolarite());
-            for(Reglement reglement: inscription.getReglements()){
-                inscription.setSolde(inscription.getSolde() - reglement.getAmount());
-            }
-            studentRepository.save(inscription.getStudent());
+
             inscriptionRepository.deleteByInscriptionPK(inscriptionPK);
 
-            List<Student> students = studentRepository.findAll();
+            /*List<Student> students = studentRepository.findAll();
             for(Student student: students){
                 if(isEmptyOrNull(student.getInscriptions()))
                     studentRepository.delete(student.getId());
-            }
+            }*/
 
         }
     }
@@ -250,5 +312,20 @@ public class InscriptionService {
         if(inscriptions == null) return true;
         if(inscriptions.isEmpty()) return true;
         return false;
+    }
+
+    public byte[] getImage(Long studentId, Long promoId) throws IOException {
+
+        Promo promo = promoRepository.findOne(promoId);
+
+        if (promo == null) {
+            return null;
+        }
+
+        File f = new File(FOLDER + promo.getAnnee().getId() + "/" + promoId + "_" + studentId + ".png");
+        if(f.exists() && !f.isDirectory()) {
+            return IOUtils.toByteArray(new FileInputStream(f));
+        }
+        return null;
     }
 }

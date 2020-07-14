@@ -25,6 +25,7 @@
       "debut":"Begin",
       "fin":"End",
       "active":"Active",
+      "senderId":"SMS Sender Identifier",
       "yes":"Yes",
       "no":"No"
     }

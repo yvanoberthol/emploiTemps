@@ -46,7 +46,7 @@
                     <td></td>
                 </tr>-->
 
-                <tr ng-repeat="student in $data track by $index">
+                <tr ng-repeat="inscription in $data track by $index">
 
                     <td data-title="'#'" width="5%">
                             <span class="small">
@@ -56,13 +56,13 @@
 
                     <!-- <td data-title="'myApp.student.createdDate' | translate" sortable="'createdDate'">
                          <span class="small">
-                             {{student.createdDate}}
+                             {{inscription.student.createdDate}}
                          </span>
                      </td>-->
                     <td data-title="'Matricule' | translate" width="10%">
                         <span class="small">
                              <span>
-                                {{student.matricule}}
+                                {{inscription.student.matricule}}
                             </span>
                         </span>
                     </td>
@@ -70,66 +70,56 @@
                     <td data-title="'myApp.student' | translate"  width="20%">
                         <span class="small">
                              <span>
-                                {{student.name}}
+                                {{inscription.student.name}}
                             </span>
                         </span>
                     </td>
 
                     <td data-title="'Date de naissance'" width="10%">
                         <span class="small">
-                           {{student.dateNaissance}}
+                           {{inscription.student.dateNaissance}}
                         </span>
                     </td>
 
                     <td data-title="'Age'" width="10%">
                         <span class="small">
-                           {{student.age}}
+                           {{inscription.student.age}}
                         </span>
                     </td>
 
                     <td data-title="'Lieu de naissance'" width="10%">
                             <span class="small">
-                               {{student.lieuNaissance}}
+                               {{inscription.student.lieuNaissance}}
                             </span>
                     </td>
 
                     <td data-title="'Sexe'" width="10%">
                             <span class="small">
-                               {{student.sexe}}
+                               {{inscription.student.sexe}}
                             </span>
                     </td>
 
                     <td data-title="'Statut'" width="10%">
-                        <span class="small">
-                           {{student.statut}}
-                        </span>
+                            <span class="small">
+                               {{inscription.student.statut}}
+                            </span>
                     </td>
 
                     <!--<td data-title="'myApp.student.solde' | translate" sortable="'solde'">
                         <strong class="small" ng-class="{'text-success': student.solde > -1, 'text-danger': student.solde < 0}">
-                            {{student.solde | currency: '' : 0}} Fcfa
+                            {{inscription.student.solde | currency: '' : 0}} Fcfa
                         </strong>
                     </td>-->
 
 
                     <td data-title="''" class="text-right" width="5%">
-                            <span class="text-nowrap">
-                                <a ui-sref="student-detail({studentId:student.id})" class="btn btn-info btn-sm">
-                                    <span>
-                                        <span class="small" translate="entity.action.view"></span>
-                                    </span>
-                                </a>
-                                <!--<a ui-sref="student.edit({studentId:student.id, promoId:student.promoId})" class="btn btn-primary btn-sm">
-                                    <span>
-                                        <span class="small" translate="entity.action.edit"></span>
-                                    </span>
-                                </a>
-                                <a ui-sref="student.delete({studentId:student.id, promoId:student.promoId})" class="btn btn-danger btn-sm">
-                                    <span>
-                                       <span class="small" translate="entity.action.delete"></span>
-                                    </span>
-                                </a>-->
-                            </span>
+                        <span class="text-nowrap">
+                            <a ui-sref="inscription-detail({studentId:inscription.student.id, promoId:inscription.promoId})" class="btn btn-info btn-sm">
+                                <span>
+                                    <span class="small" translate="entity.action.view"></span>
+                                </span>
+                            </a>
+                        </span>
                 </tr>
             </table>
         </div> <!-- card.// -->

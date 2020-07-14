@@ -27,7 +27,7 @@
                            ng-class="{'active': vm.selected == 2 }" ui-sref="setup.trimestre" ng-click="vm.selected = 2">Périodes Scolaires</a>
 
                         <a class="list-group-item list-group-item-action mt-4"
-                           ng-class="{'active': vm.selected == 3 }" ui-sref="promo-detail.matieres" ng-click="vm.selected = 3">Entête, logo & cachet</a>
+                           ng-class="{'active': vm.selected == 3 }" ui-sref="promo-detail.matieres" ng-click="vm.selected = 3">Entête</a>
 
                         <a class="list-group-item list-group-item-action mt-4"
                            ng-class="{'active': vm.selected == 4 }" ui-sref="promo-detail.notes" ng-click="vm.selected = 4">Modèle Bulletin </a>
@@ -45,9 +45,7 @@
 
                 <div flex-gt-sm="80" style="margin-left:20px">
                     <div class="tab-content" id="nav-tabContent">
-                        <md-content>
-                            <ui-view></ui-view>
-                        </md-content>
+                        <ui-view></ui-view>
                     </div>
                 </div>
             </div>
