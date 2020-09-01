@@ -85,6 +85,9 @@ public class Student {
     @Column(name = "otherInfos")
     private String otherInfos;
 
+    @Column(name = "domicile")
+    private String domicile;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
     private List<Inscription> inscriptions;
 
@@ -124,6 +127,14 @@ public class Student {
 
     public String getDateNaissance() {
         String pattern = "ddMMyyyy";
+        if(dateNaissance != null) {
+            return dateNaissance.toString(pattern);
+        }
+        return null;
+    }
+
+    public String getDateNaissanceFormatted() {
+        String pattern = "dd/MM/yyyy";
         if(dateNaissance != null) {
             return dateNaissance.toString(pattern);
         }

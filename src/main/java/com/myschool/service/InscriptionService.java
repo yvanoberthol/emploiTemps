@@ -7,7 +7,9 @@ import com.myschool.dto.StudentDto;
 import com.myschool.repository.*;
 import com.myschool.utils.CustomErrorType;
 import org.apache.commons.io.IOUtils;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.Years;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
@@ -245,10 +247,26 @@ public class InscriptionService {
         log.debug("Request to get all Students");
 
         List<Inscription> inscriptions = inscriptionRepository.findByPromoId(promoId, "%"+studentName+"%");
+        Promo promo = promoRepository.getOne(promoId);
+        int currentYear = new LocalDate().getYear();
+        /*if(promo.getAnnee().getActive() != null){
+            if(!promo.getAnnee().getActive()){
+                currentYear = promo.getAnnee().getFin();
+            }
+        }*/
+
+        currentYear = promo.getAnnee().getFin();
+
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("ddMMyyyy");
+        LocalDate now = new LocalDate();
 
         List<InscriptionDto> inscriptionDtos = new ArrayList<>();
         for(Inscription inscription: inscriptions){
-            inscriptionDtos.add(new InscriptionDto().createDTO(inscription));
+            InscriptionDto inscriptionDto = new InscriptionDto().createDTO(inscription);
+            inscriptionDto.getStudent().setAge(currentYear - formatter.parseLocalDate(inscriptionDto.getStudent().getDateNaissance()).getYear());
+            //Years age = Years.yearsBetween(formatter.parseDateTime(inscriptionDto.getStudent().getDateNaissance()).toLocalDate(), now);
+            //inscriptionDto.getStudent().setAge(age.getYears());
+            inscriptionDtos.add(inscriptionDto);
         }
         return inscriptionDtos;
     }

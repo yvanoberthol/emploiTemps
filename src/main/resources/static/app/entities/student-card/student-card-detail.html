@@ -1,0 +1,96 @@
+<section class="section-content padding-y-sm bg" loading="vm.loading">
+
+    <div class="container">
+
+        <header class="section-heading ">
+            <div class="row d-flex justify-content-between">
+                <div >
+                    <h4 class="title-section bg"><b class="text-uppercase">{{vm.studentCard.name}}</b>  </h4>
+                    <span class="text-uppercase">Liste des sous-catégories</span>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary btn-raised btn-sm" ui-sref="studentCard-detail.new-substudentCard">
+                            <span translate="myApp.studentCard.home.createLabelSub">
+                                Create new studentCard
+                            </span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="card">
+
+            <table ng-table="vm.tableParams" class="ng-table-responsive table table-condensed table-striped">
+
+                <tr ng-repeat="subStudentCard in vm.studentCard.subStudentCards track by $index">
+
+                    <td data-title="'#'" width="5%">
+                    <span class="small">
+                        {{ $index + 1}}
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.studentCard.name' | translate" width="30%" sortable="'name'">
+                    <span>
+                        <span> {{subStudentCard.name}}</span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.studentCard.nbProducts' | translate" width="15%" sortable="'productIds.length'">
+                    <span class="small">
+                         <span>
+                            {{subStudentCard.nbProducts || 0 }}
+                        </span>
+                        <span> &nbsp;</span>
+                        <span ng-if="subStudentCard.nbProducts">
+                            <a ui-sref="product({studentCardName:subStudentCard.name})"> [<span translate="entity.action.view"></span>] </a>
+                        </span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.studentCard.rank' | translate" width="15%" sortable="'rank'">
+                    <span class="small">
+                         <span>
+                            {{subStudentCard.rank || 0 }}
+                        </span>
+                    </span>
+                    </td>
+
+                    <td data-title="'myApp.studentCard.enabled' | translate" width="20%">
+                        <h1 ng-class="{'badge-success': subStudentCard.enabled, 'badge-danger': !subStudentCard.enabled}"
+                            class="badge clickable" ng-click="vm.updateSubStudentCard(subStudentCard)">
+                            <span ng-if="subStudentCard.enabled" translate="myApp.studentCard.yes"></span>
+                            <span ng-if="!subStudentCard.enabled" translate="myApp.studentCard.no"></span>
+                        </h1>
+                    </td>
+                    <td width="15%">
+                    <span class="text-nowrap">
+                        <a ui-sref="subStudentCard-edit({subStudentCardId:subStudentCard.id})" class="btn btn-info btn-sm">
+                            <span>
+                                <span class="" translate="entity.action.edit"></span>
+                            </span>
+                        </a>
+                        <a ui-sref="subStudentCard-delete({subStudentCardId:subStudentCard.id})" class="btn btn-danger btn-sm">
+                            <span>
+                               <span class="" translate="entity.action.delete"></span>
+                            </span>
+                        </a>
+                    </span>
+                    </td>
+                </tr>
+            </table>
+
+        </div> <!-- card.// -->
+
+        <div class="spacer">
+            <button type="submit"
+                    ui-sref="studentCard"
+                    class="btn btn-info">
+                <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+            </button>
+        </div>
+
+    </div> <!-- container .//  -->
+
+</section>

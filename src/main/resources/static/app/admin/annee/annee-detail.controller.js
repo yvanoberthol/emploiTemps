@@ -5,9 +5,9 @@
         .module('myApp')
         .controller('AnneeDetailController', AnneeDetailController);
 
-    AnneeDetailController.$inject = ['$scope', '$stateParams', 'previousState', 'entity', 'Annee', 'Upload'];
+    AnneeDetailController.$inject = ['$scope', '$stateParams', 'previousState', 'entity', 'Annee', 'Upload', 'TypeEtablissement'];
 
-    function AnneeDetailController($scope, $stateParams, previousState, entity, Annee, Upload) {
+    function AnneeDetailController($scope, $stateParams, previousState, entity, Annee, Upload, TypeEtablissement) {
         var vm = this;
         vm.annee = entity;
 
@@ -46,6 +46,13 @@
             }
         };
 
+        vm.typesEtablissement = [];
+        TypeEtablissement.getAll()
+        .then(function(response){
+            response.data.forEach(function(typeEtablissement) {
+               vm.typesEtablissement.push({name: typeEtablissement.name, value:typeEtablissement.value})
+            });
+        })
 
         vm.save = save;
         function save () {

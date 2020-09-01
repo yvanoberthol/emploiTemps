@@ -413,7 +413,7 @@
                                             <th scope="col">Matière</th>
                                             <th scope="col" ng-repeat="sequence in vm.ligneTrimestre.sequences">{{sequence.name}}</th>
                                             <th scope="col">Note trimestre</th>
-                                            <!--<th scope="col">Coef</th>-->
+                                            <th scope="col">Coef</th>
                                         </tr>
 
                                         <tbody ng-repeat="ligneGroupe in vm.ligneTrimestre.groupes track by $index">
@@ -426,7 +426,7 @@
                                                 <span>{{studentNote.note}}</span>
                                             </td>
                                             <td>{{ligneMatiere.moyenne}}/{{ligneMatiere.noteSur}}</td>
-                                            <!--<td>{{ligneMatiere.coef}}</td>-->
+                                            <td>{{ligneMatiere.coef}}</td>
                                         </tr>
                                         </tbody>
                                     </table>

@@ -6,13 +6,14 @@
         .controller('InscriptionDetailController', InscriptionDetailController);
 
     InscriptionDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity',
-                                    'session', 'Promo',  'Sexe', 'Inscription', 'Upload'];
+                                    'session', 'Promo',  'Sexe', 'Inscription', 'Upload', '$filter'];
 
     function InscriptionDetailController($scope, $rootScope, $stateParams, previousState, entity,
-                                    session, Promo, Sexe, Inscription, Upload) {
+                                    session, Promo, Sexe, Inscription, Upload, $filter) {
         var vm = this;
         vm.inscription = entity;
         vm.save = save;
+        console.log(vm.inscription)
 
         vm.previousState = previousState.name;
         vm.selected = 0;
@@ -54,14 +55,22 @@
         vm.tabSelected(0, matieres);
 
 
+        vm.getNote = function(sequenceId, ligneMatiere) {
+         var studentNotes =  $filter('filter')(ligneMatiere.notes, {sequenceId: sequenceId});
+         if(studentNotes.length){
+            return studentNotes[0].note;
+         }
+        }
+
         function save () {
             vm.isSaving = true;
             console.log(vm.inscription);
             if(vm.file){
-                Upload.resize(vm.file, {width: 400, quality: 0.8})
+                /*Upload.resize(vm.file, {width: 400, height: 400, quality: 0.8})
                 .then(function(image){
                     Inscription.update(vm.inscription, image, onSaveSuccess, onSaveError);
-                })
+                })*/
+                Inscription.update(vm.inscription, vm.file, onSaveSuccess, onSaveError);
             }
             else{
                 Inscription.update(vm.inscription, null, onSaveSuccess, onSaveError);

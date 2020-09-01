@@ -3,6 +3,7 @@ package com.myschool.security.jwt;
 import com.myschool.domain.Annee;
 import com.myschool.domain.Role;
 import com.myschool.domain.User;
+import com.myschool.domain.enumerations.TypeEtablissement;
 import com.myschool.repository.AnneeRepository;
 import com.myschool.repository.UserRepository;
 import com.myschool.security.SecurityConstants;
@@ -37,8 +38,6 @@ public class TokenProvider {
     @Autowired
     private AnneeRepository anneeRepository;
 
-    @Value("${properties.typeSchool}")
-    private String TYPE_SCHOOL;
 
     public TokenProvider(UserDetailsService userService) {
         this.secretKey = Base64.getEncoder().encodeToString(SecurityConstants.SECRET.getBytes());
@@ -55,10 +54,12 @@ public class TokenProvider {
         Annee anneeActive = anneeRepository.findActive();
         Long anneeId = null;
         String annee = null;
+        String typeEtablisement = TypeEtablissement.Secondaire.toValue();
 
         if(anneeActive != null){
             anneeId = anneeActive.getId();
             annee = anneeActive.getDebut() + " - " + anneeActive.getFin();
+            typeEtablisement = anneeActive.getTypeEtablissement().toValue();
         }
 
         return Jwts.builder().setId(UUID.randomUUID().toString()).setSubject(username)
@@ -67,7 +68,7 @@ public class TokenProvider {
                 .claim("name", user.getName())
                 .claim("anneeId", anneeId)
                 .claim("annee", annee)
-                .claim("typeSchool", TYPE_SCHOOL)
+                .claim("typeSchool", typeEtablisement)
                 .claim("role", user.getRole().getName()).compact();
     }
 

@@ -20,7 +20,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +63,9 @@ public class AnneeService {
     @Value("${dir.myschool}")
     private String FOLDER;
 
+    @Value("${dir.cards}")
+    private String FOLDER_CARDS;
+
     /**
      * Save a annee.
      *
@@ -76,7 +81,7 @@ public class AnneeService {
         annee.setDebut(anneeDto.getDebut());
         annee.setFin(anneeDto.getFin());
         annee.setActive(anneeDto.getActive());
-        annee.setTypeEtablissement(TypeEtablissement.College);
+        annee.setTypeEtablissement(TypeEtablissement.Secondaire);
 
         Annee result = anneeRepository.save(annee);
         if (result != null){
@@ -136,10 +141,14 @@ public class AnneeService {
         annee.setActive(anneeDto.getActive());
 
         annee.setNomEtablissement(anneeDto.getNomEtablissement());
+        annee.setNameEtablissement(anneeDto.getNameEtablissement());
+        annee.setSlogan(anneeDto.getSlogan());
         annee.setPays(anneeDto.getPays());
+        annee.setRegion(anneeDto.getRegion());
+        annee.setDepartement(anneeDto.getDepartement());
         annee.setVille(anneeDto.getVille());
         annee.setAdresse(anneeDto.getAdresse());
-        annee.setTelephone(anneeDto.getTelephone());
+        annee.setPhone(anneeDto.getPhone());
         annee.setSenderId(anneeDto.getSenderId());
         annee.setTypeEtablissement(TypeEtablissement.fromValue(anneeDto.getTypeEtablissement()));
 
@@ -238,6 +247,42 @@ public class AnneeService {
         }
     }
 
+    public void updateCarteScolaire(Long anneeId, Long studentCardId) {
+        log.debug("Request to update student card : {}", anneeId);
+        Annee annee = anneeRepository.findOne(anneeId);
+        if(Optional.ofNullable(annee).isPresent()){
+            CarteScolaire carteScolaire = carteScolaireRepository.findOne(studentCardId);
+            annee.setCarteScolaire(carteScolaire);
+            anneeRepository.save(annee);
+
+            //replace carte scolaire recto verso in annee folder
+            try {
+                Path path = Paths.get(FOLDER  + "/" + annee.getId()  + "/" + "recto.png");
+                Files.deleteIfExists(path);
+                File source = new File(FOLDER_CARDS  + "recto_" + carteScolaire.getId() + ".png");
+                File dest = new File(FOLDER  + "/" + annee.getId()  + "/" + "recto.png");
+                Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Path path = Paths.get(FOLDER  + "/" + annee.getId()  + "/" + "verso.png");
+                Files.deleteIfExists(path);
+                File source = new File(FOLDER_CARDS  + "verso_" + carteScolaire.getId() + ".png");
+                File dest = new File(FOLDER  + "/" + annee.getId()  + "/" + "verso.png");
+                Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private static void copyFileUsingJava7Files(File source, File dest) throws IOException {
+        Files.copy(source.toPath(), dest.toPath());
+    }
+
     /**
      *  Delete the  annee by id.
      *
@@ -264,4 +309,5 @@ public class AnneeService {
         }
         return null;
     }
+
 }

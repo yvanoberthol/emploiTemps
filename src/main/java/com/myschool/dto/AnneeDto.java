@@ -20,10 +20,14 @@ public class AnneeDto {
     private String typeEtablissement;
 
     private String nomEtablissement;
+    private String nameEtablissement;
+    private String slogan;
     private String pays;
+    private String region;
+    private String departement;
     private String ville;
     private String adresse;
-    private String telephone;
+    private String phone;
     private String senderId;
 
     private Long bulletinId;
@@ -41,10 +45,14 @@ public class AnneeDto {
             anneeDto.setLabel(annee.toString());
 
             anneeDto.setNomEtablissement(annee.getNomEtablissement());
+            anneeDto.setNameEtablissement(annee.getNameEtablissement());
+            anneeDto.setSlogan(annee.getSlogan());
             anneeDto.setPays(annee.getPays());
+            anneeDto.setRegion(annee.getRegion());
+            anneeDto.setDepartement(annee.getDepartement());
             anneeDto.setVille(annee.getVille());
             anneeDto.setAdresse(annee.getAdresse());
-            anneeDto.setTelephone(annee.getTelephone());
+            anneeDto.setPhone(annee.getPhone());
             anneeDto.setSenderId(annee.getSenderId());
 
             if(annee.getBulletin() != null){

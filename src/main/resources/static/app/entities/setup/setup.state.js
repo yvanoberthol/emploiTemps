@@ -80,6 +80,24 @@
                 }]
             }
         })
+        .state('setup.student-card', {
+            parent: 'setup',
+            url: '/carte-scolaire',
+            data: {
+                authorities: ['ADMIN', 'SUPER', 'USER'],
+                pageTitle: 'myApp.trimestre.home.title'
+            },
+            templateUrl: 'app/entities/student-card/student-cards.html',
+            controller: 'StudentCardController',
+            controllerAs: 'vm',
+            resolve: {
+                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                    $translatePartialLoader.addPart('studentCard');
+                    $translatePartialLoader.addPart('global');
+                    return $translate.refresh();
+                }]
+            }
+        })
         ;
     }
 })();

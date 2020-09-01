@@ -442,7 +442,7 @@
         .state('promo-detail.notes', {
             parent: 'promo-detail',
             url: '/edit-notes',
-            params : { promoId: null },
+            params : { promoId: null, trimestreId: null, sequenceId: null, matiereId: null  },
             data: {
                 //authorities: ['ADMIN', 'USER', 'SUPER'],
                 pageTitle: 'myApp.promo.notes.title'
@@ -475,6 +475,27 @@
                     return currentStateData;
                 }]
             }
+        })
+        .state('promo-detail.notes.import', {
+            parent: 'promo-detail.notes',
+            //url: '/new',
+            params : {promoId: null, trimestreId: null, sequenceId: null, matiereId: null },
+            data: {
+                authorities: []
+            },
+            onEnter: ['$state', '$stateParams', '$uibModal', function($state, $stateParams, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/promo/promo-notes-import.html',
+                    controller: 'PromoNotesImportController',
+                    controllerAs: 'vm',
+                    backdrop: true,
+                    size: 'md'
+                }).result.then(function() {
+                  $state.go('promo-detail.notes', $stateParams, { reload: 'promo-detail.notes' });
+                }, function() {
+                  $state.go('^');
+                });
+            }]
         })
         .state('promo-detail.notes-summary', {
             parent: 'promo-detail',

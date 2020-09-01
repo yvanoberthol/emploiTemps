@@ -4,7 +4,10 @@ import com.myschool.domain.*;
 import com.myschool.dto.GroupeDto;
 import com.myschool.dto.MatiereDto;
 import com.myschool.dto.PromoDto;
+import com.myschool.dto.StudentNoteDto;
 import com.myschool.repository.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.util.*;
 
 
 /**
@@ -36,6 +40,11 @@ public class PromoService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private StudentRepository studentRepository;
 
     /**
      * Save a promo.
@@ -136,4 +145,61 @@ public class PromoService {
             promoRepository.delete(id);
         }
     }
+
+    public void importNotes(MultipartFile file, Long promoId, Long sequenceId, Long matiereId) throws Exception {
+        if(file != null){
+            if(!file.isEmpty()){
+                InputStream inputStream =  new BufferedInputStream(file.getInputStream());
+                process(inputStream, promoId, sequenceId, matiereId);
+            }
+        }
+    }
+
+    public void process(InputStream is, Long promoId, Long sequenceId, Long matiereId) throws Exception {
+        Workbook workbook = new XSSFWorkbook(is);
+        Sheet sheet = workbook.getSheetAt(0);
+
+        StringBuilder s = new StringBuilder();
+
+        Iterator<Row> iterator = sheet.iterator();
+        List<Student> students;
+
+        int rowIndex = 0;
+        while (iterator.hasNext()) {
+
+            Row currentRow = iterator.next();
+            Iterator<Cell> cellIterator = currentRow.iterator();
+
+            StudentNoteDto studentNote = new StudentNoteDto();
+            studentNote.setPromoId(promoId);
+            studentNote.setSequenceId(sequenceId);
+            studentNote.setMatiereId(matiereId);
+
+            if(rowIndex != 0){
+                while (cellIterator.hasNext()) {
+
+                    Cell currentCell = cellIterator.next();
+
+                    if (currentCell.getCellTypeEnum() == CellType.STRING) {
+                        s.append((currentCell.getStringCellValue()).trim() + "; ");
+                        students = studentRepository.findByMatriculeOrLastNameOrFirstName(promoId, (currentCell.getStringCellValue()).trim());
+                        if(!students.isEmpty()){
+                            studentNote.setStudentId(students.get(0).getId());
+                        }
+                    }
+                    else if (currentCell.getCellTypeEnum() == CellType.NUMERIC) {
+                        studentNote.setNote(currentCell.getNumericCellValue());
+                    }
+
+                    if(studentNote.getStudentId() != null)
+                    studentService.saveNote(studentNote);
+                }
+            }
+            rowIndex++;
+            System.out.println("--------------");
+            s.append("\n");
+        }
+        System.out.println(s);
+    }
+
 }

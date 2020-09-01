@@ -3,6 +3,7 @@ package com.myschool.service;
 import com.myschool.domain.*;
 import com.myschool.domain.enumerations.Sexe;
 import com.myschool.domain.enumerations.Statut;
+import com.myschool.domain.enumerations.TypeEtablissement;
 import com.myschool.dto.*;
 import com.myschool.repository.*;
 import com.myschool.utils.MapUtil;
@@ -10,7 +11,6 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -20,7 +20,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 
@@ -65,9 +64,6 @@ public class StudentService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Value("${properties.typeSchool}")
-    private String TYPE_SCHOOL;
 
     /**
      * Save a student.
@@ -245,6 +241,7 @@ public class StudentService {
 
     public List<StudentWithNotesDto> findByPromoWithNotes(String studentName, Long promoId, Long noteId) {
         List<Student> students = studentRepository.findByPromoId(promoId, "%"+studentName+"%");
+        Promo promo = promoRepository.getOne(promoId);
         List<StudentWithNotesDto> studentWithNoteDtos = new ArrayList<>();
         for( Student student : students) {
             StudentWithNotesDto studentWithNotesDto = new StudentWithNotesDto().createDTO(student);
@@ -252,7 +249,7 @@ public class StudentService {
             if(inscription != null){
                 if (inscription.getStudentNotes() != null){
                     Map<Long, List<StudentNoteDto>> groupedByTrimestre = groupByTrimestre(inscription.getStudentNotes(), noteId);
-                    studentWithNotesDto.setNotes(computeMoyennes(groupedByTrimestre));
+                    studentWithNotesDto.setNotes(computeMoyennes(groupedByTrimestre, promo.getAnnee().getTypeEtablissement()));
                     studentWithNotesDto.setFinalNote(computeFinalNote(studentWithNotesDto));
                 }
             }
@@ -269,10 +266,10 @@ public class StudentService {
         return Math.round((sum / studentWithNotesDto.getNotes().values().size()) * 100) / 100.0;
     }
 
-    public Map<Long, Double> computeMoyennes(Map<Long, List<StudentNoteDto>> myMap) {
+    public Map<Long, Double> computeMoyennes(Map<Long, List<StudentNoteDto>> myMap, TypeEtablissement typeEtablissement) {
         Map<Long, Double> mapResult = new TreeMap<>();
         for (Map.Entry<Long, List<StudentNoteDto>> entry : myMap.entrySet()) {
-            mapResult.put(entry.getKey(), computeMoyenne(entry.getValue()));
+            mapResult.put(entry.getKey(), computeMoyenne(entry.getValue(), typeEtablissement));
         }
         return mapResult;
     }
@@ -327,7 +324,7 @@ public class StudentService {
         if(map.entrySet().isEmpty()){
             LigneGroupeDto ligneGroupeDto = new LigneGroupeDto();
             ligneGroupeDto.setGroupe("Groupe 1");
-            ligneGroupeDto.setMoyenne(computeMoyenne(notes));
+            ligneGroupeDto.setMoyenne(computeMoyenne(notes, trimestre.getAnnee().getTypeEtablissement()));
             ligneGroupeDto.setMatieres(groupByMatiere(inscription, trimestre, notes));
             ligneGroupeDtos.add(ligneGroupeDto);
         }
@@ -339,11 +336,11 @@ public class StudentService {
                 if(groupe != null){
                     ligneGroupeDto.setGroupe(groupe.getName());
                     ligneGroupeDto.setRank(groupe.getRank());
-                    ligneGroupeDto.setMoyenne(computeMoyenne(entry.getValue()));
+                    ligneGroupeDto.setMoyenne(computeMoyenne(entry.getValue(), trimestre.getAnnee().getTypeEtablissement()));
                     ligneGroupeDto.setMoyenneGenerale(getMoyenneGeneraleByTrimestreAndGroupe(inscription, trimestre, groupe));
                     ligneGroupeDto.setRang(getRangByInscriptionAndTrimestreAndGroupe(inscription, trimestre, groupe));
                     ligneGroupeDto.setTotalCoef(computeTotalCoef(entry.getValue()) / trimestre.getSequences().size());
-                    ligneGroupeDto.setTotalNotes(computeTotalNotes(entry.getValue()) / trimestre.getSequences().size());
+                    ligneGroupeDto.setTotalNotes(computeTotalNotes(entry.getValue(), trimestre.getAnnee().getTypeEtablissement()) / trimestre.getSequences().size());
                     ligneGroupeDto.setMatieres(groupByMatiere(inscription, trimestre, entry.getValue()));
                     ligneGroupeDto.setSequences(groupBySequence(inscription, entry.getValue()));
                     ligneGroupeDtos.add(ligneGroupeDto);
@@ -418,8 +415,8 @@ public class StudentService {
                 sequenceDto.setWeight(sequence.getWeight());
                 sequenceDto.setTrimestreId(sequence.getTrimestre().getId());
                 sequenceDto.setTrimestre(sequence.getTrimestre().getName());
-                sequenceDto.setTotalNotes(computeTotalNotes(entry.getValue()));
-                sequenceDto.setMoyenne(computeMoyenne(entry.getValue()));
+                sequenceDto.setTotalNotes(computeTotalNotes(entry.getValue(), sequence.getTrimestre().getAnnee().getTypeEtablissement()));
+                sequenceDto.setMoyenne(computeMoyenne(entry.getValue(), sequence.getTrimestre().getAnnee().getTypeEtablissement()));
                 sequenceDto.setRang(getRangByInscriptionAndSequence(inscription, sequence));
                 sequenceDto.setMoyenneGenerale(getMoyenneGeneraleBySequence(inscription, sequence));
                 sequenceDto.setEffectif(inscription.getPromo().getInscriptions().size());
@@ -441,10 +438,10 @@ public class StudentService {
     }
     */
 
-    private Double computeMoyenne(List<StudentNoteDto> notes) {
+    private Double computeMoyenne(List<StudentNoteDto> notes, TypeEtablissement typeEtablissement) {
         double sum = 0;
         double totalCoef = 0;
-        if(TYPE_SCHOOL.equals("Primaire")){
+        if(typeEtablissement.equals(TypeEtablissement.Primaire)){
                 /*for(StudentNoteDto studentNoteDto : notes){
                     sum += ( (studentNoteDto.getNote() * 20 / studentNoteDto.getNoteSur()) * ( studentNoteDto.getCoef() * 20 / studentNoteDto.getNoteSur()) );
                     totalCoef += studentNoteDto.getCoef() * 20 / studentNoteDto.getNoteSur();
@@ -457,7 +454,6 @@ public class StudentService {
             return Math.round((sum/totalCoef) * 100) / 100.0;
         }
         else{
-            //if TYPE_SCHOOL = College
             for(StudentNoteDto studentNoteDto : notes){
                 sum += ( studentNoteDto.getNote() * (studentNoteDto.getWeight() / 100.0) * studentNoteDto.getCoef());
                 totalCoef += studentNoteDto.getCoef() * (studentNoteDto.getWeight() / 100.0);
@@ -480,6 +476,10 @@ public class StudentService {
     //new function with weigths
     private Double computeMoyenneSimple(List<StudentNoteDto> notes) {
         double moy = 0;
+        
+        if(notes.size() == 1)
+            return notes.get(0).getNote();
+
         for(StudentNoteDto studentNoteDto : notes){
             moy += ( studentNoteDto.getNote() * studentNoteDto.getWeight() / 100);
         }
@@ -500,15 +500,14 @@ public class StudentService {
         return sum;
     }
 
-    private Double computeTotalNotes(List<StudentNoteDto> notes) {
+    private Double computeTotalNotes(List<StudentNoteDto> notes, TypeEtablissement typeEtablissement) {
         double sum = 0;
-        if(TYPE_SCHOOL.equals("Primaire")){
+        if(typeEtablissement.equals(TypeEtablissement.Primaire)){
             for(StudentNoteDto studentNoteDto : notes)
                 sum += studentNoteDto.getNote();
             return sum;
         }
-                else{
-            //if TypeSchool.College
+        else{
             for(StudentNoteDto studentNoteDto : notes)
                 sum += (studentNoteDto.getNote() * studentNoteDto.getCoef());
             return sum;
@@ -602,10 +601,10 @@ public class StudentService {
                             ligneTrimestreDto.setTrimestreId(trimestre.getId());
                             ligneTrimestreDto.setTrimestre(trimestre.getName());
                             ligneTrimestreDto.setClasse(inscription.getPromo().getClasse());
-                            ligneTrimestreDto.setMoyenne(computeMoyenne(entry.getValue()));
+                            ligneTrimestreDto.setMoyenne(computeMoyenne(entry.getValue(), trimestre.getAnnee().getTypeEtablissement()));
                             ligneTrimestreDto.setTotalNoteSur( computeTotalNoteSur(entry.getValue()) / trimestre.getSequences().size());
                             ligneTrimestreDto.setTotalCoef( computeTotalCoef(entry.getValue()) / trimestre.getSequences().size());
-                            ligneTrimestreDto.setTotalNotes( computeTotalNotes(entry.getValue()) / trimestre.getSequences().size());
+                            ligneTrimestreDto.setTotalNotes( computeTotalNotes(entry.getValue(), trimestre.getAnnee().getTypeEtablissement()) / trimestre.getSequences().size());
                             ligneTrimestreDto.setGroupes(groupByGroupe(entry.getValue(), inscription, trimestre));
                             //ligneTrimestreDto.setMatieres(groupByMatiere(entry.getValue()));
                             ligneTrimestreDto.setSequences(groupBySequence(inscription, entry.getValue()));
@@ -668,7 +667,7 @@ public class StudentService {
     private Double getMoyenneGeneraleByTrimestre(Inscription inscription, Trimestre trimestre) {
         double sum = 0;
         for(Inscription i: inscription.getPromo().getInscriptions()){
-            sum += computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), i.getStudent().getId()));
+            sum += computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), i.getStudent().getId()), trimestre.getAnnee().getTypeEtablissement());
         }
         return Math.round((sum / inscription.getPromo().getInscriptions().size()) * 100) / 100.0;
     }
@@ -676,7 +675,7 @@ public class StudentService {
     private Double getMoyenneGeneraleByTrimestreAndGroupe(Inscription inscription, Trimestre trimestre, Groupe groupe) {
         double sum = 0;
         for(Inscription i: inscription.getPromo().getInscriptions()){
-            sum += computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndMatiereGroupeIdAndInscriptionStudentId(trimestre.getId(), groupe.getId(), i.getStudent().getId()));
+            sum += computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndMatiereGroupeIdAndInscriptionStudentId(trimestre.getId(), groupe.getId(), i.getStudent().getId()), trimestre.getAnnee().getTypeEtablissement());
         }
         return Math.round((sum / inscription.getPromo().getInscriptions().size()) * 100) / 100.0;
     }
@@ -684,7 +683,7 @@ public class StudentService {
     private Double getHighestMarkByTrimestre(Inscription inscription, Trimestre trimestre) {
         double max = 0;
         for(Inscription i: inscription.getPromo().getInscriptions()){
-            double moy = computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), i.getStudent().getId()));
+            double moy = computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), i.getStudent().getId()), trimestre.getAnnee().getTypeEtablissement());
             if(moy > max)
                 max = moy;
         }
@@ -694,7 +693,7 @@ public class StudentService {
     private Double getLowestMarkByTrimestre(Inscription inscription, Trimestre trimestre) {
         double min = 20;
         for(Inscription i: inscription.getPromo().getInscriptions()){
-            double moy = computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), i.getStudent().getId()));
+            double moy = computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), i.getStudent().getId()), trimestre.getAnnee().getTypeEtablissement());
             if(moy < min && moy != 0)
                 min = moy;
         }
@@ -704,7 +703,7 @@ public class StudentService {
     private Double getMoyenneGeneraleBySequence(Inscription inscription, Sequence sequence) {
         double sum = 0;
         for(Inscription i: inscription.getPromo().getInscriptions()){
-            sum += computeMoyenne(studentNoteService.findBySequenceIdAndInscriptionStudentId(sequence.getId(), i.getStudent().getId()));
+            sum += computeMoyenne(studentNoteService.findBySequenceIdAndInscriptionStudentId(sequence.getId(), i.getStudent().getId()), sequence.getTrimestre().getAnnee().getTypeEtablissement());
         }
         return Math.round((sum / inscription.getPromo().getInscriptions().size()) * 100) / 100.0;
     }
@@ -713,7 +712,7 @@ public class StudentService {
         Map<Long, Double> moyennes = new HashMap<>();
         for(Inscription inscription: promo.getInscriptions()){
             moyennes.put(inscription.getStudent().getId(),
-                    computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), inscription.getStudent().getId())));
+                    computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndInscriptionStudentId(trimestre.getId(), inscription.getStudent().getId()), trimestre.getAnnee().getTypeEtablissement()));
         }
         return MapUtil.sortByValue(moyennes);
     }
@@ -722,7 +721,7 @@ public class StudentService {
         Map<Long, Double> moyennes = new HashMap<>();
         for(Inscription inscription: promo.getInscriptions()){
             moyennes.put(inscription.getStudent().getId(),
-                    computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndMatiereGroupeIdAndInscriptionStudentId(trimestre.getId(), groupe.getId(), inscription.getStudent().getId())));
+                    computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndMatiereGroupeIdAndInscriptionStudentId(trimestre.getId(), groupe.getId(), inscription.getStudent().getId()), trimestre.getAnnee().getTypeEtablissement()));
         }
         return MapUtil.sortByValue(moyennes);
     }
@@ -731,7 +730,7 @@ public class StudentService {
         Map<Long, Double> moyennes = new HashMap<>();
         for(Inscription inscription: promo.getInscriptions()){
             moyennes.put(inscription.getStudent().getId(),
-                    computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndMatiereIdAndInscriptionStudentId(trimestre.getId(), matiere.getId(), inscription.getStudent().getId())));
+                    computeMoyenne(studentNoteService.findBySequenceTrimestreIdAndMatiereIdAndInscriptionStudentId(trimestre.getId(), matiere.getId(), inscription.getStudent().getId()), trimestre.getAnnee().getTypeEtablissement()));
         }
         return MapUtil.sortByValue(moyennes);
     }
@@ -751,7 +750,7 @@ public class StudentService {
         Map<Long, Double> moyennes = new HashMap<>();
         for(Inscription inscription: promo.getInscriptions()){
             moyennes.put(inscription.getStudent().getId(),
-                    computeMoyenne(studentNoteService.findBySequenceIdAndInscriptionStudentId(sequence.getId(), inscription.getStudent().getId())));
+                    computeMoyenne(studentNoteService.findBySequenceIdAndInscriptionStudentId(sequence.getId(), inscription.getStudent().getId()), sequence.getTrimestre().getAnnee().getTypeEtablissement()));
         }
         return MapUtil.sortByValue(moyennes);
     }

@@ -75,7 +75,8 @@
                                                 <span>&nbsp;</span>
                                                 <a  class="btn btn-outline-primary btn-sm" href=""
                                                     ngf-select="vm.addImage()" ng-model="vm.file" name="file" ngf-pattern="'image/*'"
-                                                    ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="50">
+                                                    ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="50"
+                                                    ngf-resize="{width: 400, height: 400, centerCrop: true,}">
                                                     <span class="">{{vm.selectedFile? "modifier" : "choisir"}}</span>
                                                 </a>
                                             </label>
@@ -303,22 +304,28 @@
                                     <table class="table ng-table-responsive table-condensed table-bordered small">
                                         <tr>
                                             <th scope="col">Matière</th>
+                                            <th scope="col">Coef</th>
                                             <th scope="col" ng-repeat="sequence in vm.ligneTrimestre.sequences">{{sequence.name}}</th>
                                             <th scope="col">Note trimestre</th>
-                                            <!--<th scope="col">Coef</th>-->
+
                                         </tr>
 
                                         <tbody ng-repeat="ligneGroupe in vm.ligneTrimestre.groupes track by $index">
                                         <!--<tr class="table-active">-->
                                         <!--<td colspan="6">{{ligneGroupe.groupe}}</td>-->
                                         <!--</tr>-->
+
                                         <tr ng-repeat="ligneMatiere in ligneGroupe.matieres">
                                             <td>{{ligneMatiere.matiere}}</td>
-                                            <td ng-repeat="studentNote in ligneMatiere.notes">
+                                            <td>{{ligneMatiere.coef}}</td>
+                                            <!--<td ng-repeat="studentNote in ligneMatiere.notes">
                                                 <span>{{studentNote.note}}</span>
+                                            </td>-->
+                                            <td ng-repeat="sequence in vm.ligneTrimestre.sequences">
+                                                <span>{{vm.getNote(sequence.id, ligneMatiere)  || 'N/A'}}</span>
                                             </td>
                                             <td>{{ligneMatiere.moyenne}}/{{ligneMatiere.noteSur}}</td>
-                                            <!--<td>{{ligneMatiere.coef}}</td>-->
+
                                         </tr>
                                         </tbody>
                                     </table>
@@ -339,7 +346,6 @@
                         </div>
 
                     </div>
-                    </md-content>
                 </div>
             </div>
         </div>

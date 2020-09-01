@@ -21,6 +21,7 @@
         "title": "Class"
       },
       "label":"Name",
+      "capacite":"Capacity",
       "montantScolarite":"School Fees",
       "matieres":"Courses",
       "nbStudents":"Nb students",

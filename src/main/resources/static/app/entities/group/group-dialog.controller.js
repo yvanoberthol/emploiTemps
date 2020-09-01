@@ -41,10 +41,5 @@
         function onSaveError () {
             vm.isSaving = false;
         }
-
-        vm.groupActiveChanged = function(){
-            if(!vm.group.active)
-                vm.group.showOnStoreFront = false;
-        }
     }
 })();

@@ -49,17 +49,29 @@ public class Annee {
     @Column(name = "nomEtablissement")
     private String nomEtablissement;
 
+    @Column(name = "nameEtablissement")
+    private String nameEtablissement;
+
+    @Column(name = "slogan")
+    private String slogan;
+
+    @Column(name = "phone")
+    private String phone;
+
     @Column(name = "pays")
     private String pays;
+
+    @Column(name = "region")
+    private String region;
+
+    @Column(name = "departement")
+    private String departement;
 
     @Column(name = "ville")
     private String ville;
 
     @Column(name = "adresse")
     private String adresse;
-
-    @Column(name = "telephone")
-    private String telephone;
 
     @Column(name = "senderId")
     private String senderId;

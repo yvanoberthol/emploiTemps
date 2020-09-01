@@ -18,6 +18,7 @@
         "title": "Classe"
       },
       "label":"Classe",
+      "capacite":"Capacité",
       "montantScolarite":"Montant Scolarité",
       "matieres":"Matières",
       "nbStudents":"Nb Étudiants",

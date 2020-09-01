@@ -1,9 +1,14 @@
 package com.myschool.dto;
 
 import com.myschool.domain.Groupe;
+import com.myschool.domain.Inscription;
 import com.myschool.domain.Matiere;
 import com.myschool.domain.Promo;
+import com.myschool.domain.enumerations.Sexe;
+import com.myschool.domain.enumerations.Statut;
 import lombok.Data;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +32,13 @@ public class PromoDto {
     private List<MatiereDto> matieres = new ArrayList<>();
     private List<GroupeDto> groupes = new ArrayList<>();
 
+    private int nbMales;
+    private int nbFemales;
+    private InscriptionDto minAge;
+    private InscriptionDto maxAge;
+    private int nbNews;
+    private int nbRedoublants;
+
     public PromoDto createDTO(Promo promo) {
         PromoDto promoDto = new PromoDto();
         if(promo != null){
@@ -43,6 +55,44 @@ public class PromoDto {
 
             if (promo.getInscriptions() != null) {
                 promoDto.setNbStudents(promo.getInscriptions().size());
+
+                DateTimeFormatter formatter = DateTimeFormat.forPattern("ddMMyyyy");
+                int nbMales = 0, nbFemales = 0, nbNews = 0, nbRedoublants = 0;
+                Inscription minAge = promo.getInscriptions().get(0);
+                Inscription maxAge = promo.getInscriptions().get(0);
+
+                for(Inscription inscription: promo.getInscriptions()){
+                    if(inscription.getStudent().getSexe().equals(Sexe.Masculin))
+                        nbMales++;
+                    else
+                        nbFemales++;
+
+                    if(inscription.getStudent().getStatut().equals(Statut.Nouveau))
+                        nbNews++;
+                    else
+                        nbRedoublants++;
+
+                    if(formatter.parseLocalDate(inscription.getStudent().getDateNaissance())
+                            .isAfter( formatter.parseLocalDate(minAge.getStudent().getDateNaissance()) )){
+                        minAge = inscription;
+                    }
+                    if(formatter.parseLocalDate(inscription.getStudent().getDateNaissance())
+                            .isBefore( formatter.parseLocalDate(maxAge.getStudent().getDateNaissance()) )){
+                        maxAge = inscription;
+                    }
+                }
+                promoDto.setNbMales(nbMales);
+                promoDto.setNbFemales(nbFemales);
+                promoDto.setNbNews(nbNews);
+                promoDto.setNbRedoublants(nbRedoublants);
+
+                InscriptionDto minAgeDto = new InscriptionDto().createDTO(minAge);
+                minAgeDto.getStudent().setAge(promo.getAnnee().getFin() - formatter.parseLocalDate(minAgeDto.getStudent().getDateNaissance()).getYear());
+                promoDto.setMinAge(minAgeDto);
+
+                InscriptionDto maxAgeDto = new InscriptionDto().createDTO(maxAge);
+                maxAgeDto.getStudent().setAge(promo.getAnnee().getFin() - formatter.parseLocalDate(maxAgeDto.getStudent().getDateNaissance()).getYear());
+                promoDto.setMaxAge(maxAgeDto);
             }
 
             ArrayList<MatiereDto> matiereDtos = new ArrayList<>();

@@ -1,0 +1,34 @@
+
+<form name="importForm" role="form" novalidate ng-submit="vm.import()" show-validation>
+
+    <div class="modal-header">
+        <h5 class="modal-title" id="mycontribuableLabel">Importez des notes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+    </div>
+
+    <div loading="vm.loading"></div>
+
+    <div class="modal-body" >
+
+
+        <div class="form-group spacer">
+            <label class="control-label">Fichier</label>
+            <input type="file" ngf-select ng-model="vm.file" name="file" ngf-pattern="'.xls,.csv,.xlsx'" accept=".xls,.xlsx" ngf-max-size="20MB" required class="btn btn-success">
+            <span ng-show="importForm.file.$error.pattern" class="spacer text-danger">Le fichier doit être au format xls ou xlsx !</span>
+        </div>
+
+        <div class="form-group spacer">
+            <a href="" class="text-muted small" ng-click="vm.downloadSample()">Télécharger un modèle</a>
+        </div>
+    </div>
+
+    <div class="modal-footer spacer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.cancel()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="importForm.$invalid || vm.isSaving || !vm.file" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.import">Import</span>
+        </button>
+    </div>
+</form>

@@ -17,9 +17,10 @@
                         </select>
                     </div>
                     <div layout-gt-sm="row" layout-align="end center" ng-if="vm.promoId">
-                        <span >Capacité : </span>&nbsp;<span class="badge badge-info">80</span>
+                        <span >Capacité : </span>&nbsp;<span class="badge badge-info">{{vm.promo.capacite}}</span>
                         <span flex="5"></span>
-                        <span >Effectif : </span>&nbsp;<span class="badge badge-danger">78</span>
+                        <span >Effectif : </span>&nbsp;<span class="badge" ng-class="{'badge-success': vm.promo.capacite > vm.promo.nbStudents, 'badge-danger': vm.promo.capacite < vm.promo.nbStudents}">
+                        {{vm.promo.nbStudents || 0}}</span>
                     </div>
                 </div>
             </div>
@@ -36,12 +37,12 @@
                                 Nouvel élève
                             </span>
                     </button>
-                    &nbsp;
+                    <!--&nbsp;
                     <button class="btn btn-info btn-raised btn-sm" ui-sref="inscription.new">
                         <span>
                             Réinscription
                         </span>
-                    </button>
+                    </button>-->
                 </div>
             </div>
 
@@ -128,7 +129,7 @@
                         </strong>
                     </td>
 
-                    <td data-title="''" class="text-right">
+                    <td data-title="''" class="text-center" width="10%">
                             <span class="text-nowrap">
                                 <!--<a ui-sref="inscription.edit({inscriptionId:inscription.id})" class="">
                                     <span>
@@ -137,7 +138,7 @@
                                 </a>-->
                                 <a ui-sref="inscription.delete({studentId:inscription.studentId, promoId:inscription.promoId})" class="btn btn-danger btn-sm">
                                     <span>
-                                       <span >Désinscrire</span>
+                                       <span class="small">Désinscrire</span>
                                     </span>
                                 </a>
                             </span>

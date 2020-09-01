@@ -1,0 +1,41 @@
+{
+  "myApp": {
+    "studentCard" : {
+      "home": {
+        "title": "Carte scolaires",
+        "createLabel": "Créer une nouvelle carte scolaire",
+        "createOrEditLabel": "Créer ou éditer une carte scolaire",
+        "search": "Rechercher une carte scolaire"
+      },
+      "created": "Une nouvelle carte scolaire a été créé avec l'identifiant {{ param }}",
+      "updated": "La carte scolaire avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "La carte scolaire avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Etes-vous certain de vouloir supprimer la carte scolaire {{ id }} ?"
+      },
+      "setActive": {
+        "question": "Etes-vous certain de vouloir rendre la carte scolaire {{ id }} active ?"
+      },
+      "detail": {
+        "title": "Carte scolaire"
+      },
+      "label":"Carte scolaire",
+      "name":"Nom",
+      "enabled":"Activée",
+      "sequence":"Séquence",
+      "sequences":"Séquences",
+      "start":"Heure Début",
+      "end":"Heure Fin",
+      "rank":"Rang",
+      "matiere":"Matière",
+      "teacher":"Enseignant",
+      "typeEvent":"Type",
+      "title":"Titre",
+      "present":"Présent",
+      "absent":"Absent",
+      "weight":"Poids",
+      "yes":"Oui",
+      "no":"Non"
+    }
+  }
+}

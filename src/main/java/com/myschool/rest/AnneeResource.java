@@ -105,7 +105,14 @@ public class AnneeResource {
     public ResponseEntity<?> setActive(@PathVariable Long id) {
         log.debug("REST request to set active Annee : {}", id);
         anneeService.setActive(id);
-        return new ResponseEntity<AnneeDto>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<AnneeDto>(HttpStatus.OK);
+    }
+
+    @GetMapping("/api/annee-update-student-card/{anneeId}/{studentCardId}")
+    public ResponseEntity<?> updateCarteScolaire(@PathVariable Long anneeId, @PathVariable Long studentCardId) {
+        log.debug("REST request to set active Annee : {}", anneeId);
+        anneeService.updateCarteScolaire(anneeId, studentCardId);
+        return new ResponseEntity<AnneeDto>(HttpStatus.OK);
     }
 
     /**

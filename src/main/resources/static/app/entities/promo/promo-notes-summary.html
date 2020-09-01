@@ -64,19 +64,27 @@
                         </span>
                     </td>
 
-                    <td data-title="'myApp.student.matricule' | translate" width="20%">
+                    <td data-title="'myApp.student.matricule' | translate" width="15%">
                         <span class="small">
-                            {{student.matricule}}
+                            <a ui-sref="inscription-detail({studentId:student.id, promoId:vm.promo.id})" class="text-info">
+                                <span>
+                                {{student.matricule}}
+                            </span>
+                            </a>
                         </span>
                     </td>
 
-                    <td data-title="'myApp.student.lastName' | translate" width="20%">
-                            <span class="small">
-                               {{student.lastName}}
+                    <td data-title="'myApp.student.lastName' | translate" width="15%">
+                        <span class="small">
+                            <a ui-sref="inscription-detail({studentId:student.id, promoId:vm.promo.id})" class="text-info">
+                                <span>
+                                {{student.lastName}}
                             </span>
+                            </a>
+                        </span>
                     </td>
 
-                    <td data-title="'myApp.student.firstName' | translate" width="20%">
+                    <td data-title="'myApp.student.firstName' | translate" width="15%">
                         <span class="small">
                              <span>
                                 {{student.firstName}}
@@ -85,7 +93,7 @@
                     </td>
 
                     <td ng-repeat="trimestre in vm.trimestres track by $index" ng-if="trimestre.id == vm.trimestreId || !vm.trimestreId"
-                        data-title="vm.getTitle()">
+                        data-title="vm.getTitle()" width="15%">
                         <strong class=""
                                 ng-class="{'text-success': student.notes[trimestre.id] > 10, 'text-danger': student.notes[trimestre.id] < 10}">
                            {{student.notes[trimestre.id] || 'N/A'}}
@@ -94,10 +102,10 @@
                         <a ng-if="student.notes[trimestre.id]" class="btn btn-light btn-sm" href="" ng-click="vm.openBulletinModal(student, trimestre.id)">
                             <span class="small">Voir</span>
                         </a>
-                        <span>&nbsp;</span>
-                        <a ng-if="student.notes[trimestre.id] > 12" class="btn btn-light btn-sm" href="" ng-click="vm.openBulletinModal(student, trimestre.id)">
+                        <!--<span>&nbsp;</span>-->
+                        <!--<a ng-if="student.notes[trimestre.id] > 12" class="btn btn-light btn-sm" href="" ng-click="vm.openBulletinModal(student, trimestre.id)">
                             <span class="small">TH</span>
-                        </a>
+                        </a>-->
                     </td>
 
                     <!--<td ng-if="!vm.trimestreId">

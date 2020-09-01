@@ -252,3 +252,15 @@ md-tabs md-ink-bar {
      /*padding-top: 25px;*/
      /*margin: 10px;*/
  }
+
+ .drop-box3 {
+      background: #FFF;
+      /*border: 2px dashed #DDD;*/
+      border: 2px #DDD;
+      width: auto;
+      height: 200px;
+
+      text-align: center;
+      /*padding-top: 25px;*/
+      /*margin: 10px;*/
+  }

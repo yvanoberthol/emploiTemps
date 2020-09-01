@@ -1,8 +1,11 @@
 package com.myschool.domain.enumerations;
 
+/**
+ *
+ */
 public enum TypeEtablissement {
 
-    College("College"),
+    Secondaire("Secondaire"),
     Primaire("Primaire");
 
     private final String value;
@@ -31,7 +34,7 @@ public enum TypeEtablissement {
     }
 
     public static TypeEtablissement getDefault() {
-    return College;
+    return Secondaire;
 }
 
 }

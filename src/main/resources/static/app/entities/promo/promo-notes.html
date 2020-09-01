@@ -21,16 +21,6 @@
                             </option>
                         </select>
                         <span>&nbsp;</span>
-                        <select class="form-control" id="field_sequence" name="sequence"
-                                ng-model="vm.sequenceId" required
-                                ng-change="vm.sequenceChanged()">
-                            <option value="">Séquence</option>
-                            <option value="{{sequence.id}}"
-                                    ng-repeat="sequence in vm.trimestre.sequences">
-                                {{sequence.name}}
-                            </option>
-                        </select>
-                        <span>&nbsp;</span>
                         <select class="form-control" id="field_classe" name="classe"
                                 ng-model="vm.matiereId" required
                                 ng-change="vm.matiereChanged()"
@@ -57,13 +47,14 @@
                     <td><span translate="myApp.student.matricule">Matricule</span></td>
                     <td><span translate="myApp.student.lastName">Last Name</span></td>
                     <td><span translate="myApp.student.firstName">First Name</span></td>
-                    <td ng-repeat="item in vm.trimestre.sequences"  ng-if="vm.matiereId && vm.trimestreId">
-                        {{item.name}}
+                    <td ng-repeat="item in vm.trimestre.sequences"  ng-if="vm.matiereId && vm.trimestreId" class="text-center">
+                        {{item.name}}&nbsp;
+                        <a class="btn btn-light btn-sm" href="" ui-sref="promo-detail.notes.import({promoId:vm.promo.id, trimestreId:vm.trimestreId,  sequenceId:item.id, matiereId:vm.matiereId})">
+                            <span class="small">Importer</span>
+                        </a>
                     </td>
-                    <td width="10%" class="text-right">
-                        <button class="btn btn-success btn-sm" ng-disabled="!vm.matiereId || !vm.trimestreId">
-                            <span class="">Importer</span>
-                        </button>
+                    <td width="10%" class="text-center" ng-if="vm.matiereId && vm.trimestreId">
+
                     </td>
                 </tr>
                 </thead>
@@ -76,14 +67,22 @@
                     </td>
 
                     <td data-title="'myApp.student.matricule' | translate" width="15%">
-                            <span class="small">
+                        <span class="small">
+                            <a ui-sref="inscription-detail({studentId:student.id, promoId:vm.promo.id})" class="text-info">
+                                <span>
                                 {{student.matricule}}
                             </span>
+                            </a>
+                        </span>
                     </td>
 
                     <td data-title="'myApp.student.lastName' | translate" width="15%">
                         <span class="small">
-                           {{student.lastName}}
+                            <a ui-sref="inscription-detail({studentId:student.id, promoId:vm.promo.id})" class="text-info">
+                                <span>
+                                {{student.lastName}}
+                            </span>
+                            </a>
                         </span>
                     </td>
 
@@ -96,14 +95,14 @@
                     </td>
 
                     <td ng-repeat="sequence in vm.trimestre.sequences track by $index"
-                        ng-if="vm.matiereId && vm.trimestreId"
-                        data-title="vm.getTitle()" width="15%">
+                        ng-if="vm.matiereId && vm.trimestreId" class="text-center"
+                        data-title="" width="15%">
                         <strong class=""  ng-if="!student.edit"
                                 ng-class="{'text-success': student.notes[sequence.id] > vm.matiere.noteSur/2, 'text-danger': student.notes[sequence.id] < vm.matiere.noteSur/2}">
                             {{student.notes[sequence.id] || 'N/A'}}
                         </strong>
                         <span class="small" ng-if="student.edit">
-                            <input type="number" step="0.01" class="form-control" ng-model="student.notes[sequence.id]"/>
+                            <input type="number" step="0.01" class="form-control text-center" ng-model="student.notes[sequence.id]"/>
                         </span>
                         <!--<span class="small" ng-if="student.edit">
                             <input type="number" step="0.01" class="form-control" ng-model="student.notes[item.id]"
@@ -112,7 +111,7 @@
                         </span>-->
                     </td>
 
-                    <td data-title="''" width="10%" class="text-right" ng-if="vm.matiereId && vm.trimestreId" >
+                    <td data-title="''" width="10%" class="text-center" ng-if="vm.matiereId && vm.trimestreId" >
                         <span class="">
                             <a class="" ng-click="student.edit = !student.edit" ng-if="!student.edit">
                                 <span>

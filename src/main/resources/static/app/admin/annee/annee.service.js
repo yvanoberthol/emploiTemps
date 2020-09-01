@@ -50,6 +50,9 @@
               setActive: function(id){
                   return $http.get("/api/annee-set-active/" + id);
               },
+              updateCarteScolaire: function(anneeId, studentCardId){
+                  return $http.get("/api/annee-update-student-card/" + anneeId + "/" + studentCardId);
+              },
               getImage: function(anneeId, name){
                   return $http.get("api/annee-image/" + anneeId +"?name=" + name, {responseType: "arraybuffer"})
               },

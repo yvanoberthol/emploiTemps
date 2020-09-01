@@ -4,16 +4,47 @@
         <div class="">
             <form name="form" role="form" novalidate ng-submit="vm.save()" show-validation layout-padding>
                 <div class="row mt-10 spacer">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label  for="nomEtablissement" data-translate="myApp.annee.nomEtablissement">nomEtablissement</label>
                     </div>
                     <div class="col-md-8">
                         <input type="text" class="form-control" id="nomEtablissement" name="nomEtablissement"
-                               ng-model="vm.annee.nomEtablissement" ng-minlength=1 ng-maxlength=50 maxlength="50">
+                               ng-model="vm.annee.nomEtablissement" ng-minlength=1 maxlength="50">
+                    </div>
+                </div>
+
+                <div class="row mt-10">
+                    <div class="col-md-4">
+                        <label  for="nameEtablissement" data-translate="myApp.annee.nameEtablissement">nameEtablissement</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="nameEtablissement" name="nameEtablissement"
+                               ng-model="vm.annee.nameEtablissement" ng-minlength=1 maxlength="50">
+                    </div>
+                </div>
+
+                <div class="row mt-10">
+                    <div class="col-md-4">
+                        <label  data-translate="myApp.annee.typeEtablissement">typeEtablissement</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" id="field_typeEtablissement" name="typeEtablissement" ng-model="vm.annee.typeEtablissement"
+                                ng-options="typeEtablissement.value as typeEtablissement.name for typeEtablissement in vm.typesEtablissement">
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="row mt-10">
+                    <div class="col-md-4">
+                        <label  for="nomEtablissement" data-translate="myApp.annee.slogan">slogan</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="slogan" name="slogan"
+                               ng-model="vm.annee.slogan" ng-minlength=1 maxlength="100">
                     </div>
                 </div>
                 <div class="row mt-10">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label  for="pays" data-translate="myApp.annee.pays">Pays</label>
                     </div>
                     <div class="col-md-8">
@@ -23,7 +54,26 @@
                 </div>
 
                 <div class="row mt-10">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
+                        <label  for="region" data-translate="myApp.annee.region">Region</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="region" name="region"
+                               ng-model="vm.annee.region" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    </div>
+                </div>
+                <div class="row mt-10">
+                    <div class="col-md-4">
+                        <label  for="departement" data-translate="myApp.annee.departement">Departement</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="departement" name="departement"
+                               ng-model="vm.annee.departement" ng-minlength=1 ng-maxlength=50 required maxlength="50">
+                    </div>
+                </div>
+                
+                <div class="row mt-10">
+                    <div class="col-md-4">
                         <label  for="ville" data-translate="myApp.annee.ville">Ville</label>
                     </div>
                     <div class="col-md-8">
@@ -33,7 +83,7 @@
                 </div>
 
                 <div class="row mt-10">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <label  for="adresse" data-translate="myApp.annee.adresse">Adresse</label>
                     </div>
                     <div class="col-md-8">
@@ -42,30 +92,32 @@
                     </div>
                 </div>
                 <div class="row mt-10">
-                    <div class="col-md-3">
-                        <label  data-translate="myApp.annee.telephone">Telephone Number</label>
+                    <div class="col-md-4">
+                        <label  data-translate="myApp.annee.phone">Phone Number</label>
                     </div>
                     <div class="col-md-8">
-                        <input ui-mask="999 999 999" ui-options="{{options | json}}"
+                        <!--<input ui-mask="999 999 999" ui-options="{{options | json}}"
                                model-view-value="{{modelViewValue}}"
-                               ng-model="vm.annee.telephone" placeholder=""
+                               ng-model="vm.annee.phone" placeholder=""
                                ui-mask-placeholder ui-mask-placeholder-char="space"
-                               required class="form-control"/>
+                               required class="form-control"/>-->
+                        <input type="text" class="form-control" id="phone" name="phone"
+                               ng-model="vm.annee.phone">
                     </div>
                 </div>
 
                 <div class="row mt-10">
-                    <div class="col-md-3">
-                        <label  for="senderId" data-translate="myApp.annee.senderId">senderId</label>
+                    <div class="col-md-4">
+                        <label>Sender ID</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" id="senderId" name="senderId"
-                               ng-model="vm.annee.senderId" ng-maxlength=11 required maxlength="11">
+                        <input type="text" ng-model="vm.annee.senderId"
+                               class="form-control"/>
                     </div>
                 </div>
 
                 <div class="row mt-4">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                     </div>
                     <div class="col-md-8">
                         <div class="row">
@@ -96,11 +148,8 @@
                     </div>
                 </div>
 
-
-
-
                 <div class="row mt-10">
-                    <div class="col-md-3"></div>
+                    <div class="col-md-4"></div>
                     <div class="col-md-8 text-center">
                         <button type="submit" class="btn btn-primary btn-raised" data-translate="entity.action.save">Save</button>
                     </div>

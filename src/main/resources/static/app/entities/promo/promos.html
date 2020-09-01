@@ -30,9 +30,11 @@
                     </td>
 
                     <td data-title="'myApp.classe.label' | translate" sortable="'classe'">
-                    <span class="">
-                       {{promo.classe}}
-                    </span>
+                        <a ui-sref="promo-detail.inscriptions({promoId:promo.id})" class="text-info">
+                            <span class="">
+                               {{promo.classe}}
+                            </span>
+                        </a>
                     </td>
 
                     <td data-title="'myApp.promo.profPrincipal' | translate">
@@ -101,12 +103,12 @@
 
                     <td data-title="''" class="text-right" width="10%">
                         <span class="text-nowrap">
-                            <a ui-sref="promo-detail.inscriptions({promoId:promo.id})" class="btn btn-primary btn-sm">
+                            <!--<a ui-sref="promo-detail.inscriptions({promoId:promo.id})" class="btn btn-primary btn-sm">
                                 <span>
                                     <span class="" translate="entity.action.view"></span>
                                 </span>
                             </a>
-                            <span>&nbsp;</span>
+                            <span>&nbsp;</span>-->
                             <!--<a ui-sref="promo-notes({promoId:promo.id})" class="btn btn-info btn-sm">
                                 <span class="">Editer les notes</span>
                             </a>
@@ -117,13 +119,13 @@
                             <span>&nbsp;</span>-->
                             <a ui-sref="promo.edit({promoId:promo.id})" class="btn btn-info btn-sm">
                                 <span>
-                                    <span class="" translate="entity.action.edit"></span>
+                                    <span class="small" translate="entity.action.edit"></span>
                                 </span>
                             </a>
                             <span>&nbsp;</span>
                             <a ui-sref="promo.delete({promoId:promo.id})" class="btn btn-danger btn-sm">
                                 <span>
-                                   <span class="" translate="entity.action.delete"></span>
+                                   <span class="small" translate="entity.action.delete"></span>
                                 </span>
                             </a>
                         </span>

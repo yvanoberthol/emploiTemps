@@ -5,11 +5,11 @@
  */
 package com.myschool.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.myschool.domain.enumerations.TypeCarte;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -30,13 +30,19 @@ public class CarteScolaire {
     @Column(nullable = false)
     private String name;
 
-    @Column
-    private Boolean hasLogo;
+    @Size(max = 20)
+    @Column(name = "typeCarte")
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private String typeCarte;
 
-    @Column
-    private Boolean hasWatermark;
+    @Transient
+    public TypeCarte getTypeCarte() {
+        return TypeCarte.fromValue(typeCarte);
+    }
 
-    @Column
-    private String backgroundUrl;
+    public void setTypeCarte(TypeCarte typeCarte) {
+        this.typeCarte = typeCarte.toValue();
+    }
 
 }

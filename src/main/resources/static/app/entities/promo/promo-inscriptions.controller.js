@@ -16,14 +16,18 @@
         vm.name = "";
 
         var initialParamsPromos = {
-            count: 20, // initial page size
-            //sorting: { 'name': "asc" }
+            count: 100, // initial page size
+            sorting: { 'student.lastName': "asc" }
         };
 
         Inscription.getByPromo(vm.promo.id, vm.name)
             .then(function(response){
                 vm.loading = false;
                 vm.inscriptions = response.data;
+                vm.inscriptions.forEach(function(inscription){
+                    if(inscription.student.dateNaissance)
+                    inscription.student.dateNaissance =  moment(inscription.student.dateNaissance, "DDMMYYYY").format("DD/MM/YYYY");
+                });
                 vm.tableParams = new NgTableParams(initialParamsPromos, {
                     counts: [],
                     paginationMaxBlocks: 10,
@@ -34,6 +38,10 @@
 
         vm.openStudentCards = function(){
            DownloadService.openStudentCards(vm.promo.id);
+        }
+
+        vm.openListeDefinitive = function(){
+           DownloadService.openListeDefinitive(vm.promo.id);
         }
 
     }

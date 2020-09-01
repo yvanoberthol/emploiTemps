@@ -13,6 +13,7 @@
         var vm = this;
         vm.student = entity;
         vm.save = save;
+        console.log(vm.student)
         //vm.student.dateNaissance = moment(vm.student.dateNaissance, "DDMMYYYY").format("DD/MM/YYYY")
 
         vm.previousState = previousState.name;

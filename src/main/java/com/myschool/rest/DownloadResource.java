@@ -31,13 +31,13 @@ public class DownloadResource {
     @Value("${dir.myschool}")
     private String MYSCHOOL_FOLDER;
 
-    @GetMapping("/api/bulletin")
+    @GetMapping("/api/download/bulletin")
     public ResponseEntity<byte[]> getBulletin(@RequestParam(name = "student") Long studentId,
-                                              @RequestParam(name = "annee") Long anneId,
+                                              @RequestParam(name = "annee") Long anneeId,
                                               @RequestParam(name = "trimestre") Long trimestreId) throws IOException {
 
         HttpHeaders headers = new HttpHeaders();
-        String FILE_PATH = downloadService.createBulletin(studentId, anneId, trimestreId);
+        String FILE_PATH = downloadService.createBulletin(studentId, anneeId, trimestreId);
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
 
         Path path = Paths.get(FILE_PATH);
@@ -52,7 +52,7 @@ public class DownloadResource {
         return response;
     }
 
-    @GetMapping("/api/bulletins")
+    @GetMapping("/api/download/bulletins")
     public ResponseEntity<byte[]> getAllBulletins(@RequestParam(name = "promo") Long promoId,
                                                   @RequestParam(name = "annee") Long anneeId,
                                                   @RequestParam(name = "trimestre") Long trimestreId) throws IOException {
@@ -73,12 +73,51 @@ public class DownloadResource {
         return response;
     }
 
-    @GetMapping("/api/student-cards")
+    @GetMapping("/api/download/student-cards")
     public ResponseEntity<byte[]> getStudentCards(@RequestParam(name = "promo") Long promoId) throws IOException {
 
         HttpHeaders headers = new HttpHeaders();
         String FILE_PATH = downloadService.createStudentCards(promoId);
         headers.setContentType(MediaType.parseMediaType("application/pdf"));
+
+        Path path = Paths.get(FILE_PATH);
+        byte[] data = Files.readAllBytes(path);
+        String filename = StringUtils.stripAccents(path.getFileName().toString());
+        filename = filename.replace(" ", "_");
+        //String filename = path.getFileName().toString();
+
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=" + filename.toLowerCase());
+        //headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(data, headers, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping("/api/download/liste-definitive")
+    public ResponseEntity<byte[]> getListeDefinitive(@RequestParam(name = "promo") Long promoId) throws IOException {
+
+        HttpHeaders headers = new HttpHeaders();
+        String FILE_PATH = downloadService.createListeDefinitive(promoId);
+        headers.setContentType(MediaType.parseMediaType("application/pdf"));
+
+        Path path = Paths.get(FILE_PATH);
+        byte[] data = Files.readAllBytes(path);
+        String filename = StringUtils.stripAccents(path.getFileName().toString());
+        filename = filename.replace(" ", "_");
+        //String filename = path.getFileName().toString();
+
+        headers.set(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=" + "liste_definitive_" + filename.toLowerCase());
+        //headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(data, headers, HttpStatus.OK);
+        return response;
+    }
+
+    @GetMapping("/api/download/notes-import-sample")
+    public ResponseEntity<byte[]> getNotesImportSample(@RequestParam(name = "promo") Long promoId,
+                                                       @RequestParam(name = "sequence") Long sequenceId) throws IOException {
+
+        HttpHeaders headers = new HttpHeaders();
+        String FILE_PATH = downloadService.createNotesImportSample(promoId, sequenceId);
+        headers.setContentType(MediaType.parseMediaType("application/xls"));
 
         Path path = Paths.get(FILE_PATH);
         byte[] data = Files.readAllBytes(path);

@@ -12,9 +12,13 @@
             openOneBulletin: openOneBulletin,
             openAllBulletins: openAllBulletins,
             openStudentCards: openStudentCards,
+            openListeDefinitive: openListeDefinitive,
+
             getOneBulletin: getOneBulletin,
             getAllBulletins: getAllBulletins,
             getStudentCards: getStudentCards,
+            getListeDefinitive: getListeDefinitive,
+            getNotesImportSample: getNotesImportSample,
             download: download
         };
 
@@ -80,7 +84,7 @@
             );
         }
 
-         function openStudentCards (promoId) {
+        function openStudentCards (promoId) {
             if (modalInstance !== null) return;
             console.log("student cards open")
 
@@ -108,22 +112,60 @@
             );
         }
 
+        function openListeDefinitive (promoId) {
+            if (modalInstance !== null) return;
+            console.log("student cards open")
+
+            modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/entities/download/pdf-dialog.html',
+                controller: 'DownloadController',
+                controllerAs: 'vm',
+                backdrop: 'false',
+                size: 'lg',
+                resolve: {
+                    downloadResp: [ 'DownloadService',  function(DownloadService) {
+                         return DownloadService.getListeDefinitive(promoId);
+                    }],
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('global');
+                        return $translate.refresh();
+                    }]
+                }
+            });
+
+            modalInstance.result.then(
+                resetModal,
+                resetModal
+            );
+        }
+
         function download (downloadRequest) {
             return $http.post("/api/download/", downloadRequest, {responseType: 'arraybuffer'})
         }
 
         function getOneBulletin(studentId, anneeId, trimestreId){
-            return $http.get("/api/bulletin?student=" + studentId + "&annee=" + anneeId+ "&trimestre=" + trimestreId,
+            return $http.get("/api/download/bulletin?student=" + studentId + "&annee=" + anneeId+ "&trimestre=" + trimestreId,
                             {responseType: 'arraybuffer'});
         }
 
         function getAllBulletins(promoId, anneeId, trimestreId){
-            return $http.get("/api/bulletins?promo=" + promoId + "&annee=" + anneeId+ "&trimestre=" + trimestreId,
+            return $http.get("/api/download/bulletins?promo=" + promoId + "&annee=" + anneeId+ "&trimestre=" + trimestreId,
                             {responseType: 'arraybuffer'});
         }
 
         function getStudentCards(promoId){
-            return $http.get("/api/student-cards?promo=" + promoId,
+            return $http.get("/api/download/student-cards?promo=" + promoId,
+                            {responseType: 'arraybuffer'});
+        }
+
+        function getListeDefinitive(promoId){
+            return $http.get("/api/download/liste-definitive?promo=" + promoId,
+                            {responseType: 'arraybuffer'});
+        }
+
+        function getNotesImportSample(promoId, sequenceId){
+            return $http.get("/api/download/notes-import-sample?promo=" + promoId + "&sequence=" + sequenceId,
                             {responseType: 'arraybuffer'});
         }
     }

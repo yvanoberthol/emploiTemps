@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.net.URISyntaxException;
@@ -73,6 +74,28 @@ public class PromoResource {
     public List<PromoDto> getPromoEnabledByAnnee(@PathVariable Long anneeId) {
         log.debug("REST request to get All Promos : {}", anneeId);
         return promoService.findByAnnee(anneeId);
+    }
+
+    /**
+     * POST  /promo-notes-import : Import notes.
+     *
+     * @param file the promo file to import
+     * @return the ResponseEntity with status 201 (Created) and with body the new promo, or with status 400 (Bad Request) if the promo has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/api/promo-import-notes", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> importNotes(@RequestPart(name="file") MultipartFile file,
+                                         @RequestParam(name = "promo") Long promoId,
+                                         @RequestParam(name = "sequence") Long sequenceId,
+                                         @RequestParam(name = "matiere") Long matiereId) throws Exception {
+        log.debug("REST request to import Promos : {}");
+        System.out.println(promoId);
+        System.out.println(sequenceId);
+        System.out.println(matiereId);
+        promoService.importNotes(file, promoId, sequenceId, matiereId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**

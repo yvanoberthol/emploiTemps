@@ -10,7 +10,7 @@
                 </div>
 
                 <div>
-                    <button class="btn btn-success btn-raised btn-sm" ui-sref="inscription.new">
+                    <button class="btn btn-success btn-raised btn-sm" href="" ng-click="vm.openListeDefinitive()">
                         <span>
                             Imprimer
                         </span>
@@ -61,16 +61,28 @@
                      </td>-->
                     <td data-title="'Matricule' | translate" width="10%">
                         <span class="small">
-                             <span>
+                            <a ui-sref="inscription-detail({studentId:inscription.student.id, promoId:inscription.promoId})" class="text-info">
+                                <span>
                                 {{inscription.student.matricule}}
                             </span>
+                            </a>
                         </span>
                     </td>
 
-                    <td data-title="'myApp.student' | translate"  width="20%">
+                    <td data-title="'Noms'"  width="10%" sortable="'student.lastName'">
+                        <span class="small">
+                            <a ui-sref="inscription-detail({studentId:inscription.student.id, promoId:inscription.promoId})" class="text-info">
+                                <span>
+                                {{inscription.student.lastName}}
+                            </span>
+                            </a>
+                        </span>
+                    </td>
+
+                    <td data-title="'Prénoms'"  width="10%">
                         <span class="small">
                              <span>
-                                {{inscription.student.name}}
+                                {{inscription.student.firstName}}
                             </span>
                         </span>
                     </td>
@@ -81,28 +93,28 @@
                         </span>
                     </td>
 
-                    <td data-title="'Age'" width="10%">
+                    <td data-title="'Age'" width="10%" sortable="'student.age'" >
                         <span class="small">
                            {{inscription.student.age}}
                         </span>
                     </td>
 
                     <td data-title="'Lieu de naissance'" width="10%">
-                            <span class="small">
-                               {{inscription.student.lieuNaissance}}
-                            </span>
+                        <span class="small">
+                           {{inscription.student.lieuNaissance}}
+                        </span>
                     </td>
 
                     <td data-title="'Sexe'" width="10%">
-                            <span class="small">
-                               {{inscription.student.sexe}}
-                            </span>
+                        <span class="small">
+                           {{inscription.student.sexe}}
+                        </span>
                     </td>
 
                     <td data-title="'Statut'" width="10%">
-                            <span class="small">
-                               {{inscription.student.statut}}
-                            </span>
+                        <span class="small">
+                           {{inscription.student.statut}}
+                        </span>
                     </td>
 
                     <!--<td data-title="'myApp.student.solde' | translate" sortable="'solde'">
@@ -111,18 +123,49 @@
                         </strong>
                     </td>-->
 
-
-                    <td data-title="''" class="text-right" width="5%">
+                    <!--<td data-title="''" class="text-right" width="5%">
                         <span class="text-nowrap">
-                            <a ui-sref="inscription-detail({studentId:inscription.student.id, promoId:inscription.promoId})" class="btn btn-info btn-sm">
+                            <a ui-sref="inscription-detail({studentId:inscription.student.id, promoId:inscription.promoId})" class="text-info">
                                 <span>
                                     <span class="small" translate="entity.action.view"></span>
                                 </span>
                             </a>
                         </span>
+                    </td>-->
                 </tr>
             </table>
         </div> <!-- card.// -->
+
+        <div class="spacer" style="margin-top:40px;">
+            <table class="table table-condensed table-bordered small">
+
+                <tr>
+                    <td width="10%">Filles</td>
+                    <td class="text-center" width="10%"><strong>{{vm.promo.nbFemales}}</strong></td>
+
+                    <td width="10%">Nouveaux</td>
+                    <td class="text-center" width="10%"><strong>{{vm.promo.nbNews}}</strong></td>
+
+                    <td width="10%">Moins agé</td>
+                    <td class="text-center" width="10%"> <strong>{{vm.promo.minAge.student.age}} ans</strong></td>
+                </tr>
+                <tr>
+                    <td width="10%">Garçons</td>
+                    <td class="text-center" width="10%"><strong>{{vm.promo.nbMales}}</strong></td>
+
+                    <td width="10%">Redoublants</td>
+                    <td class="text-center" width="10%"> <strong>{{vm.promo.nbRedoublants}}</strong></td>
+
+                    <td width="10%">Plus agé</td>
+                    <td class="text-center" width="10%"> <strong>{{vm.promo.maxAge.student.age}} ans</strong></td>
+                </tr>
+                <tr>
+                    <td width="10%">Total</td>
+                    <td class="text-center" width="10%"> <strong>{{vm.promo.nbStudents}}</strong></td>
+                </tr>
+            </table>
+
+        </div>
 
     </div> <!-- container .//  -->
 

@@ -23,10 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "inscription")
-public class Inscription implements Serializable {
+public class Inscription implements Comparable {
 
-    private static final long serialVersionUID = 1L;
-    
     @EmbeddedId
     protected InscriptionPK inscriptionPK;
 
@@ -89,5 +87,10 @@ public class Inscription implements Serializable {
             total += reglement.getAmount();
         }
         return total;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.getStudent().getLastName().compareToIgnoreCase( ((Inscription)o).getStudent().getLastName());
     }
 }

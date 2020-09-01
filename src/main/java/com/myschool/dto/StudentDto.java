@@ -21,6 +21,7 @@ public class StudentDto{
     private String sexe;
     private String statut;
     private String dateNaissance;
+    private String dateNaissanceFormatted;
     private String lieuNaissance;
     private String nationalite;
     private String matricule;
@@ -56,6 +57,7 @@ public class StudentDto{
             studentDto.setSexe(String.valueOf(student.getSexe()));
             studentDto.setStatut(String.valueOf(student.getStatut()));
             studentDto.setDateNaissance(student.getDateNaissance());
+            studentDto.setDateNaissanceFormatted(student.getDateNaissanceFormatted());
             studentDto.setLieuNaissance(student.getLieuNaissance());
             studentDto.setNationalite(student.getNationalite());
             studentDto.setMatricule(student.getMatricule());

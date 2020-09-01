@@ -13,15 +13,18 @@
         var vm = this;
         vm.promo = entity;
 
+        console.log($stateParams)
         vm.previousState = previousState.name;
         vm.name = "";
-        vm.matiereId = "";
-        vm.trimestreId = "";
+        vm.matiereId = $stateParams.matiereId;
         vm.trimestres = [];
 
         Trimestre.getByAnnee(session.getAnneeId())
         .then(function(response){
             vm.trimestres = response.data;
+            vm.trimestreId = $stateParams.trimestreId;
+            vm.sequenceId = $stateParams.sequenceId;
+            vm.trimestreChanged();
             console.log(vm.trimestres);
         })
 

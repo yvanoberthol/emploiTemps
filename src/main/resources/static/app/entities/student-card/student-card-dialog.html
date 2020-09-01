@@ -1,0 +1,63 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myStudentCardLabel" data-translate="myApp.studentCard.home.createOrEditLabel">Create or edit a StudentCard</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+    </div>
+    <md-content class="modal-body">
+
+        <div>
+            <div class="form-group">
+                <label class="control-label" translate="myApp.studentCard.name" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="vm.studentCard.name" required/>
+            </div>
+
+            <div class="form-group">
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div  ng-repeat="image in vm.images track by $index" class="col-md-6">
+                                <div class="form-group">
+                                    <div ng-if="!image.$error && image">
+                                        <div class="card">
+                                            <img ngf-src="!image.$error && image" class="img-responsive" ng-if="vm.edited[$index]" height="250">
+                                            <img ng-src="data:image/JPEG;base64,{{image}}" class="img-responsive" ng-if="!vm.edited[$index]" height="250">
+                                        </div>
+                                    </div>
+                                    <label class="control-label mt-2">
+                                        <span>{{vm.labels[$index]}}</span>
+                                        <span>&nbsp;</span>
+                                        <a  class="btn btn-outline-primary btn-sm" href=""
+                                            ngf-select="vm.addImage(image, $index)" ng-model="image" name="file" ngf-pattern="'image/*'"
+                                            ngf-accept="'image/*'" ngf-max-size="10MB" ngf-min-height="50">
+                                            <span class="">{{vm.selectedFile? "modifier" : "choisir"}}</span>
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">
+                    <span>Tex File</span>
+                </label>
+                <textarea class="form-control" cols="30" rows="10" ng-model="vm.studentCard.tex"></textarea>
+            </div>
+
+        </div>
+    </md-content>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

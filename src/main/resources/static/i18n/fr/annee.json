@@ -26,8 +26,14 @@
       "fin":"Fin",
       "active":"Active",
       "nomEtablissement":"Nom Etablissement",
-      "typeEtablissement":"Type Etablissement",
+      "phone": "Numéro Telephone",
+      "sloganEtablissement":"Slogan",
+      "nameEtablissement":"Nom etablissement en",
+      "slogan":"Slogan",
+      "typeEtablissement":"Type enseignement",
       "pays":"Pays",
+      "region":"Region",
+      "departement":"Département",
       "ville":"Ville",
       "adresse":"Adresse",
       "telephone":"Téléphone",
@@ -37,6 +43,7 @@
       "senderId":"Identifiant SMS",
       "bulletin":"Modèle Bulletin",
       "carteScolaire":"Modèle Carte Scolaire",
+
       "yes":"Oui",
       "no":"Non"
     }

@@ -24,6 +24,11 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     Page<Student> findByPromoId(Long promoId, String name, Pageable pageable);
 
     @Query("SELECT s FROM Student s INNER JOIN s.inscriptions i "
+            + "WHERE i.promo.id = ?1 "
+            + "AND (s.matricule = ?2 OR s.firstName = ?2 OR s.lastName = ?2)")
+    List<Student> findByMatriculeOrLastNameOrFirstName(Long promoId, String mc);
+
+    @Query("SELECT s FROM Student s INNER JOIN s.inscriptions i "
             + "WHERE i.promo.annee.id = ?1 "
             + "AND i.promo.id = ?2 "
             + "AND (s.firstName like ?3 OR s.lastName like ?3)")
