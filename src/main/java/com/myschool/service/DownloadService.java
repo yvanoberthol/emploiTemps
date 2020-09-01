@@ -13,6 +13,10 @@ import com.myschool.utils.Partition;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
@@ -48,8 +52,72 @@ public class DownloadService {
     private PromoRepository promoRepository;
 
     public String createNotesImportSample(Long promoId, Long sequenceId) {
+        Promo promo = promoRepository.getOne(promoId);
+        String TEX_FOLDER = FOLDER + promo.getAnnee().getId() + "/";
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        XSSFSheet sheet = workbook.createSheet(StringUtils.stripAccents(promo.getClasse().toLowerCase()));
+
+        //sheet.setColumnWidth(2, 30*256);
+        //sheet.setColumnWidth(3, 50*256);
+
+        List<Inscription> inscriptions = promo.getInscriptions();
+        Collections.sort(inscriptions);
+
+        this.fillSheetInformations(sheet, inscriptions);
+
+        try {
+            FileOutputStream outputStream = new FileOutputStream(TEX_FOLDER + StringUtils.stripAccents(promo.getClasse().toLowerCase()) + ".xlsx");
+            workbook.write(outputStream);
+            workbook.close();
+            return TEX_FOLDER + StringUtils.stripAccents(promo.getClasse().toLowerCase()) + ".xlsx";
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
+
+    private void fillSheetInformations(XSSFSheet sheet, List<Inscription> inscriptions) {
+        int rowNum = 0;
+        Row row = sheet.createRow(rowNum++);
+        int colNum = 0;
+        row.createCell(colNum++).setCellValue("Matricule");
+        row.createCell(colNum++).setCellValue("Noms");
+        row.createCell(colNum++).setCellValue("Prénoms");
+        row.createCell(colNum++).setCellValue("Notes");
+
+        for (Inscription inscription : inscriptions){
+            row = sheet.createRow(rowNum++);
+            colNum = 0;
+
+            if(inscription.getStudent().getMatricule() != null){
+                row.createCell(colNum++).setCellValue(inscription.getStudent().getMatricule());
+            }
+            else{
+                row.createCell(colNum++).setCellValue("");
+            }
+
+            if(inscription.getStudent().getLastName() != null){
+                row.createCell(colNum++).setCellValue(inscription.getStudent().getLastName());
+            }
+            else{
+                row.createCell(colNum++).setCellValue("");
+            }
+
+            if(inscription.getStudent().getFirstName() != null){
+                row.createCell(colNum++).setCellValue(inscription.getStudent().getFirstName());
+            }
+            else{
+                row.createCell(colNum++).setCellValue("");
+            }
+
+            row.createCell(colNum++).setCellValue("");
+        }
+    }
+
+
 
     class AfficheurFlux implements Runnable {
 
