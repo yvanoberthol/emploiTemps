@@ -46,6 +46,7 @@
                     }],
                     entity: ['session', 'Annee',  function(session, Annee) {
                          var annee = {};
+                         console.log(session.getAnneeId());
                          return Annee.get(session.getAnneeId())
                          .then(function(response){
                             annee = response.data;
