@@ -90,18 +90,21 @@ public class PromoDto {
                     }
 
                 }
-                promoDto.setNbMales(nbMales);
-                promoDto.setNbFemales(nbFemales);
-                promoDto.setNbNews(nbNews);
-                promoDto.setNbRedoublants(nbRedoublants);
 
-                InscriptionDto minAgeDto = new InscriptionDto().createDTO(minAge);
-                minAgeDto.getStudent().setAge(promo.getAnnee().getFin() - formatter.parseLocalDate(minAgeDto.getStudent().getDateNaissance()).getYear());
-                promoDto.setMinAge(minAgeDto);
+                if(promo.getInscriptions().size() != 0){
+                    promoDto.setNbMales(nbMales);
+                    promoDto.setNbFemales(nbFemales);
+                    promoDto.setNbNews(nbNews);
+                    promoDto.setNbRedoublants(nbRedoublants);
 
-                InscriptionDto maxAgeDto = new InscriptionDto().createDTO(maxAge);
-                maxAgeDto.getStudent().setAge(promo.getAnnee().getFin() - formatter.parseLocalDate(maxAgeDto.getStudent().getDateNaissance()).getYear());
-                promoDto.setMaxAge(maxAgeDto);
+                    InscriptionDto minAgeDto = new InscriptionDto().createDTO(minAge);
+                    minAgeDto.getStudent().setAge(promo.getAnnee().getFin() - formatter.parseLocalDate(minAgeDto.getStudent().getDateNaissance()).getYear());
+                    promoDto.setMinAge(minAgeDto);
+
+                    InscriptionDto maxAgeDto = new InscriptionDto().createDTO(maxAge);
+                    maxAgeDto.getStudent().setAge(promo.getAnnee().getFin() - formatter.parseLocalDate(maxAgeDto.getStudent().getDateNaissance()).getYear());
+                    promoDto.setMaxAge(maxAgeDto);
+                }
             }
 
             ArrayList<MatiereDto> matiereDtos = new ArrayList<>();
