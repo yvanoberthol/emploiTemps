@@ -14,7 +14,7 @@
                        ng-model="vm.matiere.name"/>
             </div>
 
-            <div class="form-group" ng-if="auth.getTypeSchool() == 'College'">
+            <div class="form-group" ng-if="auth.getTypeSchool() == 'Secondaire'">
                 <label class="control-label"  for="field_groupe">
                     <span data-translate="myApp.matiere.groupe">Groupe</span>
                 </label>
@@ -23,13 +23,13 @@
                 </select>
             </div>
 
-            <div class="form-group" ng-if="auth.getTypeSchool() == 'College'">
+            <div class="form-group" ng-if="auth.getTypeSchool() == 'Secondaire'">
                 <label class="control-label" translate="myApp.matiere.coef" for="field_coef">Coef</label>
                 <input type="number" min=0 step=".01" class="form-control" name="coef" id="field_coef"
                        ng-model="vm.matiere.coef"/>
             </div>
 
-            <div class="form-group" ng-if="auth.getTypeSchool() == 'College'">
+            <div class="form-group" ng-if="auth.getTypeSchool() == 'Secondaire'">
                 <label class="control-label" for="field_teacher">Enseignant</label>
                 <input type="text" class="form-control" name="teacher" id="field_teacher"
                        ng-model="vm.matiere.teacher"/>

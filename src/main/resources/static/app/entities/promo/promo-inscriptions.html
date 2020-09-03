@@ -147,7 +147,7 @@
                     <td class="text-center" width="10%"><strong>{{vm.promo.nbNews}}</strong></td>
 
                     <td width="10%">Moins agé</td>
-                    <td class="text-center" width="10%"> <strong>{{vm.promo.minAge.student.age}} ans</strong></td>
+                    <td class="text-center" width="10%"> <strong ng-if="vm.promo.minAge">{{vm.promo.minAge.student.age}} ans</strong></td>
                 </tr>
                 <tr>
                     <td width="10%">Garçons</td>
@@ -157,7 +157,7 @@
                     <td class="text-center" width="10%"> <strong>{{vm.promo.nbRedoublants}}</strong></td>
 
                     <td width="10%">Plus agé</td>
-                    <td class="text-center" width="10%"> <strong>{{vm.promo.maxAge.student.age}} ans</strong></td>
+                    <td class="text-center" width="10%"> <strong ng-if="vm.promo.maxAge">{{vm.promo.maxAge.student.age}} ans</strong></td>
                 </tr>
                 <tr>
                     <td width="10%">Total</td>
