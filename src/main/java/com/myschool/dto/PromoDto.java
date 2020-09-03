@@ -58,8 +58,14 @@ public class PromoDto {
 
                 DateTimeFormatter formatter = DateTimeFormat.forPattern("ddMMyyyy");
                 int nbMales = 0, nbFemales = 0, nbNews = 0, nbRedoublants = 0;
-                Inscription minAge = promo.getInscriptions().get(0);
-                Inscription maxAge = promo.getInscriptions().get(0);
+                Inscription minAge = null;
+                Inscription maxAge = null;
+
+                if(promo.getInscriptions().size() != 0){
+                    minAge = promo.getInscriptions().get(0);
+                    maxAge = promo.getInscriptions().get(0);
+                }
+
 
                 for(Inscription inscription: promo.getInscriptions()){
                     if(inscription.getStudent().getSexe().equals(Sexe.Masculin))
@@ -72,14 +78,17 @@ public class PromoDto {
                     else
                         nbRedoublants++;
 
-                    if(formatter.parseLocalDate(inscription.getStudent().getDateNaissance())
-                            .isAfter( formatter.parseLocalDate(minAge.getStudent().getDateNaissance()) )){
-                        minAge = inscription;
+                    if(promo.getInscriptions().size() != 0){
+                        if(formatter.parseLocalDate(inscription.getStudent().getDateNaissance())
+                                .isAfter( formatter.parseLocalDate(minAge.getStudent().getDateNaissance()) )){
+                            minAge = inscription;
+                        }
+                        if(formatter.parseLocalDate(inscription.getStudent().getDateNaissance())
+                                .isBefore( formatter.parseLocalDate(maxAge.getStudent().getDateNaissance()) )){
+                            maxAge = inscription;
+                        }
                     }
-                    if(formatter.parseLocalDate(inscription.getStudent().getDateNaissance())
-                            .isBefore( formatter.parseLocalDate(maxAge.getStudent().getDateNaissance()) )){
-                        maxAge = inscription;
-                    }
+
                 }
                 promoDto.setNbMales(nbMales);
                 promoDto.setNbFemales(nbFemales);
