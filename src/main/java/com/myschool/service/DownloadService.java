@@ -3,20 +3,17 @@ package com.myschool.service;
 
 import com.myschool.domain.Inscription;
 import com.myschool.domain.Promo;
-import com.myschool.domain.Student;
 import com.myschool.domain.enumerations.TypeCarte;
 import com.myschool.domain.enumerations.TypeEtablissement;
 import com.myschool.dto.*;
-import com.myschool.repository.*;
-import com.myschool.security.SecurityUtils;
+import com.myschool.repository.InscriptionRepository;
+import com.myschool.repository.PromoRepository;
 import com.myschool.utils.Partition;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
@@ -26,7 +23,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -961,7 +957,7 @@ public class DownloadService {
                 .append("\tDate de naissance/Date of birth: \\textbf{").append(inscription.getStudent().getDateNaissanceFormatted()).append("}\t\t\\hfill")
                 .append("\tClasse: \\textbf{").append(ligneTrimestreDto.getClasse()).append("}, Effectif: \\textbf{").append(ligneTrimestreDto.getEffectif()).append("} \\\\\n")
                 .append("Sexe: \\textbf{").append(inscription.getStudent().getSexe()).append("} \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\\hfill")
-                .append("\tProf titulaire: \\textbf{").append(inscription.getPromo().getProfPrincipal()).append("}\\\\\n")
+                .append("\tProf titulaire: \\textbf{").append(inscription.getPromo().getTeacherPrincipal().getCompleteName()).append("}\\\\\n")
                 .append("\\end{minipage}\n" + "\\vspace{0.3cm}");
 
         s.append(
@@ -1158,7 +1154,7 @@ public class DownloadService {
                         .append("\tDate de naissance/Date of birth: \\textbf{").append(inscription.getStudent().getDateNaissanceFormatted()).append("}\t\t\\hfill")
                         .append("\tClasse: \\textbf{").append(ligneTrimestreDto.getClasse()).append("}, Effectif: \\textbf{").append(ligneTrimestreDto.getEffectif()).append("} \\\\\n")
                         .append("Sexe: \\textbf{").append(inscription.getStudent().getSexe()).append("} \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\\hfill")
-                        .append("\tProf titulaire: \\textbf{").append(inscription.getPromo().getProfPrincipal()).append("}\\\\\n")
+                        .append("\tProf titulaire: \\textbf{").append(inscription.getPromo().getTeacherPrincipal().getCompleteName()).append("}\\\\\n")
                         .append("\\end{minipage}\n" + "\\vspace{0.3cm}");
 
                 s.append(

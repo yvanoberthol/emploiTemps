@@ -1,9 +1,6 @@
 package com.myschool.dto;
 
-import com.myschool.domain.Groupe;
-import com.myschool.domain.Inscription;
-import com.myschool.domain.Matiere;
-import com.myschool.domain.Promo;
+import com.myschool.domain.*;
 import com.myschool.domain.enumerations.Sexe;
 import com.myschool.domain.enumerations.Statut;
 import lombok.Data;
@@ -24,7 +21,7 @@ public class PromoDto {
     private String annee;
     private Long userId;
     private String classe;
-    private String profPrincipal;
+    private TeacherPrincipal teacherPrincipal;
     private double montantScolarite;
     private int capacite;
     private Integer nbStudents;
@@ -46,7 +43,7 @@ public class PromoDto {
             promoDto.setMontantScolarite(promo.getMontantScolarite());
             promoDto.setCapacite(promo.getCapacite());
             promoDto.setClasse(promo.getClasse());
-            promoDto.setProfPrincipal(promo.getProfPrincipal());
+            promoDto.setTeacherPrincipal(promo.getTeacherPrincipal());
 
             if(promo.getAnnee() != null){
                 promoDto.setAnneeId(promo.getAnnee().getId());

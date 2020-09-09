@@ -60,7 +60,7 @@ public class PromoService {
         promo.setClasse(promoDto.getClasse());
         promo.setMontantScolarite(promoDto.getMontantScolarite());
         promo.setCapacite(promoDto.getCapacite());
-        promo.setProfPrincipal(promoDto.getProfPrincipal());
+        promo.setTeacherPrincipal(promoDto.getTeacherPrincipal());
 
         Annee annee = anneeRepository.findOne(promoDto.getAnneeId());
         promo.setAnnee(annee);
@@ -106,7 +106,7 @@ public class PromoService {
         promo.setClasse(promoDto.getClasse());
         promo.setMontantScolarite(promoDto.getMontantScolarite());
         promo.setCapacite(promoDto.getCapacite());
-        promo.setProfPrincipal(promoDto.getProfPrincipal());
+        promo.setTeacherPrincipal(promoDto.getTeacherPrincipal());
 
         Promo result = promoRepository.save(promo);
         return new ResponseEntity<PromoDto>(new PromoDto().createDTO(result), HttpStatus.CREATED);

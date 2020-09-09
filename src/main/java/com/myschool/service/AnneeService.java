@@ -106,7 +106,7 @@ public class AnneeService {
             for (Promo promo : promos ){
                 PromoDto promoDto = new PromoDto();
                 promoDto.setClasse(promo.getClasse());
-                promoDto.setProfPrincipal(promo.getProfPrincipal());
+                promoDto.setTeacherPrincipal(promo.getTeacherPrincipal());
                 promoDto.setAnneeId(result.getId());
 
                 //add promo groupes

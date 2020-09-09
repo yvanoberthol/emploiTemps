@@ -45,14 +45,18 @@ public class Promo {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "promo")
     private List<Matiere> matieres;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "promo")
+    private List<Teacher> teachers;
+
     @Column(name = "montantScolarite")
     private double montantScolarite;
 
     @Column(name = "capacite")
     private int capacite;
 
-    @Column
-    private String profPrincipal;
+    @OneToOne(mappedBy = "promo")
+    private TeacherPrincipal teacherPrincipal;
+
 
     @Override
     public String toString() {

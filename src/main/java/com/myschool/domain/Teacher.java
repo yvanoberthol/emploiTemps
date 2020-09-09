@@ -46,6 +46,18 @@ public class Teacher {
     @Column(name = "domicile")
     private String domicile;
 
+    @JoinColumn(name = "promo_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Promo promo;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
     private List<MatiereTeacher> matiereTeachers;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+    private TeacherPrincipal teacherPrincipal;
+
+
+    public String getCompleteName(){
+        return firstName +' '+lastName;
+    }
 }
