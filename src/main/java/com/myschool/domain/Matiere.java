@@ -10,10 +10,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  *
  * @author medilox
+ * updated by yvano
  */
 @Entity
 @Data
@@ -36,11 +38,8 @@ public class Matiere {
     @Column(name = "noteSur")
     private Integer noteSur;
 
-    @Column
-    private String teacher;
-
-    /*@ManyToMany(mappedBy = "matieres")
-    private List<Teacher> teachers;*/
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "matiere")
+    private List<MatiereTeacher> matiereTeachers;
 
     @JoinColumn(name = "groupe_id", referencedColumnName = "id")
     @ManyToOne

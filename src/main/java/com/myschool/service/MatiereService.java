@@ -66,7 +66,6 @@ public class MatiereService {
         }
 
         matiere.setName(matiereDto.getName());
-        matiere.setTeacher(matiereDto.getTeacher());
 
         if(matiereDto.getGroupeId() != null){
             Groupe groupe = groupeRepository.findOne(matiereDto.getGroupeId());
@@ -104,7 +103,6 @@ public class MatiereService {
         }*/
 
         matiere.setName(matiereDto.getName());
-        matiere.setTeacher(matiereDto.getTeacher());
 
         if(matiereDto.getGroupeId() != null){
             Groupe groupe = groupeRepository.findOne(matiereDto.getGroupeId());

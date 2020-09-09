@@ -26,7 +26,6 @@ public class MatiereDto {
             matiereDto.setCoef(matiere.getCoef());
             matiereDto.setNoteSur(matiere.getNoteSur());
             matiereDto.setName(matiere.getName());
-            matiereDto.setTeacher(matiere.getTeacher());
 
             if(matiere.getGroupe() != null){
                 matiereDto.setGroupeId(matiere.getGroupe().getId());

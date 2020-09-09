@@ -377,7 +377,6 @@ public class StudentService {
             Matiere matiere = matiereRepository.findOne(entry.getKey());
             if(matiere != null){
                 ligneMatiereDto.setMatiere(matiere.getName());
-                ligneMatiereDto.setTeacher(matiere.getTeacher());
                 ligneMatiereDto.setCoef(matiere.getCoef());
                 ligneMatiereDto.setNoteSur(matiere.getNoteSur());
                 ligneMatiereDto.setMoyenne(computeMoyenneSimple(entry.getValue()));

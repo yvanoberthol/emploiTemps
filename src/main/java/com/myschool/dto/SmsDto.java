@@ -46,13 +46,13 @@ public class SmsDto {
             }*/
 
             if(sms.getDeliveryStatus() != null){
-                if(sms.getDeliveryStatus().equals(DeliveryStatus.DELIVRD))
+                if(sms.getDeliveryStatus().equals(DeliveryStatus.DELIVRED))
                     smsDto.setBadge("success");
                 if(sms.getDeliveryStatus().equals(DeliveryStatus.PENDING))
                     smsDto.setBadge("primary");
                 if(sms.getDeliveryStatus().equals(DeliveryStatus.EXPIRED))
                     smsDto.setBadge("danger");
-                if(sms.getDeliveryStatus().equals(DeliveryStatus.UNDELIV))
+                if(sms.getDeliveryStatus().equals(DeliveryStatus.UNDELIVRED))
                     smsDto.setBadge("danger");
             }
         }

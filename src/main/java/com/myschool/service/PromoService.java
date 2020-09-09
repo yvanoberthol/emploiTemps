@@ -73,7 +73,6 @@ public class PromoService {
                 Matiere matiere = new Matiere();
                 matiere.setCoef(matiereDto.getCoef());
                 matiere.setName(matiereDto.getName());
-                matiere.setTeacher(matiereDto.getTeacher());
                 matiere.setNoteSur(matiereDto.getNoteSur());
                 matiere.setPromo(result);
                 matieres.add(matiere);

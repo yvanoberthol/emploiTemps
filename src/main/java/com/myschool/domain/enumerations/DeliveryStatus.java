@@ -3,8 +3,8 @@ package com.myschool.domain.enumerations;
 public enum DeliveryStatus {
 
     PENDING("PENDING"),
-    DELIVRD("DELIVRD"),
-    UNDELIV("UNDELIV"),
+    DELIVRED("DELIVRED"),
+    UNDELIVRED("UNDELIVRED"),
     EXPIRED("EXPIRED");
 
     private final String value;
