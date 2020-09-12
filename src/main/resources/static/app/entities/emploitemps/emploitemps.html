@@ -1,0 +1,259 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container-fluid col-md-11">
+
+        <header class="section-heading ">
+            <div layout-gt-sm="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg text-uppercase">
+                        Emploi de temps
+                    </h4>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col-md-12">
+                                <span class="pull-right">
+                                    <button class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#addLecon">
+                                        Enregistrer une leçon
+                                    </button>
+                                    <button ng-if="teacherId > 0"
+                                            ng-click="vm.seancePage(teacherId)" class="btn btn-primary">
+                                        Consulter ses vacations
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <div class="form-inline">
+                                        <select class="form-control mr-3"
+                                                id="teacherId" name="teacherId"
+                                                ng-model="teacherId" required>
+                                            <option value="0" selected>Tous les enseignants</option>
+                                            <option ng-repeat="teacher in vm.teachers"
+                                                    value="{{teacher.id}}">
+                                                {{teacher.completeName}}
+                                            </option>
+                                        </select>
+                                        <select class="form-control mr-3"
+                                                id="promoId" name="promoId"
+                                                ng-model="promoId" required>
+                                            <option ng-repeat="promo in vm.promos" value="{{promo.id}}"
+                                                    ng-selected="promos[0].id==promo.id">
+                                                {{promo.classe}}
+                                            </option>
+                                        </select>
+                                        <input type="date" ng-model="day" ng-change="vm.searchBy(promoId,teacherId,day)"
+                                               class="form-control mr-3">
+                                        <button class="btn btn-primary" ng-click="vm.searchBy(promoId,teacherId,day)">
+                                            <i class="fa fa-search">
+                                            </i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div ng-if="!vm.saveSuccess"
+                                     class="col-md-12 alert alert-danger">
+                                  <i class="fa fa-close"></i> Le créneau est déja occupé par un autre cours.
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <th width="150">Calendrier</th>
+                                <th ng-repeat="day in vm.dayWeeks">
+                                    {{ day }}
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="creneau in vm.creneauHoraires">
+                                    <td>{{creneau.creneauString}}</td>
+                                    <td ng-repeat="(key,dayLine) in vm.dayWeeks"
+                                        ng-style="(jourtoday == key)?{'background-color':'#f0f0f0'}:{'background-color':'#ffffff'}">
+                                        <div ng-if="vm.emploistemps.length > 0">
+                                            <div ng-repeat="emploitemps in vm.emploistemps">
+                                                <div ng-repeat="coursTeacher in emploitemps.coursTeacherJours">
+                                                    <div ng-if="(coursTeacher.cours.creneauHoraireDto.creneauString == creneau.creneauString)
+                                                && key == coursTeacher.cours.jour" class="align-middle text-center">
+                                                        {{emploitemps.teacher.completeName}} <br>
+
+                                                        <button class="badge badge-primary" data-toggle="modal"
+                                                                data-target="#addPresence{{coursTeacher.cours.id}}">
+                                                            {{coursTeacher.cours.matiereTeacher.matiereName}}
+                                                        </button>
+                                                        <br>
+
+                                                        <span ng-repeat="seance in coursTeacher.cours.seanceDtos">
+                                                            <span ng-if="parseDate(seance.jour) == parseDate(day|date:'yyyy-MM-dd')">
+                                                                <span ng-if="seance.enabled">
+                                                                    <span class="text-success">Présent</span>
+                                                                </span>
+                                                                <span ng-if="!seance.enabled">
+                                                                    <span class="text-danger">Absent</span>
+                                                                </span>
+                                                            </span>
+                                                        </span>
+
+                                                        <div class="modal fade" id="addPresence{{coursTeacher.cours.id}}"
+                                                             tabindex="-1" role="dialog">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header alert alert-success">
+                                                                        <h4 class="modal-title">Enregistrer une présence ou absence</h4>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                                            &times;
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <table class="table table-bordered">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    Enseignant:
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span>{{emploitemps.teacher.completeName}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>Matière:</td>
+                                                                                <td>
+                                                                                    <span>{{coursTeacher.cours.matiereTeacher.matiereName}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    Classe:
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span>{{coursTeacher.cours.matiereTeacher.matiereDto.promoName}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    Creneau Horaire:
+                                                                                </td>
+                                                                                <td>
+                                                                                    <b>{{dayLine}},</b>
+                                                                                    <span>{{coursTeacher.cours.creneauHoraireDto.creneauString}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr ng-if="key == jourtoday">
+                                                                                <td>
+                                                                                    Date:
+                                                                                </td>
+                                                                                <td>
+                                                                                    <span>{{day|date:'dd/MM/yyyy'}}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        <div ng-if="key == jourtoday" class="form-group mt-2">
+                                                                            <button ng-click="vm.saveseance(coursTeacher.cours.id,true)" class="btn btn-success">
+                                                                                Présent
+                                                                            </button>
+                                                                            <button ng-click="vm.saveseance(coursTeacher.cours.id,false)" class="btn btn-danger">
+                                                                                Absent
+                                                                            </button>
+                                                                        </div>
+                                                                        <hr>
+                                                                        <div class="form-group">
+                                                                            <button ng-click="vm.deleteLecon(coursTeacher.cours.id)" class="btn btn-danger">
+                                                                                <i class="fa fa-trash"></i>
+                                                                                Supprimer ce cours
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-default"
+                                                                                data-dismiss="modal">Fermer
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="modal fade" id="addLecon"
+     tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-success">
+                <h4 class="modal-title">Enregistrer une leçon</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="matiere">Matiere</label>
+                    <select
+                            ng-model="lecon.matiere"
+                            ng-options="matiere.name for matiere in vm.matieres"
+                            class="form-control mr-3" id="matiere" required>
+                        <option value="" disabled>Selectionner la matière</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="enseignant">Enseignant</label>
+                    <select ng-model="lecon.teacher"
+                            ng-options="teacher as teacher.completeName
+                            for teacher in vm.teachers track by teacher.id"
+                            class="form-control mr-3" id="enseignant" required>
+                        <option value="" disabled>Selectionner l' enseignant</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="jour">Jour</label>
+                    <select ng-model="lecon.jour"
+                            ng-options="key as dayLine
+                            for (key,dayLine) in vm.dayWeeks track by key"
+                            class="form-control mr-3" id="jour" required>
+                        <option value="" disabled>Selectionner le jour</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="creneau">Créneau horaire</label>
+                    <select ng-model="lecon.creneauHoraire"
+                            ng-options="creneau as creneau.creneauString
+                            for creneau in vm.creneauHoraires track by creneau.id"
+                            class="form-control mr-3" id="creneau" required>
+                        <option value="" disabled>Selectionner le créneau horaire</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" ng-click="vm.saveLecon()">
+                        Enregistrer
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">Fermer
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

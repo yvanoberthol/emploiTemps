@@ -1,0 +1,89 @@
+<section class="section-content padding-y-sm spacer" loading="vm.loading">
+
+    <div class="container-fluid col-md-11">
+
+        <header class="section-heading ">
+            <div layout-gt-sm="row" layout-align="space-between center">
+                <div >
+                    <h4 class="title-section bg text-uppercase">
+                        SEANCE DE COURS DE L'ENSEIGNANT
+                    </h4>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col-md-12">
+                                <div class="form-inline">
+                                    <input type="date" ng-model="debut"
+                                           class="form-control mr-3" name="debut">
+                                    <input type="date" ng-model="fin"
+                                           class="form-control mr-3" name="fin">
+                                    <button ng-click="vm.searchSeanceByTeacher()" class="btn btn-primary">
+                                        <i class="fa fa-search"></i> consulter
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div ng-if="vm.arraymap <= 0" class="col-md-12 text-center text-danger p-5">
+                                    Aucune participation de cours sur cette période
+                                </div>
+                                <div class="col-md-6" ng-repeat="seance in vm.arraymap">
+                                    <div class="card" >
+                                        <div class="card-header font-weight-bolder text-center">
+                                            CLASSE: {{seance.classe}}
+                                            <span class="text-success">
+                                                ({{seance.seances.length}}h)
+                                            </span>
+                                        </div>
+                                        <div class="card-body">
+                                            <table class="table table-bordered table-striped"
+                                                   ng-repeat="seanceDetail in group = (seance.seances | groupBy:'jour')">
+                                                <tr>
+                                                    <td ng-show="seanceDetail.group_by_CHANGED" colspan="3">
+                                                        {{reformatDateForFrench(seanceDetail.jour)}} ({{(group|filter:{jour: seanceDetail.jour}).length}}h)
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="w-25">
+                                                        {{seanceDetail.matiere}}
+                                                    </td>
+                                                    <td class="w-50">
+                                                        {{seanceDetail.creneauHoraire}}
+                                                    </td>
+                                                    <td class="w-25">
+                                                        {{seanceDetail.tauxHoraire}}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <span class="h4">
+                                        Montant des vacations:
+                                        <span ng-class="(vm.montantVacations <= 0)?'text-danger':'text-success'">
+                                            {{formatNumber(vm.montantVacations)}}
+                                        </span>
+                                        FCFA
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

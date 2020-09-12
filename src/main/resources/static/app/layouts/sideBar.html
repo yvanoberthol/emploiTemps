@@ -1,0 +1,37 @@
+<ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <a class="nav-link" href="{{path('accueil')}}">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Tableau de bord</span>
+        </a>
+    </li>
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Produit">
+        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseProduit"
+           data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-product-hunt"></i>
+            <span class="nav-link-text">Produit</span>
+        </a>
+        <ul class="sidenav-second-level collapse" id="collapseProduit">
+            <li>
+                <a href="{{path('produit_new')}}">Ajouter un produit</a>
+            </li>
+            <li>
+                <a href="{{ path('produit_index') }}">Liste des produits</a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dette">
+        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseDette"
+           data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-book"></i>
+            <span class="nav-link-text">Dette</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link nav-link-collapse collapsed" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-backward"></i>
+            <span class="nav-link-text">Règlement</span>
+        </a>
+    </li>
+</ul>
