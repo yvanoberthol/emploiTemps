@@ -26,7 +26,6 @@ public class CoursResource {
     public Map<String, Boolean> save(@RequestBody Lecon lecon){
 
         boolean saved = coursService.save(lecon);
-
         Map<String, Boolean> map = new HashMap<>();
         map.put("result", saved);
         return map;

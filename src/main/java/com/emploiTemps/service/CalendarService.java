@@ -2,6 +2,7 @@ package com.emploiTemps.service;
 
 
 import com.emploiTemps.domain.*;
+import com.emploiTemps.domain.enumerations.Semaine;
 import com.emploiTemps.domain.form.Calendar;
 import com.emploiTemps.domain.form.CoursTeacherJour;
 import com.emploiTemps.domain.form.EmploiTempsTeacherJour;
@@ -112,13 +113,11 @@ public class CalendarService {
         }
 
         Map<Integer,String> dayWeeks = new Hashtable<>();
-        dayWeeks.put(1,"Lundi");
-        dayWeeks.put(2,"Mardi");
-        dayWeeks.put(3, "Mercredi");
-        dayWeeks.put(4, "Jeudi");
-        dayWeeks.put(5,"Vendredi");
-        dayWeeks.put(6,"Samedi");
-        dayWeeks.put(7,"Dimanche");
+        int i = 1;
+        for (Semaine day: Semaine.values()){
+            dayWeeks.put(i,day.name());
+            i++;
+        }
 
         List<EmploiTempsTeacherJour> emploiTempsTeacherJourList = new ArrayList<>();
         if (idTeacher == 0){

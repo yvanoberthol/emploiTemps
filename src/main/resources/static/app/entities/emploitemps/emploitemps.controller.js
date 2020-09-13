@@ -89,7 +89,7 @@
         vm.deleteLecon = function(idCours){
             var dateString = formatDate($scope.day);
             jQuery.noConflict();
-            var element = $('#addLecon .close');
+            var element = $('#addPresence'+idCours+' .close');
             element.click();
             EmploiTemps.deleteLecon(idCours).then(function (response) {
                 getByTeacherJour($scope.promoId,$scope.teacherId,dateString);

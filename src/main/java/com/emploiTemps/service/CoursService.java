@@ -39,6 +39,7 @@ public class CoursService {
         if (idTeacher == null || idPromo == null){
             return null;
         }
+
         Promo promo = promoRepository.findOne(idPromo);
 
         List<MatiereTeacher> matiereTeachers = matiereTeacherRepository
@@ -55,23 +56,39 @@ public class CoursService {
     }
 
     public boolean save(Lecon lecon){
+
+        if (lecon.getMatiere() == null ||
+                lecon.getCreneauHoraire() == null ||
+                lecon.getTeacher() == null){
+
+            return false;
+        }
+
         MatierTeacherId matierTeacherId = new MatierTeacherId();
         matierTeacherId.setMatiereId(lecon.getMatiere().getId());
         matierTeacherId.setTeacherId(lecon.getTeacher().getId());
 
-        MatiereTeacher matiereTeacherOne = matiereTeacherRepository.
-                findMatiereTeacherByTeacherIdAndMatiereId(matierTeacherId.getTeacherId(),matierTeacherId.getMatiereId());
+        MatiereTeacher matiereTeacherByMatiere = matiereTeacherRepository
+                .findMatiereTeacherByMatiereId(lecon.getMatiere().getId());
 
         Matiere matiere = matiereRepository.getOne(matierTeacherId.getMatiereId());
         Teacher teacher = teacherRepository.getOne(matierTeacherId.getTeacherId());
 
-        if (matiereTeacherOne == null){
+
+        MatiereTeacher matiereTeacherOne = matiereTeacherRepository.
+                findMatiereTeacherByTeacherIdAndMatiereId(matierTeacherId.getTeacherId(),matierTeacherId.getMatiereId());
+        if (matiereTeacherOne == null && matiereTeacherByMatiere == null){
+
             MatiereTeacher matiereTeacher = new MatiereTeacher();
             matiereTeacher.setMatiere(matiere);
             matiereTeacher.setTeacher(teacher);
 
             matiereTeacherOne = matiereTeacherRepository.save(matiereTeacher);
         }
+
+        if (matiereTeacherByMatiere.getTeacher() != matiereTeacherOne.getTeacher())
+            return false;
+
 
         CreneauHoraire creneauHoraire = creneauHoraireRepository.getOne(lecon.getCreneauHoraire().getId());
         if (creneauHoraire == null)
@@ -104,7 +121,6 @@ public class CoursService {
         }
 
         coursRepository.delete(cours);
-        matiereTeacherRepository.delete(matiereTeacher);
         return true;
     }
 }

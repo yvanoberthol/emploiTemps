@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface MatiereTeacherRepository extends JpaRepository<MatiereTeacher,Long> {
 
+    MatiereTeacher findMatiereTeacherByMatiereId(Long id);
     MatiereTeacher findMatiereTeacherByTeacherIdAndMatiereId(Long idTeacher, Long idMatiere);
     List<MatiereTeacher> findMatiereTeacherByTeacherIdAndMatierePromo(Long idTeacher, Promo promo);
     List<MatiereTeacher> findAllByMatierePromo(Promo promo);
