@@ -1,5 +1,6 @@
 package com.emploiTemps.rest;
 
+import com.emploiTemps.domain.form.CallBackMessage;
 import com.emploiTemps.domain.form.Lecon;
 import com.emploiTemps.service.CoursService;
 import org.slf4j.Logger;
@@ -23,16 +24,16 @@ public class CoursResource {
     private CoursService coursService;
 
     @PostMapping("/api/cours/save")
-    public Map<String, Boolean> save(@RequestBody Lecon lecon){
+    public Map<String, CallBackMessage> save(@RequestBody Lecon lecon){
 
-        boolean saved = coursService.save(lecon);
-        Map<String, Boolean> map = new HashMap<>();
+        CallBackMessage saved = coursService.save(lecon);
+        Map<String, CallBackMessage> map = new HashMap<>();
         map.put("result", saved);
         return map;
     }
 
     @DeleteMapping("/api/cours/delete/{idCours}")
-    public Map<String, Boolean> save(@PathVariable Long idCours){
+    public Map<String, Boolean> delete(@PathVariable Long idCours){
 
         boolean deleted = coursService.delete(idCours);
         Map<String, Boolean> map = new HashMap<>();

@@ -1,6 +1,7 @@
 package com.emploiTemps.service;
 
 import com.emploiTemps.domain.*;
+import com.emploiTemps.domain.form.CallBackMessage;
 import com.emploiTemps.domain.form.Lecon;
 import com.emploiTemps.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,13 +56,16 @@ public class CoursService {
         return coursList;
     }
 
-    public boolean save(Lecon lecon){
+    public CallBackMessage save(Lecon lecon){
+
+        CallBackMessage callBackMessage = new CallBackMessage();
 
         if (lecon.getMatiere() == null ||
                 lecon.getCreneauHoraire() == null ||
                 lecon.getTeacher() == null){
 
-            return false;
+            callBackMessage.setKey("incorrectInfo");
+            callBackMessage.setMessage("Vérifier les informations entrées dans le formulaire");
         }
 
         MatierTeacherId matierTeacherId = new MatierTeacherId();
@@ -86,26 +90,31 @@ public class CoursService {
             matiereTeacherOne = matiereTeacherRepository.save(matiereTeacher);
         }
 
-        if (matiereTeacherByMatiere.getTeacher() != matiereTeacherOne.getTeacher())
-            return false;
+        if (matiereTeacherByMatiere.getTeacher() != matiereTeacherOne.getTeacher()){
+            callBackMessage.setKey("matiereDejaPris");
+            callBackMessage.setMessage("Cette matière est déja prise par une autre professeur");
+        }
 
 
         CreneauHoraire creneauHoraire = creneauHoraireRepository.getOne(lecon.getCreneauHoraire().getId());
-        if (creneauHoraire == null)
-            return false;
 
         Cours coursExist = coursRepository.
                 findCoursByCreneauHoraireAndJourAndMatiereTeacher_Matiere_Promo(creneauHoraire,lecon.getJour(),matiere.getPromo());
-        if (coursExist != null)
-            return false;
+        if (coursExist != null){
+            callBackMessage.setKey("coursOccupe");
+            callBackMessage.setMessage("Ce créneau est déja occupé par un autre professeur");
+        }
 
         Cours cours = new Cours();
         cours.setJour(lecon.getJour());
         cours.setCreneauHoraire(creneauHoraire);
         cours.setMatiereTeacher(matiereTeacherOne);
-
         coursRepository.save(cours);
-        return true;
+
+        callBackMessage.setKey("success");
+        callBackMessage.setMessage("Le cours a été enregistré");
+
+        return callBackMessage;
     }
 
     public boolean delete(Long idCours){

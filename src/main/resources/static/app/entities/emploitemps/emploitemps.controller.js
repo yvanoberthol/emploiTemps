@@ -13,7 +13,7 @@
         var vm = this;
         vm.loading = true;
         vm.error = false;
-        vm.saveSuccess = true;
+        vm.saveMessage = '';
 
         vm.emploistemps = [];
         vm.dayWeeks = {};
